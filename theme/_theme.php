@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<?
+session_start();
+include "conexao.php";
+$modulo = $_REQUEST["modulo"];
+if (intval($_SESSION["CD_USUARIO"]) < 1) {
+    echo "<meta http-equiv='refresh' content='0; url=index.php'>";
+}
+
+?>
+<html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistema 2023</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="<?= shared_plugins("fontawesome-free/css/all.min.css") ?>">
     <link rel="stylesheet" href="<?= shared_plugins("datatables-bs4/css/dataTables.bootstrap4.min.css") ?>">
     <link rel="stylesheet" href="<?= shared_plugins("datatables-responsive/css/responsive.bootstrap4.min.css") ?>">
     <link rel="stylesheet" href="<?= shared_plugins("datatables-buttons/css/buttons.bootstrap4.min.css") ?>">
     <link rel="stylesheet" href="<?= shared_css("adminlte.min.css") ?>">
-    <?= $v->section('css') ?>
-    <title>Sistema 2023</title>
+    <script src="<?= shared_plugins("jquery/jquery.min.js") ?>"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -196,8 +207,8 @@
         <aside class="control-sidebar control-sidebar-dark">
         </aside>
     </div>
-    <?= $v->section('modal') ?>
-    <script src="<?= shared_plugins("jquery/jquery.min.js") ?>"></script>
+
+
     <script src="<?= shared_plugins("bootstrap/js/bootstrap.bundle.min.js") ?>"></script>
     <script src="<?= shared_plugins("datatables/jquery.dataTables.min.js") ?>"></script>
     <script src="<?= shared_plugins("datatables-bs4/js/dataTables.bootstrap4.min.js") ?>"></script>
@@ -212,8 +223,10 @@
     <script src="<?= shared_plugins("datatables-buttons/js/buttons.print.min.js") ?>"></script>
     <script src="<?= shared_plugins("datatables-buttons/js/buttons.colVis.min.js") ?>"></script>
     <script src="<?= shared_plugins("bs-custom-file-input/bs-custom-file-input.min.js") ?>"></script>
-    <script src="<?= shared_js("js/adminlte.min.js") ?>"></script>
-    <script src="<?= shared_js("js/de_mo.js") ?>"></script>
+    <script src="<?= shared_js("adminlte.min.js") ?>"></script>
+    <!-- <script src="<?= shared_js("de_mo.js") ?>"></script> -->
+    <script src="<?= shared_plugins("jquery/jquery.min.js") ?>"></script>
+
     <script>
         $(function() {
             bsCustomFileInput.init();
@@ -221,26 +234,24 @@
     </script>
 
     <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
+        // $(function() {
+        //     $("#example1").DataTable({
+        //         "responsive": true,
+        //         "lengthChange": false,
+        //         "autoWidth": false,
+        //         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        //     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        //     $('#example2').DataTable({
+        //         "paging": true,
+        //         "lengthChange": true,
+        //         "searching": true,
+        //         "ordering": true,
+        //         "info": true,
+        //         "autoWidth": false,
+        //         "responsive": true,
+        //     });
+        // });
     </script>
-    <!-- Meus scripts -->
-    <?= $v->section('js') ?>
 </body>
 
 </html>
