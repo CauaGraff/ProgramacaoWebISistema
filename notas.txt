@@ -1,0 +1,8 @@
+ENTIDADES QUE O SISTEMA DEVE TER
+
+Usuarios
+Empresas
+Produtos
+Pedidos
+Constas
+Log

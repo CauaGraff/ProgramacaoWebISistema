@@ -1,0 +1,20 @@
+{
+    "name": "victor/primeiro-projeto",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Source\\": "source/"
+        },
+        "files": [
+            "source/Boot/config.php",
+            "source/Boot/helpers.php"
+        ]
+    },
+    "require": {
+        "coffeecode/router": "1.0.*",
+        "coffeecode/datalayer": "1.1.*",
+        "league/plates": "v4.0.0-alpha"
+    }
+}
