@@ -214,7 +214,31 @@
     <script src="<?= shared_plugins("bs-custom-file-input/bs-custom-file-input.min.js") ?>"></script>
     <script src="<?= shared_js("js/adminlte.min.js") ?>"></script>
     <script src="<?= shared_js("js/de_mo.js") ?>"></script>
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
 
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
     <!-- Meus scripts -->
     <?= $v->section('js') ?>
 </body>
