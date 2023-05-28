@@ -2,6 +2,7 @@
 
 namespace Source\Controllers;
 
+use CoffeeCode\DataLayer\Connect;
 use CoffeeCode\Router\Router;
 use Source\Controllers\Controller;
 use Source\Models\Usuario;
@@ -15,7 +16,13 @@ class Web extends Controller
 
     public function home()
     {
-        echo $this->view->render('home');
+        if (Auth::verify('usuario_id')) {
+            echo $this->view->render('home');
+            return;
+        }
+
+        $this->router->redirect('web.login');
+        return;
     }
 
     public function contato()
@@ -26,10 +33,13 @@ class Web extends Controller
     public function register(array $dados)
     {
         if (!empty($dados)) {
-            $senha = $dados['senha'];
-            $email = $dados['email'];
-            $primeironome = $dados['primeiroNome'];
-            $sobrenome = $dados['sobrenome'];
+            $nome = $dados['ds_usuario'];
+            $cpf = $dados['ds_cpf'];
+            $dataNasc  = $dados['dt_nascimento'];
+            $uf = $dados['ds_uf'];
+            $cidade = $dados['ds_cidade'];
+            $senha = $dados['ds_senha'];
+            $email = $dados['ds_email'];
 
             if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 echo $this->ajaxResponse([
@@ -40,28 +50,33 @@ class Web extends Controller
             }
 
             $usuario = new Usuario();
-            $usuario->primeiro_nome = $primeironome;
-            $usuario->sobrenome = $sobrenome;
-            $usuario->senha = password_hash($senha, PASSWORD_DEFAULT);
-            $usuario->email = $email;
+            $usuario->ds_usuario = $nome;
+            $usuario->ds_cpf = $cpf;
+            $usuario->ds_senha = password_hash($senha, PASSWORD_DEFAULT);
+            $usuario->ds_email = $email;
+            $usuario->ds_dataNasc = $dataNasc;
+            $usuario->ds_cidade = $cidade;
+            $usuario->ds_estado = $uf;
+
 
             if ($usuario->save()) {
-                $attempt = compact('email', 'senha');
+                // $attempt = compact('email', 'senha');
 
-                // ['email' => 'example@gmail.com', 'senha' => '123']
+                // // ['email' => 'example@gmail.com', 'senha' => '123']
 
-                if (Auth::attempt($attempt)) {
-                    echo $this->ajaxResponse([
-                        'type' => 'success',
-                        'redirect' => $this->router->route('web.home')
-                    ]);
+                // if (Auth::attempt($attempt)) {
+                //     echo $this->ajaxResponse([
+                //         'type' => 'success',
+                //         'redirect' => $this->router->route('web.home')
+                //     ]);
 
-                    return;
-                }
+                //     return;
+                // }
+
 
                 echo $this->ajaxResponse([
-                    'type' => 'error',
-                    'mensagem' => 'Houve um erro ao tentar realizar o login'
+                    'type' => 'success',
+                    'redirect' => $this->router->route('web.home')
                 ]);
                 return;
             }
@@ -69,7 +84,39 @@ class Web extends Controller
             return;
         }
 
-        echo $this->view->render('register');
+        /** GET PDO instance AND errors*/
+        $connect = Connect::getInstance();
+        $error = Connect::getError();
+
+        /** CHECK connection/errors */
+        if ($error) {
+            echo $error->getMessage();
+            exit;
+        }
+
+        /** FETCH DATA*/
+        $ufs = $connect->query("SELECT ds_uf FROM cidades GROUP BY ds_uf ORDER BY ds_uf")
+            ->fetchAll();
+        echo $this->view->render('register', compact('ufs'));
+    }
+
+    public function cidades(array $data)
+    {
+        $ds_uf = $data['ufid'];
+        /** GET PDO instance AND errors*/
+        $connect = Connect::getInstance();
+        $error = Connect::getError();
+
+        /** CHECK connection/errors */
+        if ($error) {
+            echo $error->getMessage();
+            exit;
+        }
+
+        /** FETCH DATA*/
+        $cidades = $connect->query("SELECT cd_cidade, ds_cidade FROM cidades WHERE ds_uf = '" . $ds_uf . "' ORDER BY ds_cidade ASC")
+            ->fetchAll();
+        echo json_encode($cidades);
     }
 
     public function login(array $dados)
@@ -77,8 +124,8 @@ class Web extends Controller
         // se ele não tem sessão
         if (!Auth::verify('usuario_id')) {
             if (!empty($dados)) {
-                $senha = $dados['senha'];
-                $email = $dados['email'];
+                $senha = $dados['ds_senha'];
+                $email = $dados['ds_email'];
 
                 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     echo "E-mail inválido";
@@ -91,11 +138,11 @@ class Web extends Controller
                 }
 
                 if (Auth::attempt($dados)) {
-                    echo "Logado com sucesso!";
+                    $this->router->redirect('web.home');
                     return;
                 }
 
-                echo "Não foi possível realizar o login" . $email;
+                echo "Não foi possível realizar o login " . $email;
                 return;
             }
 
@@ -113,5 +160,23 @@ class Web extends Controller
 
             $this->router->redirect('web.login');
         }
+    }
+
+    public function usuarios()
+    {
+        if (Auth::verify('usuario_id')) {
+
+            $usuarios = (new Usuario())->find()->fetch(true);
+            echo $this->view->render('listausuarios', compact('usuarios'));
+            return;
+        }
+
+        $this->router->redirect('web.login');
+        return;
+    }
+
+    public  function atualizaUsuarios(array $data)
+    {
+        var_dump($data);
     }
 }

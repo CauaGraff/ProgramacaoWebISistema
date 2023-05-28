@@ -8,9 +8,19 @@ class Usuario extends DataLayer
 {
     public function __construct()
     {
-        parent::__construct("usuarios", [
-            "primeiro_nome", "sobrenome",
-            "email", "senha"
-        ], 'id', false);
+        parent::__construct(
+            "usuarios",
+            [
+                "ds_usuario",
+                "ds_cpf",
+                "ds_senha",
+                "ds_email",
+                "ds_dataNasc",
+                "ds_cidade",
+                "ds_estado"
+            ],
+            'cd_usuario',
+            false
+        );
     }
 }

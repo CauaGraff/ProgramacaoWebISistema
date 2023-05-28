@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<?
-session_start();
-include "conexao.php";
-$modulo = $_REQUEST["modulo"];
-if (intval($_SESSION["CD_USUARIO"]) < 1) {
-    echo "<meta http-equiv='refresh' content='0; url=index.php'>";
-}
+<?php
+// session_start();
+// include "conexao.php";
+// $modulo = $_REQUEST["modulo"];
+// if (intval($_SESSION["CD_USUARIO"]) < 1) {
+//     echo "<meta http-equiv='refresh' content='0; url=index.php'>";
+// }
 
 ?>
 <html lang="en">
@@ -39,7 +39,7 @@ if (intval($_SESSION["CD_USUARIO"]) < 1) {
                     <a href="#" class="nav-link">Contact</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index.php?desconecta=sim" class="nav-link">Desconectar</a>
+                    <a href="<?= $router->route("auth.logout") ?>" class="nav-link">Desconectar</a>
                 </li>
             </ul>
 
@@ -49,7 +49,7 @@ if (intval($_SESSION["CD_USUARIO"]) < 1) {
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="../../index3.html" class="brand-link">
+            <a href="<?= $router->route("web.home") ?>" class="brand-link">
                 <img src="<?= shared_img("AdminLTELogo.png") ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
             </a>
@@ -62,7 +62,7 @@ if (intval($_SESSION["CD_USUARIO"]) < 1) {
                         <img src="<?= shared_img("user2-160x160.jpg") ?>" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"><? echo $_SESSION["DS_USUARIO"]; ?></a>
+                        <a href="#" class="d-block"><?= $user->ds_usuario ?></a>
                     </div>
                 </div>
 
@@ -92,9 +92,9 @@ if (intval($_SESSION["CD_USUARIO"]) < 1) {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="menu.php?modulo=lista_usuarios" class="nav-link">
+                                    <a href="<?= $router->route("web.usuarios") ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Usuario</p>
+                                        <p>Usuarios</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -196,7 +196,7 @@ if (intval($_SESSION["CD_USUARIO"]) < 1) {
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <? include $modulo . ".php"; ?>
+            <?= $v->section("content"); ?>
         </div>
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
@@ -226,6 +226,8 @@ if (intval($_SESSION["CD_USUARIO"]) < 1) {
     <script src="<?= shared_js("adminlte.min.js") ?>"></script>
     <!-- <script src="<?= shared_js("de_mo.js") ?>"></script> -->
     <script src="<?= shared_plugins("jquery/jquery.min.js") ?>"></script>
+    <?= $v->section("js"); ?>
+
 
     <script>
         $(function() {

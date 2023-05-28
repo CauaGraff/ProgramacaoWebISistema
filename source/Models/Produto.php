@@ -8,6 +8,18 @@ class Produto extends DataLayer
 {
     public function __construct()
     {
-        parent::__construct('produtos', ['nome', 'descricao', 'preco', 'imagem']);
+        parent::__construct(
+            'produto',
+            [
+                "nome",
+                "qtd",
+                "preco",
+                "descricao",
+                "id_empresa",
+                "id_uni"
+            ],
+            "id",
+            false
+        );
     }
 }

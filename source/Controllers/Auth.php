@@ -15,21 +15,21 @@ class Auth extends Controller
 
     public static function attempt(array $dados): bool
     {
-        $senha = $dados['senha'];
-        $email = $dados['email'];
+        $senha = $dados['ds_senha'];
+        $email = $dados['ds_email'];
 
         $usuario = new Usuario();
-        $usuario->find('email = :email', "email={$email}");
+        $usuario->find('ds_email = :ds_email', "ds_email={$email}");
 
         if (!$usuario = $usuario->fetch()) {
             return false;
         }
 
-        if (!password_verify($senha, $usuario->senha)) {
+        if (!password_verify($senha, $usuario->ds_senha)) {
             return false;
         }
 
-        $_SESSION['usuario_id'] = $usuario->id;
+        $_SESSION['usuario_id'] = $usuario->cd_usuario;
         return true;
     }
 
@@ -49,7 +49,7 @@ class Auth extends Controller
             $usuarioId = $_SESSION['usuario_id'];
 
             return (new Usuario)
-                ->find('id = :id', "id={$usuarioId}")
+                ->find('cd_usuario = :cd_usuario', "cd_usuario={$usuarioId}")
                 ->fetch()
                 ->data();
         }
