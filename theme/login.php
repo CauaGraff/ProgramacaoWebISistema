@@ -76,7 +76,7 @@
                     <a href="<?= $router->route('web.home') ?>">Esqueci a senha</a>
                 </p>
                 <p class="mb-0">
-                    <a href="<?= $router->route('web.register') ?>" class="text-center">Novo Registro</a>
+                    <a href="<?= $router->route('usuarios.register') ?>" class="text-center">Novo Registro</a>
                 </p>
             </div>
             <!-- /.login-card-body -->

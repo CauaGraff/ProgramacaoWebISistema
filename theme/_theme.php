@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistema 2023</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?= shared_plugins("fontawesome-free/css/all.min.css") ?>">
     <link rel="stylesheet" href="<?= shared_plugins("datatables-bs4/css/dataTables.bootstrap4.min.css") ?>">
     <link rel="stylesheet" href="<?= shared_plugins("datatables-responsive/css/responsive.bootstrap4.min.css") ?>">
@@ -39,7 +40,6 @@
                     <a href="#" class="nav-link">Contact</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?= $router->route("auth.logout") ?>" class="nav-link">Desconectar</a>
                 </li>
             </ul>
 
@@ -57,12 +57,14 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
                     <div class="image">
                         <img src="<?= shared_img("user2-160x160.jpg") ?>" class="img-circle elevation-2" alt="User Image">
+
                     </div>
-                    <div class="info">
+                    <div class="info d-flex align-items-center">
                         <a href="#" class="d-block"><?= $user->ds_usuario ?></a>
+                        <a href="<?= $router->route("auth.logout") ?>" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
                     </div>
                 </div>
 
@@ -92,7 +94,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?= $router->route("web.usuarios") ?>" class="nav-link">
+                                    <a href="<?= $router->route("usuarios.index") ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Usuarios</p>
                                     </a>

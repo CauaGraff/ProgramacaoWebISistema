@@ -1,7 +1,7 @@
 <?php
 
-//define('CONF_SITE_URL', 'http://localhost/unc/programacao%20web%20I/ProgramacaoWebISistema');
-define('CONF_SITE_URL', 'http://localhost/UNC/programação%20web/ProgramacaoWebISistema');
+define('CONF_SITE_URL', 'http://localhost/unc/programacao%20web%20I/ProgramacaoWebISistema');
+//define('CONF_SITE_URL', 'http://localhost/UNC/programação%20web/ProgramacaoWebISistema');
 
 define('DATA_LAYER_CONFIG', [
     "driver" => "mysql",

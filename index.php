@@ -22,13 +22,15 @@ $router->get('/login', 'Web:login', 'web.login');
 $router->get('/contato', 'Web:contato', 'web.contato');
 $router->post('/cidades', 'Web:cidades', 'web.cidades');
 
-$router->get('/cadastro', 'Web:register', 'web.register');
-$router->post('/register', 'Web:register', 'web.post.register');
+
 
 /**USUARIOS */
-$router->get('/usuarios', 'Web:usuarios', 'web.usuarios');
-$router->put('/usuarios/{id}', 'Web:atualizaUsuarios', 'web.put.usuarios');
-
+$router->group('usuarios');
+$router->get('/', 'Usuarios:index', 'usuarios.index');
+$router->get('/cadastro', 'Usuarios:register', 'usuarios.register');
+$router->post('/register', 'Usuarios:register', 'usuarios.post.register');
+$router->get('/atualiza/{id}', 'Usuarios:update', 'usuarios.update');
+$router->post('/update', 'Usuarios:update', 'usuarios.post.update');
 
 /** AUTH */
 $router->post('/login', 'Web:login', 'auth.login');
