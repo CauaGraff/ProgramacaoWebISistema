@@ -26,12 +26,12 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($usuarios as $usuario) : ?>
-                                    <tr data-id="<?= $usuario->cd_usuario ?>">
-                                        <td><?= $usuario->cd_usuario ?></td>
-                                        <td><?= $usuario->ds_usuario ?></td>
-                                        <td><?= $usuario->ds_cpf ?></td>
-                                        <td><?= $usuario->ds_email ?></td>
-                                        <td><a href="<?= $router->route("usuarios.update", ["id" => $usuario->cd_usuario]) ?>" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                    <tr data-id="<?= $usuario->id ?>">
+                                        <td><?= $usuario->id ?></td>
+                                        <td><?= $usuario->nome ?></td>
+                                        <td><?= $usuario->CPF ?></td>
+                                        <td><?= $usuario->email ?></td>
+                                        <td><a href="<?= $router->route("usuarios.update", ["id" => $usuario->id]) ?>" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>

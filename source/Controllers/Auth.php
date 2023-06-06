@@ -19,7 +19,7 @@ class Auth extends Controller
         $email = $dados['ds_email'];
 
         $usuario = new Usuario();
-        $usuario->find('ds_email = :ds_email', "ds_email={$email}");
+        $usuario->find('email = :email', "email={$email}");
 
         if (!$usuario = $usuario->fetch()) {
             return false;
@@ -49,7 +49,7 @@ class Auth extends Controller
             $usuarioId = $_SESSION['usuario_id'];
 
             return (new Usuario)
-                ->find('cd_usuario = :cd_usuario', "cd_usuario={$usuarioId}")
+                ->find('id = :id', "id={$usuarioId}")
                 ->fetch()
                 ->data();
         }

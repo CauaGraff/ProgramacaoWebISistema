@@ -11,15 +11,15 @@ class Usuario extends DataLayer
         parent::__construct(
             "usuarios",
             [
-                "ds_usuario",
-                "ds_cpf",
-                "ds_senha",
-                "ds_email",
-                "ds_dataNasc",
-                "ds_cidade",
-                "ds_estado"
+                "nome",
+                "CPF",
+                "senha",
+                "email",
+                "dataNasc",
+                "cidade",
+                "estado"
             ],
-            'cd_usuario',
+            'id',
             false
         );
     }

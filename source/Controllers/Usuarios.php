@@ -29,14 +29,15 @@ class Usuarios extends Controller
 
     public function register(array $dados)
     {
-        if (!empty($dados) && $dados['id'] == 0) {
-            $nome = $dados['ds_usuario'];
-            $cpf = $dados['ds_cpf'];
-            $dataNasc  = $dados['dt_nascimento'];
-            $uf = $dados['ds_uf'];
-            $cidade = $dados['ds_cidade'];
-            $senha = $dados['ds_senha'];
-            $email = $dados['ds_email'];
+        var_dump($dados);
+        if (!empty($dados)) {
+            $nome = $dados['nome'];
+            $cpf = $dados['cpf'];
+            $dataNasc  = $dados['dataNasc'];
+            $uf = $dados['uf'];
+            $cidade = $dados['cidade'];
+            $senha = $dados['senha'];
+            $email = $dados['email'];
 
             if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 echo $this->ajaxResponse([
@@ -47,13 +48,13 @@ class Usuarios extends Controller
             }
 
             $usuario = new Usuario();
-            $usuario->ds_usuario = $nome;
-            $usuario->ds_cpf = $cpf;
-            $usuario->ds_senha = password_hash($senha, PASSWORD_DEFAULT);
-            $usuario->ds_email = $email;
-            $usuario->ds_dataNasc = $dataNasc;
-            $usuario->ds_cidade = $cidade;
-            $usuario->ds_estado = $uf;
+            $usuario->nome = $nome;
+            $usuario->CPF = $cpf;
+            $usuario->senha = password_hash($senha, PASSWORD_DEFAULT);
+            $usuario->email = $email;
+            $usuario->dataNasc = $dataNasc;
+            $usuario->cidade = $cidade;
+            $usuario->estado = $uf;
 
 
             if ($usuario->save()) {
@@ -101,28 +102,7 @@ class Usuarios extends Controller
     {
         if (Auth::verify('usuario_id')) {
 
-            if (!empty($data) && $data['acao'] == "update") {
-                echo "ATUALIZAR";
-                return;
-            }
-            $usuarioId = $data["id"];
-            $model = new Usuario();
-            $usuario = $model->findById($usuarioId)->data();
-
-            /** GET PDO instance AND errors*/
-            $connect = Connect::getInstance();
-            $error = Connect::getError();
-
-            /** CHECK connection/errors */
-            if ($error) {
-                echo $error->getMessage();
-                exit;
-            }
-
-            /** FETCH DATA*/
-            $ufs = $connect->query("SELECT ds_uf FROM cidades GROUP BY ds_uf ORDER BY ds_uf")
-                ->fetchAll();
-            echo $this->view->render('register', compact('usuario', 'ufs', 'usuarioId'));
+            echo $this->view->render('register');
             return;
         }
         $this->router->redirect('web.login');

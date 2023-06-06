@@ -63,7 +63,7 @@
 
                     </div>
                     <div class="info d-flex align-items-center">
-                        <a href="#" class="d-block"><?= $user->ds_usuario ?></a>
+                        <a href="#" class="d-block"><?= $user->nome ?></a>
                         <a href="<?= $router->route("auth.logout") ?>" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
                     </div>
                 </div>
