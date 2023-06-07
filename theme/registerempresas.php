@@ -10,27 +10,27 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header" id="header">
-                        Novo Usuario
+                        Nova Empresa
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form action="" method="">
-                        <input type="hidden" name="id" id="id" value="<?= intval($usuarioId) ?>">
+                        <input type="hidden" name="id" id="id" value="<?= intval($empresaId) ?>">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="">Nome do usuário</label>
-                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome ...">
+                                <label for="">CNPJ</label>
+                                <input type="text" class="form-control" id="CNPJ" name="CNPJ" placeholder="CNPJ ...">
                             </div>
 
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label for="">CPF usuário</label>
-                                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF ...">
+                                        <label for="">Razão Social</label>
+                                        <input type="text" class="form-control" id="razaoSocial" name="razaoSocial" placeholder="razaoSocial ...">
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="exampleInputEmail1">Data Nascimento</label>
-                                        <input type="date" class="form-control" id="dataNasc" name="dataNasc">
+                                        <label for="exampleInputEmail1">Telefone</label>
+                                        <input type="text" class="form-control" id="fone" name="fone">
                                     </div>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                     <div class="col-3">
                                         <label for="uf" class="form-label">UF</span></label>
                                         <select id="uf" name="uf" class="form-control">
-                                            <option value=""></option>
+                                            <option value="">Selecione um estado</option>
                                             <?php foreach ($ufs as $uf) : ?>
                                                 <option value="<?= $uf->ds_uf; ?>"><?= $uf->ds_uf; ?></option>
                                             <?php endforeach; ?>
@@ -53,15 +53,6 @@
                                                 <option value=""></option>
                                             </select>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="exampleInputPassword1">Senha</label>
-                                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Password">
                                     </div>
                                 </div>
                             </div>
@@ -114,14 +105,12 @@
 
         $("#cod").focus();
         var id;
-        var nome;
-        var cpf;
-        var dataNasc;
+        var cnpj;
+        var razaoSocial;
+        var fone;
         var uf;
         var cidade;
-        var senha;
         var email;
-        var config;
         $("#sal").click(function() {
             sal();
         })
@@ -132,10 +121,10 @@
             excluir();
         })
         $(document).ready(function() {
-            aluno();
+            empresa();
         })
 
-        function aluno() {
+        function empresa() {
             if (($("#id").val()) == 0) {
                 console.log($("#id").val());
                 return;
@@ -143,7 +132,7 @@
             var id = $("#id").val();
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("usuarios.post.dados"); ?>",
+                url: "<?= $router->route("empresas.post.dados"); ?>",
                 data: {
                     "id": id
                 },
@@ -151,13 +140,13 @@
                 error: function() {},
                 success: function(response) {
                     if (response.type == "success") {
-                        $("#id").val(response.data[0].id);
-                        $("#nome").val(response.data[0].nome);
-                        $("#cpf").val(response.data[0].CPF);
-                        $("#dataNasc").val(response.data[0].dataNasc);
-                        $("#uf").val(response.data[0].estado);
+                        $("#CNPJ").val(response.data[0].CNPJ);
+                        $("#razaoSocial").val(response.data[0].razaoSocial);
+                        $("#fone").val(response.data[0].fone);
+                        $("#uf").val(response.data[0].uf);
+                        $("#email").val(response.data[0].email);
                         $.post(" <?= $router->route("web.cidades"); ?>", {
-                            ufid: response.data[0].estado
+                            ufid: response.data[0].uf
                         }, function(result) {
                             $("#cidade").empty();
                             if (result) {
@@ -166,12 +155,10 @@
                                     options = options + '<option value="' + v.cd_cidade + '">' + v.ds_cidade + '</option>'
                                 });
                                 $("#cidade").html(options);
-                                $('#cidade').val(response.data[0].cidade);
+                                $('#cidade').val(response.data[0].id_cidade);
                             }
-                        }, "json");
-                        $("#senha").val(response.data[0].senha);
-                        $("#email").val(response.data[0].email);
-                        $("#header").text("Atualizar dados Usuario id " + response.data[0].id);
+                        }, "json");;
+                        $("#header").text("Atualizar dados Empresa ID " + response.data[0].id);
                     }
                 },
                 beforeSend: function() {}
@@ -179,24 +166,21 @@
         }
 
         function sal() {
-            id = $("#id").val();
-            nome = $("#nome").val();
-            cpf = $("#cpf").val();
-            dataNasc = $("#dataNasc").val();
+            cnpj = $("#CNPJ").val();
+            razaoSocial = $("#razaoSocial").val();
+            fone = $("#fone").val();
             uf = $("#uf").val();
             cidade = $("#cidade").val();
-            senha = $("#senha").val();
             email = $("#email").val();
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("usuarios.post.register"); ?>",
+                url: "<?= $router->route("empresas.post.register"); ?>",
                 data: {
-                    "nome": nome,
-                    "cpf": cpf,
-                    "dataNasc": dataNasc,
+                    "CNPJ": cnpj,
+                    "razaoSocial": razaoSocial,
+                    "fone": fone,
                     "uf": uf,
                     "cidade": cidade,
-                    "senha": senha,
                     "email": email
                 },
                 dataType: "json",
@@ -218,7 +202,7 @@
 
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("usuarios.delet"); ?>",
+                url: "<?= $router->route("empresas.delet"); ?>",
                 data: {
                     "id": id
                 },
@@ -238,26 +222,23 @@
 
         function alterar() {
             id = $("#id").val();
-            nome = $("#nome").val();
-            cpf = $("#cpf").val();
-            dataNasc = $("#dataNasc").val();
+            cnpj = $("#CNPJ").val();
+            razaoSocial = $("#razaoSocial").val();
+            fone = $("#fone").val();
             uf = $("#uf").val();
             cidade = $("#cidade").val();
-            senha = $("#senha").val();
             email = $("#email").val();
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("usuarios.post.update"); ?>",
+                url: "<?= $router->route("empresas.post.update"); ?>",
                 data: {
                     "id": id,
-                    "nome": nome,
-                    "cpf": cpf,
-                    "dataNasc": dataNasc,
+                    "CNPJ": cnpj,
+                    "razaoSocial": razaoSocial,
+                    "fone": fone,
                     "uf": uf,
                     "cidade": cidade,
-                    "senha": senha,
-                    "email": email,
-                    "type": "update"
+                    "email": email
                 },
                 dataType: "json",
                 error: function() {},

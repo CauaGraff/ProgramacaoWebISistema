@@ -34,7 +34,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="../../index3.html" class="nav-link">Home</a>
+                    <a href="<?= $router->route("web.home") ?>" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -100,7 +100,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="menu.php?modulo=cadastro_empresa" class="nav-link">
+                                    <a href="<?= $router->route("empresas.index") ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Empresas</p>
                                     </a>

@@ -9,7 +9,7 @@
                     <div class="card-header d-flex align-items-center">
                         <h3 class="card-title">Tabela Usuarios</h3>
                         <div class="ml-3">
-                            <a href="<?= $router->route("usuarios.register"); ?>"><button type="button" class="btn btn-success">Novo</button></a>
+                            <a href="<?= $router->route("empresas.register"); ?>"><button type="button" class="btn btn-success">Novo</button></a>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -18,21 +18,23 @@
                             <thead>
                                 <tr>
                                     <th>Codigo</th>
-                                    <th>Usuário</th>
-                                    <th>CPF</th>
+                                    <th>CNPJ</th>
+                                    <th>Razão Social</th>
                                     <th>E-mail</th>
+                                    <th>Telefone</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($usuarios)) : ?>
-                                    <?php foreach ($usuarios as $usuario) : ?>
-                                        <tr data-id="<?= $usuario->id ?>">
-                                            <td><?= $usuario->id ?></td>
-                                            <td><?= $usuario->nome ?></td>
-                                            <td><?= $usuario->CPF ?></td>
-                                            <td><?= $usuario->email ?></td>
-                                            <td style="text-align: center;"><a href="<?= $router->route("usuarios.update", ["id" => $usuario->id]) ?>" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                <?php if (!empty($empresas)) : ?>
+                                    <?php foreach ($empresas as $empresa) : ?>
+                                        <tr data-id="<?= $empresa->id ?>">
+                                            <td><?= $empresa->id ?></td>
+                                            <td><?= $empresa->CNPJ ?></td>
+                                            <td><?= $empresa->razaoSocial ?></td>
+                                            <td><?= $empresa->email ?></td>
+                                            <td><?= $empresa->fone ?></td>
+                                            <td style="text-align: center;"><a href="<?= $router->route("empresas.update", ["id" => $empresa->id]) ?>" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                         </tr>
                                     <?php endforeach ?>
                                 <?php else : ?>
@@ -44,9 +46,10 @@
                             <tfoot>
                                 <tr>
                                     <th>Codigo</th>
-                                    <th>Usuário</th>
-                                    <th>CPF</th>
+                                    <th>CNPJ</th>
+                                    <th>Razão Social</th>
                                     <th>E-mail</th>
+                                    <th>Telefone</th>
                                     <th>Ações</th>
                                 </tr>
                             </tfoot>

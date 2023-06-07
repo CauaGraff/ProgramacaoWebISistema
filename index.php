@@ -22,6 +22,9 @@ $router->get('/login', 'Web:login', 'web.login');
 $router->get('/contato', 'Web:contato', 'web.contato');
 $router->post('/cidades', 'Web:cidades', 'web.cidades');
 
+/** AUTH */
+$router->post('/login', 'Web:login', 'auth.login');
+$router->get('/logout', 'Web:logout', 'auth.logout');
 
 
 /**USUARIOS */
@@ -32,10 +35,19 @@ $router->post('/register', 'Usuarios:register', 'usuarios.post.register');
 $router->get('/atualiza/{id}', 'Usuarios:update', 'usuarios.update');
 $router->post('/update', 'Usuarios:update', 'usuarios.post.update');
 $router->post('/dados', 'Usuarios:dados', 'usuarios.post.dados');
+$router->post('/delet', 'Usuarios:delet', 'usuarios.delet');
 
-/** AUTH */
-$router->post('/login', 'Web:login', 'auth.login');
-$router->get('/logout', 'Web:logout', 'auth.logout');
+
+/**EMPRESAS */
+$router->group('empresas');
+$router->get('/', 'Empresas:index', 'empresas.index');
+$router->get('/cadastro', 'Empresas:register', 'empresas.register');
+$router->post('/register', 'Empresas:register', 'empresas.post.register');
+$router->get('/atualiza/{id}', 'Empresas:update', 'empresas.update');
+$router->post('/update', 'Empresas:update', 'empresas.post.update');
+$router->post('/dados', 'Empresas:dados', 'empresas.post.dados');
+$router->post('/delet', 'Empresas:delet', 'empresas.delet');
+
 
 /** PRODUTOS */
 $router->group('produtos');
