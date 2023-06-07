@@ -31,6 +31,7 @@ $router->get('/cadastro', 'Usuarios:register', 'usuarios.register');
 $router->post('/register', 'Usuarios:register', 'usuarios.post.register');
 $router->get('/atualiza/{id}', 'Usuarios:update', 'usuarios.update');
 $router->post('/update', 'Usuarios:update', 'usuarios.post.update');
+$router->post('/dados', 'Usuarios:dados', 'usuarios.post.dados');
 
 /** AUTH */
 $router->post('/login', 'Web:login', 'auth.login');

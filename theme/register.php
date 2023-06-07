@@ -9,13 +9,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-primary">
-                    <div class="card-header">
+                    <div class="card-header" id="header">
                         Novo Usuario
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form action="" method="">
-                        <input type='hidden' name='id' id='id' value=''>
+                        <input type="hidden" name="id" id="id" value="<?= intval($usuarioId) ?>">
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="">Nome do usuário</label>
@@ -113,10 +113,14 @@
         });
 
         $("#cod").focus();
-        var cod;
+        var id;
         var nome;
-        var exercicio;
-        var frases;
+        var cpf;
+        var dataNasc;
+        var uf;
+        var cidade;
+        var senha;
+        var email;
         var config;
         $("#sal").click(function() {
             sal();
@@ -127,75 +131,75 @@
         $("#exc").click(function() {
             excluir();
         })
-        $("#cod").keyup(function() {
+        $(document).ready(function() {
             aluno();
         })
 
         function aluno() {
-            if (($("#cod").val().length) != 4) {
+            if (($("#id").val()) == 0) {
+                console.log($("#id").val());
                 return;
             }
-            var config = {
-                "cod": $("#cod").val()
-            };
-            $.post("source/aluno.php", config, function(data) {
-                data = JSON.parse(data);
-                if (!data.erro) {
-                    var nome = data.nome;
-                    exercicio = data.exercicio;
-                    frases = data.frases;
-                    $("#nome").val(nome);
-                    $("#exercicio").val(exercicio);
-                    $("#frases").val(frases);
-                } else {
-                    $("#nome").val("");
-                    $("#exercicio").val("1");
-                    $("#frases").val("0");
-                    $("#nome").focus();
-                }
-
-                $("input").each(function(i, e) {
-                    if ($(this).val()) {
-                        $(this).siblings().addClass("up");
+            var id = $("#id").val();
+            $.ajax({
+                method: "POST",
+                url: "<?= $router->route("usuarios.post.dados"); ?>",
+                data: {
+                    "id": id
+                },
+                dataType: "json",
+                error: function() {},
+                success: function(response) {
+                    if (response.type == "success") {
+                        $("#id").val(response.data[0].id);
+                        $("#nome").val(response.data[0].nome);
+                        $("#cpf").val(response.data[0].CPF);
+                        $("#dataNasc").val(response.data[0].dataNasc);
+                        $("#uf").val(response.data[0].estado);
+                        $("#cidade").val(response.data[0].cidade);
+                        $("#senha").val(response.data[0].senha);
+                        $("#email").val(response.data[0].email);
+                        $("#header").text("Atualizar dados Usuario id " + response.data[0].id);
                     }
-                });
-
+                },
+                beforeSend: function() {}
             });
         }
 
         function sal() {
-            var id = $("#id").val();
-            var nome = $("#nome").val();
-            var cpf = $("#cpf").val();
-            var dataNasc = $("#dataNasc").val();
-            var uf = $("#uf").val();
-            var cidade = $("#cidade").val();
-            var senha = $("#senha").val();
-            var email = $("#email").val();
-            var config = {
-                "nome": nome,
-                "cpf": cpf,
-                "dataNasc": dataNasc,
-                "uf": uf,
-                "cidade": cidade,
-                "senha": senha,
-                "email": email
-            }
-            $.post("<?= $router->route("usuarios.post.register"); ?>",
-                config,
-                function(result) {
-                    if (result.type == "success") {
-                        window.location.replace(result.redirect)
-
-                    } else if (data.type == "erro") {
-                        alert("Erro ao cadastrar aluno.");
-                    } else if (data.type == "existe") {
-                        alert("Aluno já existe.");
-                    } else {
-                        alert("Erro desconhecido.");
+            id = $("#id").val();
+            nome = $("#nome").val();
+            cpf = $("#cpf").val();
+            dataNasc = $("#dataNasc").val();
+            uf = $("#uf").val();
+            cidade = $("#cidade").val();
+            senha = $("#senha").val();
+            email = $("#email").val();
+            $.ajax({
+                method: "POST",
+                url: "<?= $router->route("usuarios.post.register"); ?>",
+                data: {
+                    "nome": nome,
+                    "cpf": cpf,
+                    "dataNasc": dataNasc,
+                    "uf": uf,
+                    "cidade": cidade,
+                    "senha": senha,
+                    "email": email
+                },
+                dataType: "json",
+                error: function() {},
+                success: function(response) {
+                    if (response.type == "error") {
+                        $alert.addClass('alert-danger');
+                        $alert.text(response.mensagem);
                     }
-
-                }, "json");
+                    if (response.type == "success") {
+                        window.location.href = response.redirect
+                    }
+                },
+                beforeSend: function() {}
+            });
         }
 
         function excluir() {

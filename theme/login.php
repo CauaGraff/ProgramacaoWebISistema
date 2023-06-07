@@ -45,12 +45,15 @@
         </div>
         <!-- /.login-logo -->
         <div class="card">
+            <div class="card-header">
+
+            </div>
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Conecte-se</p>
 
                 <form action="<?= $router->route("auth.login") ?>" method="post">
                     <div class="input-group mb-3">
-                        <input type="email" id='ds_email' name='ds_email' class="form-control" placeholder="Email">
+                        <input type="email" id='email' name='email' class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -58,7 +61,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" id='ds_senha' name='ds_senha' class="form-control" placeholder="Senha">
+                        <input type="password" id='senha' name='senha' class="form-control" placeholder="Senha">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>

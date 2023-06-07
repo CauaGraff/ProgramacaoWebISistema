@@ -15,8 +15,8 @@ class Auth extends Controller
 
     public static function attempt(array $dados): bool
     {
-        $senha = $dados['ds_senha'];
-        $email = $dados['ds_email'];
+        $senha = $dados['senha'];
+        $email = $dados['email'];
 
         $usuario = new Usuario();
         $usuario->find('email = :email', "email={$email}");
@@ -25,11 +25,11 @@ class Auth extends Controller
             return false;
         }
 
-        if (!password_verify($senha, $usuario->ds_senha)) {
+        if (!password_verify($senha, $usuario->senha)) {
             return false;
         }
 
-        $_SESSION['usuario_id'] = $usuario->cd_usuario;
+        $_SESSION['usuario_id'] = $usuario->id;
         return true;
     }
 

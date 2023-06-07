@@ -56,8 +56,8 @@ class Web extends Controller
         // se ele não tem sessão
         if (!Auth::verify('usuario_id')) {
             if (!empty($dados)) {
-                $senha = $dados['ds_senha'];
-                $email = $dados['ds_email'];
+                $senha = $dados['senha'];
+                $email = $dados['email'];
 
                 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     echo "E-mail inválido";

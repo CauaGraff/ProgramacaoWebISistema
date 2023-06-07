@@ -29,7 +29,7 @@ class Usuarios extends Controller
 
     public function register(array $dados)
     {
-        var_dump($dados);
+
         if (!empty($dados)) {
             $nome = $dados['nome'];
             $cpf = $dados['cpf'];
@@ -101,9 +101,38 @@ class Usuarios extends Controller
     public  function update(array $data)
     {
         if (Auth::verify('usuario_id')) {
+            if (!empty($data)) {
+                $usuarioId = $data['id'];
+                echo $this->view->render('register', compact('usuarioId'));
+                return;
+            }
+        }
+        $this->router->redirect('web.login');
+        return;
+    }
 
-            echo $this->view->render('register');
-            return;
+    public function dados(array $data)
+    {
+        if (Auth::verify('usuario_id')) {
+            if (!empty($data)) {
+                $id = $data['id'];
+                /* * GET PDO instance AND errors */
+                $connect = Connect::getInstance();
+                $error = Connect::getError();
+                /* * CHECK connection/errors */
+                if ($error) {
+                    echo $error->getMessage();
+                    exit;
+                }
+                /* * FETCH DATA */
+                $users = [];
+                $users = $connect->query("SELECT * FROM usuarios WHERE id={$id}")->fetchAll();
+                echo $this->ajaxResponse([
+                    "data" => $users,
+                    "type" => "success"
+                ]);
+                return;
+            }
         }
         $this->router->redirect('web.login');
         return;
