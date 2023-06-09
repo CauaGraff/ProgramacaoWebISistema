@@ -39,6 +39,41 @@ class Usuarios extends Controller
             $senha = $dados['senha'];
             $email = $dados['email'];
 
+            $erro = [];
+
+            if (empty($nome)) {
+                $erro['nome'] = "Preencha o Nome";
+            }
+
+            if (empty($cpf)) {
+                $erro['cpf'] = "Preencha o CPF";
+            }
+
+            if (empty($dataNasc)) {
+                $erro['dataNasc'] = "Preencha a data de nascimento";
+            }
+
+            if (empty($uf)) {
+                $erro['uf'] = "Selecione um estado";
+            }
+
+            if (empty($cidade)) {
+                $erro['cidade'] = "Selecione uma cidade";
+            }
+
+            if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $erro['email'] = "E-mail invalido";
+            }
+
+            if (empty($senha) || strlen($senha) <= 7) {
+                $erro['senha'] = "Senha Invalida, Minimo de digitos é 8";
+            }
+
+            if (!empty($erro)) {
+                echo $this->ajaxResponse($erro);
+                return;
+            }
+
             if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 echo $this->ajaxResponse([
                     'type' => 'error',

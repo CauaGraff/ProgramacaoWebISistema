@@ -20,31 +20,33 @@
                             <div class="form-group">
                                 <label for="">Nome do usuário</label>
                                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome ...">
+                                <small class="form-text rounded" data-alert="nome"></small>
                             </div>
-
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="">CPF usuário</label>
-                                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF ...">
+                                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Somente números" MAXLENGTH="14">
+                                        <small class="form-text rounded" data-alert="cpf"></small>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="exampleInputEmail1">Data Nascimento</label>
                                         <input type="date" class="form-control" id="dataNasc" name="dataNasc">
+                                        <small class="form-text rounded" data-alert="dataNasc"></small>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-3">
                                         <label for="uf" class="form-label">UF</span></label>
                                         <select id="uf" name="uf" class="form-control">
-                                            <option value=""></option>
+                                            <option value="">Selecione um estado</option>
                                             <?php foreach ($ufs as $uf) : ?>
                                                 <option value="<?= $uf->ds_uf; ?>"><?= $uf->ds_uf; ?></option>
                                             <?php endforeach; ?>
                                         </select>
+                                        <small class="form-text rounded" data-alert="uf"></small>
                                     </div>
                                     <div class="col-9">
                                         <label for="cidade" class="form-label">Cidade</label>
@@ -52,27 +54,25 @@
                                             <select id="cidade" name="cidade" class="form-control">
                                                 <option value=""></option>
                                             </select>
+                                            <small class="form-text rounded" data-alert="cidade"></small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
                                         <label for="exampleInputPassword1">Senha</label>
                                         <input type="password" class="form-control" id="senha" name="senha" placeholder="Password">
-                                    </div>
-                                </div>
-                            </div>
+                                        <small class="form-text rounded" data-alert="senha"></small>
 
+
+                            </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                                <small class="form-text rounded" data-alert="email"></small>
                             </div>
                         </div>
                         <!-- /.card-body -->
-
                         <div class="card-footer d-flex justify-content-center gap-3">
                             <button id="sal" class="btn btn-success m-1">Salvar</button>
                             <button id="alt" class="btn btn-warning m-1">Alterar</button>
@@ -82,12 +82,12 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 
 <?php $v->start('js') ?>
+<script src="<?= shared_js("formatacpf.js")?>"></script>
 <script>
     $(function() {
         $("#uf").change(function() {
@@ -202,14 +202,20 @@
                 dataType: "json",
                 error: function() {},
                 success: function(response) {
-                    if (response.type == "error") {
-
-                    }
+                    $.each(response, function(indice, valor) {
+                        var $campo = $(`[data-alert='${indice}']`)
+                        $campo.addClass('text-danger');
+                        $campo.html("<i class='fa-sharp fa-solid fa-circle-exclamation' style='color: #ef2929;'></i> "+valor);
+                    })
                     if (response.type == "success") {
                         window.location.href = response.redirect
                     }
                 },
-                beforeSend: function() {}
+                beforeSend: function() {
+                    var $alert = $("[data-alert]");
+                    $alert.removeClass("text-danger");
+                    $alert.text("");
+                }
             });
         }
 
@@ -262,15 +268,14 @@
                 dataType: "json",
                 error: function() {},
                 success: function(response) {
-                    if (response.type == "error") {
-                        $alert.addClass('alert-danger');
-                        $alert.text(response.mensagem);
-                    }
+
                     if (response.type == "success") {
                         window.location.href = response.redirect
                     }
                 },
-                beforeSend: function() {}
+                beforeSend: function() {
+
+                }
             });
         }
     });
