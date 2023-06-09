@@ -238,7 +238,8 @@
                     "fone": fone,
                     "uf": uf,
                     "cidade": cidade,
-                    "email": email
+                    "email": email,
+                    "type": "update"
                 },
                 dataType: "json",
                 error: function() {},
