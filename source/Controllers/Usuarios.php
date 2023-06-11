@@ -45,20 +45,20 @@ class Usuarios extends Controller
                 $erro['nome'] = "Preencha o Nome";
             }
 
-            if (empty($cpf)) {
-                $erro['cpf'] = "Preencha o CPF";
+            if (empty($cpf) || !validaCPF($cpf)) {
+                $erro['cpf'] = "Preencha um CPF valido";
             }
 
             if (empty($dataNasc)) {
-                $erro['dataNasc'] = "Preencha a data de nascimento";
+                $erro['dataNasc'] = "Preencha a Data de Nascimento";
             }
 
             if (empty($uf)) {
-                $erro['uf'] = "Selecione um estado";
+                $erro['uf'] = "Selecione um Estado";
             }
 
             if (empty($cidade)) {
-                $erro['cidade'] = "Selecione uma cidade";
+                $erro['cidade'] = "Selecione uma Cidade";
             }
 
             if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -71,14 +71,6 @@ class Usuarios extends Controller
 
             if (!empty($erro)) {
                 echo $this->ajaxResponse($erro);
-                return;
-            }
-
-            if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                echo $this->ajaxResponse([
-                    'type' => 'error',
-                    'mensagem' => 'E-mail inválido'
-                ]);
                 return;
             }
 

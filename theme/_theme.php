@@ -112,9 +112,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../forms/editors.html" class="nav-link">
+                                    <a href="<?= $router->route("clientes.index") ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Editors</p>
+                                        <p>Clientes</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

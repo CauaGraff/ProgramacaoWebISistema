@@ -60,9 +60,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                        <label for="exampleInputPassword1">Senha</label>
-                                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Password">
-                                        <small class="form-text rounded" data-alert="senha"></small>
+                                <label for="exampleInputPassword1">Senha</label>
+                                <input type="password" class="form-control" id="senha" name="senha" placeholder="Password">
+                                <small class="form-text rounded" data-alert="senha"></small>
 
 
                             </div>
@@ -87,7 +87,7 @@
 </section>
 
 <?php $v->start('js') ?>
-<script src="<?= shared_js("formatacpf.js")?>"></script>
+<script src="<?= shared_js("formatacpf.js") ?>"></script>
 <script>
     $(function() {
         $("#uf").change(function() {
@@ -205,7 +205,7 @@
                     $.each(response, function(indice, valor) {
                         var $campo = $(`[data-alert='${indice}']`)
                         $campo.addClass('text-danger');
-                        $campo.html("<i class='fa-sharp fa-solid fa-circle-exclamation' style='color: #ef2929;'></i> "+valor);
+                        $campo.html("<i class='fa-sharp fa-solid fa-circle-exclamation' style='color: #ef2929;'></i> " + valor);
                     })
                     if (response.type == "success") {
                         window.location.href = response.redirect

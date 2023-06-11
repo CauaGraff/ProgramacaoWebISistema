@@ -48,6 +48,16 @@ $router->post('/update', 'Empresas:update', 'empresas.post.update');
 $router->post('/dados', 'Empresas:dados', 'empresas.post.dados');
 $router->post('/delet', 'Empresas:delet', 'empresas.delet');
 
+/**CLIENTES */
+$router->group('clientes');
+$router->get('/', 'Clientes:index', 'clientes.index');
+$router->get('/cadastro', 'Clientes:register', 'clientes.register');
+$router->post('/register', 'Clientes:register', 'clientes.post.register');
+$router->get('/atualiza/{id}', 'Clientes:update', 'clientes.update');
+$router->post('/update', 'Clientes:update', 'clientes.post.update');
+$router->post('/dados', 'Clientes:dados', 'clientes.post.dados');
+$router->post('/delet', 'Clientes:delet', 'clientes.delet');
+
 
 /** PRODUTOS */
 $router->group('produtos');

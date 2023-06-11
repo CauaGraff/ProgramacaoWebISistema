@@ -1,8 +1,5 @@
 <?php $v->layout('_theme') ?>
 
-<script type="text/javascript">
-
-</script>
 <!-- Main content -->
 <section class="content mt-3">
     <div class="container-fluid">
@@ -10,29 +7,29 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header" id="header">
-                        Nova Empresa
+                        Novo Cliente
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form action="" method="">
-                        <input type="hidden" name="id" id="id" value="<?= intval($empresaId) ?>">
+                        <input type="hidden" name="id" id="id" value="<?= intval($clienteId) ?>">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="">CNPJ</label>
-                                <input type="text" class="form-control" id="CNPJ" name="CNPJ" placeholder="CNPJ ..." maxlength="18">
-                                <small class="form-text rounded" data-alert="CNPJ"></small>
+                                <label for="">Nome do Cliente</label>
+                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome ...">
+                                <small class="form-text rounded" data-alert="nome"></small>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label for="">Razão Social</label>
-                                        <input type="text" class="form-control" id="razaoSocial" name="razaoSocial" placeholder="razaoSocial ...">
-                                        <small class="form-text rounded" data-alert="razaoSocial"></small>
+                                        <label for="">CPF Cliente</label>
+                                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Somente números" MAXLENGTH="14">
+                                        <small class="form-text rounded" data-alert="cpf"></small>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="exampleInputEmail1">Telefone</label>
-                                        <input type="text" class="form-control" id="fone" name="fone" maxlength="14" placeholder="Somente numeros">
-                                        <small class="form-text rounded" data-alert="fone"></small>
+                                        <label for="exampleInputEmail1">Data Nascimento</label>
+                                        <input type="date" class="form-control" id="dataNasc" name="dataNasc">
+                                        <small class="form-text rounded" data-alert="dataNasc"></small>
                                     </div>
                                 </div>
                             </div>
@@ -60,6 +57,20 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="ncasa">Nº casa</label>
+                                        <input type="text" class="form-control" id="ncasa" name="ncasa" placeholder="">
+                                        <small class="form-text rounded" data-alert="ncasa"></small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="exampleInputEmail1">Telefone</label>
+                                        <input type="text" class="form-control" id="fone" name="fone" maxlength="14" placeholder="Somente numeros">
+                                        <small class="form-text rounded" data-alert="fone"></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
                                 <small class="form-text rounded" data-alert="email"></small>
@@ -75,14 +86,13 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 
 <?php $v->start('js') ?>
-<script src="<?= shared_js("formatacnpj.js") ?>"></script>
-<script src="<?= shared_js("formatafone.js") ?>"></script>
+<script src="<?= shared_js("formatacpf.js") ?>"></script>
+<script src="<?= shared_js("formatarfone.js") ?>"></script>
 <script>
     $(function() {
         $("#uf").change(function() {
@@ -109,12 +119,15 @@
 
         $("#cod").focus();
         var id;
-        var cnpj;
-        var razaoSocial;
-        var fone;
+        var nome;
+        var cpf;
+        var dataNasc;
         var uf;
         var cidade;
+        var ncasa;
+        var fone;
         var email;
+        var config;
         $("#sal").click(function() {
             sal();
         })
@@ -125,10 +138,10 @@
             excluir();
         })
         $(document).ready(function() {
-            empresa();
+            aluno();
         })
 
-        function empresa() {
+        function aluno() {
             if (($("#id").val()) == 0) {
                 console.log($("#id").val());
                 return;
@@ -136,7 +149,7 @@
             var id = $("#id").val();
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("empresas.post.dados"); ?>",
+                url: "<?= $router->route("usuarios.post.dados"); ?>",
                 data: {
                     "id": id
                 },
@@ -144,13 +157,13 @@
                 error: function() {},
                 success: function(response) {
                     if (response.type == "success") {
-                        $("#CNPJ").val(response.data[0].CNPJ);
-                        $("#razaoSocial").val(response.data[0].razaoSocial);
-                        $("#fone").val(response.data[0].fone);
-                        $("#uf").val(response.data[0].uf);
-                        $("#email").val(response.data[0].email);
+                        $("#id").val(response.data[0].id);
+                        $("#nome").val(response.data[0].nome);
+                        $("#cpf").val(response.data[0].CPF);
+                        $("#dataNasc").val(response.data[0].dataNasc);
+                        $("#uf").val(response.data[0].estado);
                         $.post(" <?= $router->route("web.cidades"); ?>", {
-                            ufid: response.data[0].uf
+                            ufid: response.data[0].estado
                         }, function(result) {
                             $("#cidade").empty();
                             if (result) {
@@ -159,10 +172,12 @@
                                     options = options + '<option value="' + v.cd_cidade + '">' + v.ds_cidade + '</option>'
                                 });
                                 $("#cidade").html(options);
-                                $('#cidade').val(response.data[0].id_cidade);
+                                $('#cidade').val(response.data[0].cidade);
                             }
-                        }, "json");;
-                        $("#header").text("Atualizar dados Empresa ID " + response.data[0].id);
+                        }, "json");
+                        $("#senha").val(response.data[0].senha);
+                        $("#email").val(response.data[0].email);
+                        $("#header").text("Atualizar dados Usuario id " + response.data[0].id);
                     }
                 },
                 beforeSend: function() {}
@@ -170,22 +185,26 @@
         }
 
         function sal() {
-            cnpj = $("#CNPJ").val();
-            razaoSocial = $("#razaoSocial").val();
-            fone = $("#fone").val();
+            nome = $("#nome").val();
+            cpf = $("#cpf").val();
+            dataNasc = $("#dataNasc").val();
             uf = $("#uf").val();
             cidade = $("#cidade").val();
+            ncasa = $("#ncasa").val();
+            fone = $("#fone").val();
             email = $("#email").val();
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("empresas.post.register"); ?>",
+                url: "<?= $router->route("clientes.post.register"); ?>",
                 data: {
-                    "CNPJ": cnpj,
-                    "razaoSocial": razaoSocial,
-                    "fone": fone,
+                    "nome": nome,
+                    "cpf": cpf,
+                    "dataNasc": dataNasc,
                     "uf": uf,
                     "cidade": cidade,
-                    "email": email
+                    "ncasa": ncasa,
+                    "email": email,
+                    "fone": fone
                 },
                 dataType: "json",
                 error: function() {},
@@ -212,7 +231,7 @@
 
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("empresas.delet"); ?>",
+                url: "<?= $router->route("usuarios.delet"); ?>",
                 data: {
                     "id": id
                 },
@@ -232,37 +251,38 @@
 
         function alterar() {
             id = $("#id").val();
-            cnpj = $("#CNPJ").val();
-            razaoSocial = $("#razaoSocial").val();
-            fone = $("#fone").val();
+            nome = $("#nome").val();
+            cpf = $("#cpf").val();
+            dataNasc = $("#dataNasc").val();
             uf = $("#uf").val();
             cidade = $("#cidade").val();
+            senha = $("#senha").val();
             email = $("#email").val();
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("empresas.post.update"); ?>",
+                url: "<?= $router->route("usuarios.post.update"); ?>",
                 data: {
                     "id": id,
-                    "CNPJ": cnpj,
-                    "razaoSocial": razaoSocial,
-                    "fone": fone,
+                    "nome": nome,
+                    "cpf": cpf,
+                    "dataNasc": dataNasc,
                     "uf": uf,
                     "cidade": cidade,
+                    "senha": senha,
                     "email": email,
                     "type": "update"
                 },
                 dataType: "json",
                 error: function() {},
                 success: function(response) {
-                    if (response.type == "error") {
-                        $alert.addClass('alert-danger');
-                        $alert.text(response.mensagem);
-                    }
+
                     if (response.type == "success") {
                         window.location.href = response.redirect
                     }
                 },
-                beforeSend: function() {}
+                beforeSend: function() {
+
+                }
             });
         }
     });

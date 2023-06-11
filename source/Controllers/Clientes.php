@@ -5,9 +5,9 @@ namespace Source\Controllers;
 use CoffeeCode\DataLayer\Connect;
 use CoffeeCode\Router\Router;
 use Source\Controllers\Controller;
-use Source\Models\Empresa;
+use Source\Models\Clientes as ModelsClientes;
 
-class Empresas extends Controller
+class Clientes extends Controller
 {
     public function __construct(Router $router)
     {
@@ -17,9 +17,8 @@ class Empresas extends Controller
     public function index()
     {
         if (Auth::verify('usuario_id')) {
-
-            $empresas = (new Empresa())->find()->fetch(true);
-            echo $this->view->render('listaempresas', compact('empresas'));
+            $clientes = (new ModelsClientes())->find()->fetch(true);
+            echo $this->view->render('listaclientes', compact('clientes'));
             return;
         }
 
@@ -32,19 +31,21 @@ class Empresas extends Controller
         if (Auth::verify('usuario_id')) {
 
             if (!empty($dados)) {
-                $CNPJ = $dados['CNPJ'];
-                $razaoSocial = $dados['razaoSocial'];
+                $nome = $dados['nome'];
+                $cpf = $dados['cpf'];
                 $fone  = $dados['fone'];
                 $uf = $dados['uf'];
                 $cidade = $dados['cidade'];
                 $email = $dados['email'];
+                $ncasa = $dados['ncasa'];
+                $dataNasc = $dados['dataNasc'];
 
-                if (empty($CNPJ) || !validar_cnpj($CNPJ)) {
-                    $erro['CNPJ'] = "Preencha um CNPJ valido";
+                if (empty($nome)) {
+                    $erro['nome'] = "Preencha um nome";
                 }
 
-                if (empty($razaoSocial)) {
-                    $erro['razaoSocial'] = "Preencha a Razão Social";
+                if (empty($cpf) || !validaCPF($cpf)) {
+                    $erro['cpf'] = "Preencha um CPF valido";
                 }
 
                 if (empty($fone)) {
@@ -63,20 +64,25 @@ class Empresas extends Controller
                     $erro['email'] = "E-mail invalido";
                 }
 
+                if (empty($ncasa)) {
+                    $erro['ncasa'] = "Preencha o Nº casa";
+                }
+
                 if (!empty($erro)) {
                     echo $this->ajaxResponse($erro);
                     return;
                 }
 
-                $empresa = new Empresa();
-                $empresa->CNPJ = $CNPJ;
-                $empresa->razaoSocial = $razaoSocial;
-                $empresa->fone = $fone;
-                $empresa->id_cidade = $cidade;
-                $empresa->uf = $uf;
-                $empresa->email = $email;
+                $cliente = new ModelsClientes();
+                $cliente->nome = $nome;
+                $cliente->CPF = $cpf;
+                $cliente->dataNasc = $dataNasc;
+                $cliente->ncasa = $ncasa;
+                $cliente->id_cidade = $cidade;
+                $cliente->uf = $uf;
+                $cliente->email = $email;
 
-                if ($empresa->save()) {
+                if ($cliente->save()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
                         'redirect' => $this->router->route('web.home')
@@ -98,10 +104,9 @@ class Empresas extends Controller
             }
 
             /** FETCH DATA*/
-            $ufs = $connect->query("SELECT ds_uf FROM cidades GROUP BY ds_uf ORDER BY ds_uf")
-                ->fetchAll();
-            $empresaId = 0;
-            echo $this->view->render('registerempresas', compact('ufs', 'empresaId'));
+            $ufs = $connect->query("SELECT ds_uf FROM cidades GROUP BY ds_uf ORDER BY ds_uf")->fetchAll();
+            $clienteId = 0;
+            echo $this->view->render('registerclientes', compact('ufs', 'clienteId'));
         }
 
         $this->router->redirect('web.login');
@@ -129,7 +134,7 @@ class Empresas extends Controller
                         return;
                     }
 
-                    $empresa = (new Empresa())->findById($id);
+                    $empresa = (new ModelsClientes())->findById($id);
                     $empresa->CNPJ = $CNPJ;
                     $empresa->razaoSocial = $razaoSocial;
                     $empresa->fone = $fone;
@@ -199,7 +204,7 @@ class Empresas extends Controller
         if (Auth::verify('usuario_id')) {
             if (!empty($data)) {
                 $id = $data['id'];
-                $user = (new Empresa())->findById($id);
+                $user = (new ModelsClientes())->findById($id);
                 if ($user->destroy()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
