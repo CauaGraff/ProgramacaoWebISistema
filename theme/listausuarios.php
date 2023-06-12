@@ -1,5 +1,11 @@
 <?php $v->layout("_theme"); ?>
-
+<?php $v->start("css")?>
+<style>
+    td, th{
+        text-align: center;
+    }
+</style>
+<?php $v->end()?>
 <!-- Main content -->
 <section class="content mt-3">
     <div class="container-fluid">

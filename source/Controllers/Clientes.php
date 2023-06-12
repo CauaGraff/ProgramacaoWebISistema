@@ -82,9 +82,10 @@ class Clientes extends Controller
                 $cliente->CPF = $cpf;
                 $cliente->dataNasc = $dataNasc;
                 $cliente->ncasa = $ncasa;
-                $cliente->id_cidade = $cidade;
+                $cliente->cidade_id = $cidade;
                 $cliente->uf = $uf;
                 $cliente->email = $email;
+                $cliente->fone = $fone;
 
                 if ($cliente->save()) {
                     echo $this->ajaxResponse([
@@ -110,7 +111,8 @@ class Clientes extends Controller
             /** FETCH DATA*/
             $ufs = $connect->query("SELECT ds_uf FROM cidades GROUP BY ds_uf ORDER BY ds_uf")->fetchAll();
             $clienteId = 0;
-            echo $this->view->render('registerclientes', compact('ufs', 'clienteId'));
+            echo $this->view->render('registerclientes',compact('ufs', 'clienteId'));
+            return;
         }
 
         $this->router->redirect('web.login');
@@ -123,12 +125,14 @@ class Clientes extends Controller
             if (!empty($data)) {
                 if (array_key_exists("type", $data)) {
                     $id = $data['id'];
-                    $CNPJ = $data['CNPJ'];
-                    $razaoSocial = $data['razaoSocial'];
-                    $fone  = $data['fone'];
-                    $uf = $data['uf'];
-                    $cidade = $data['cidade'];
-                    $email = $data['email'];
+                    $nome = $dados['nome'];
+                    $cpf = $dados['cpf'];
+                    $fone  = $dados['fone'];
+                    $uf = $dados['uf'];
+                    $cidade = $dados['cidade'];
+                    $email = $dados['email'];
+                    $ncasa = $dados['ncasa'];
+                    $dataNasc = $dados['dataNasc'];
 
                     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         echo $this->ajaxResponse([
@@ -138,14 +142,16 @@ class Clientes extends Controller
                         return;
                     }
 
-                    $empresa = (new ModelsClientes())->findById($id);
-                    $empresa->CNPJ = $CNPJ;
-                    $empresa->razaoSocial = $razaoSocial;
-                    $empresa->fone = $fone;
-                    $empresa->id_cidade = $cidade;
-                    $empresa->uf = $uf;
-                    $empresa->email = $email;
-                    if ($empresa->save()) {
+                    $cliente = (new ModelsClientes())->findById($id);
+                    $cliente->nome = $nome;
+                    $cliente->CPF = $cpf;
+                    $cliente->dataNasc = $dataNasc;
+                    $cliente->ncasa = $ncasa;
+                    $cliente->cidade_id = $cidade;
+                    $cliente->uf = $uf;
+                    $cliente->email = $email;
+                    $cliente->fone = $fone;
+                    if ($cliente->save()) {
                         echo $this->ajaxResponse([
                             'type' => 'success',
                             'redirect' => $this->router->route('web.home')
@@ -154,7 +160,7 @@ class Clientes extends Controller
                     }
                     return;
                 }
-                $empresaId = $data['id'];
+                $clienteId = $data['id'];
                 /** GET PDO instance AND errors*/
                 $connect = Connect::getInstance();
                 $error = Connect::getError();
@@ -168,7 +174,7 @@ class Clientes extends Controller
                 /** FETCH DATA*/
                 $ufs = $connect->query("SELECT ds_uf FROM cidades GROUP BY ds_uf ORDER BY ds_uf")
                     ->fetchAll();
-                echo $this->view->render('registerempresas', compact('empresaId', 'ufs'));
+                echo $this->view->render('registerclientes', compact('clienteId', 'ufs'));
                 return;
             }
         }
@@ -191,7 +197,7 @@ class Clientes extends Controller
                 }
                 /* * FETCH DATA */
                 $users = [];
-                $users = $connect->query("SELECT * FROM empresas WHERE id={$id}")->fetchAll();
+                $users = $connect->query("SELECT * FROM clientes WHERE id={$id}")->fetchAll();
                 echo $this->ajaxResponse([
                     "data" => $users,
                     "type" => "success"

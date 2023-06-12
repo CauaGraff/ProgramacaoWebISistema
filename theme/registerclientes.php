@@ -149,7 +149,7 @@
             var id = $("#id").val();
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("usuarios.post.dados"); ?>",
+                url: "<?= $router->route("clientes.post.dados"); ?>",
                 data: {
                     "id": id
                 },
@@ -161,9 +161,9 @@
                         $("#nome").val(response.data[0].nome);
                         $("#cpf").val(response.data[0].CPF);
                         $("#dataNasc").val(response.data[0].dataNasc);
-                        $("#uf").val(response.data[0].estado);
+                        $("#uf").val(response.data[0].uf);
                         $.post(" <?= $router->route("web.cidades"); ?>", {
-                            ufid: response.data[0].estado
+                            ufid: response.data[0].uf
                         }, function(result) {
                             $("#cidade").empty();
                             if (result) {
@@ -172,11 +172,14 @@
                                     options = options + '<option value="' + v.cd_cidade + '">' + v.ds_cidade + '</option>'
                                 });
                                 $("#cidade").html(options);
-                                $('#cidade').val(response.data[0].cidade);
+                                $('#cidade').val(response.data[0].cidade_id);
                             }
                         }, "json");
                         $("#senha").val(response.data[0].senha);
                         $("#email").val(response.data[0].email);
+                        $("#ncasa").val(response.data[0].ncasa);
+                        $("#fone").val(response.data[0].fone);
+
                         $("#header").text("Atualizar dados Usuario id " + response.data[0].id);
                     }
                 },

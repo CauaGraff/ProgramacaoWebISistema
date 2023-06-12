@@ -25,7 +25,7 @@
                                 <tr>
                                     <th>Codigo</th>
                                     <th>Nome</th>
-                                    <th>Data Nascimento</th>
+                                    <th>Quantidade Disponivel</th>
                                     <th>E-mail</th>
                                     <th>Telefone</th>
                                     <th>Ações</th>

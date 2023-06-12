@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="<?= shared_plugins("datatables-buttons/css/buttons.bootstrap4.min.css") ?>">
     <link rel="stylesheet" href="<?= shared_css("adminlte.min.css") ?>">
     <script src="<?= shared_plugins("jquery/jquery.min.js") ?>"></script>
+    <?= $v->section("css"); ?>
 </head>
 
 <body class="hold-transition sidebar-mini">
