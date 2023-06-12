@@ -92,7 +92,7 @@
 
 <?php $v->start('js') ?>
 <script src="<?= shared_js("formatacpf.js") ?>"></script>
-<script src="<?= shared_js("formatarfone.js") ?>"></script>
+<script src="<?= shared_js("formatafone.js") ?>"></script>
 <script>
     $(function() {
         $("#uf").change(function() {

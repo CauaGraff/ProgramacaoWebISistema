@@ -68,6 +68,10 @@ class Clientes extends Controller
                     $erro['ncasa'] = "Preencha o Nº casa";
                 }
 
+                if (empty($dataNasc)) {
+                    $erro['dataNasc'] = "Preencha a data de nascimento";
+                }
+
                 if (!empty($erro)) {
                     echo $this->ajaxResponse($erro);
                     return;
