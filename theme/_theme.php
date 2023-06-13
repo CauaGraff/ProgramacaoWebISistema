@@ -103,11 +103,11 @@
                                 <li class="nav-item">
                                     <a href="<?= $router->route("empresas.index") ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Empresas</p>
+                                        <p>Fornecedor</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../forms/advanced.html" class="nav-link">
+                                    <a href="<?= $router->route("produto.index")?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Produtos</p>
                                     </a>

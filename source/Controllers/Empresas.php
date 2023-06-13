@@ -79,7 +79,7 @@ class Empresas extends Controller
                 if ($empresa->save()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
-                        'redirect' => $this->router->route('web.home')
+                        'redirect' => $this->router->route('empresas.home')
                     ]);
                     return;
                 }
@@ -102,6 +102,7 @@ class Empresas extends Controller
                 ->fetchAll();
             $empresaId = 0;
             echo $this->view->render('registerempresas', compact('ufs', 'empresaId'));
+            return;
         }
 
         $this->router->redirect('web.login');
@@ -139,7 +140,7 @@ class Empresas extends Controller
                     if ($empresa->save()) {
                         echo $this->ajaxResponse([
                             'type' => 'success',
-                            'redirect' => $this->router->route('web.home')
+                            'redirect' => $this->router->route('empresas.home')
                         ]);
                         return;
                     }
@@ -203,7 +204,7 @@ class Empresas extends Controller
                 if ($user->destroy()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
-                        'redirect' => $this->router->route('web.home')
+                        'redirect' => $this->router->route('empresas.home')
                     ]);
                     return;
                 }

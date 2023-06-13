@@ -62,6 +62,12 @@ $router->post('/delet', 'Clientes:delet', 'clientes.delet');
 /** PRODUTOS */
 $router->group('produtos');
 $router->get('/', 'Produto:index', 'produto.index');
+$router->get('/cadastro', 'Produto:register', 'produto.register');
+$router->post('/register', 'Produto:register', 'produto.post.register');
+$router->get('/atualiza/{id}', 'Produto:update', 'produto.update');
+$router->post('/update', 'Produto:update', 'produto.post.update');
+$router->post('/dados', 'Produto:dados', 'produto.post.dados');
+$router->post('/delet', 'Produto:delet', 'produto.delet');
 
 /** CARRINHO */
 $router->group('carrinho');

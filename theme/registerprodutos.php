@@ -10,73 +10,76 @@
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header" id="header">
-                        Novo Fornecedor
+                        Novo Produto
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form action="" method="">
-                        <input type="hidden" name="id" id="id" value="<?= intval($empresaId) ?>">
+                        <input type="hidden" name="id" id="id" value="<?= intval($produtoId) ?>">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="">CNPJ</label>
-                                <input type="text" class="form-control" id="CNPJ" name="CNPJ" placeholder="CNPJ ..." maxlength="18">
-                                <small class="form-text rounded" data-alert="CNPJ"></small>
+                                <label for="nome">Nome</label>
+                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome ..." maxlength="18">
+                                <small class="form-text rounded" data-alert="nome"></small>
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="">Razão Social</label>
-                                        <input type="text" class="form-control" id="razaoSocial" name="razaoSocial" placeholder="razaoSocial ...">
-                                        <small class="form-text rounded" data-alert="razaoSocial"></small>
+                                    <div class="col-md-4">
+                                        <label for="prco">Preço</label>
+                                        <input type="number" class="form-control" id="prco" name="prco" min="0">
+                                        <small class="form-text rounded" data-alert="prco"></small>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="exampleInputEmail1">Telefone</label>
-                                        <input type="text" class="form-control" id="fone" name="fone" maxlength="14" placeholder="Somente numeros">
-                                        <small class="form-text rounded" data-alert="fone"></small>
+                                    <div class="col-md-2">
+                                        <label for="qtd">Quantidade</label>
+                                        <input type="number" class="form-control" id="qtd" name="qtd" min="0">
+                                        <small class="form-text rounded" data-alert="qtd"></small>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label for="uf" class="form-label">UF</span></label>
-                                        <select id="uf" name="uf" class="form-control">
-                                            <option value="">Selecione um estado</option>
-                                            <?php foreach ($ufs as $uf) : ?>
-                                                <option value="<?= $uf->ds_uf; ?>"><?= $uf->ds_uf; ?></option>
+                                    <div class="col-4">
+                                        <label for="id_uni" class="form-label">Unidade</span></label>
+                                        <select id="id_uni" name="id_uni" class="form-control">
+                                            <option value="">Selecione uma unidade</option>
+                                            <?php foreach ($unis as $uni) : ?>
+                                                <option value="<?= $uni->id; ?>"><?= $uni->descricao; ?> | <?= $uni->unid; ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                        <small class="form-text rounded" data-alert="uf"></small>
+                                        <small class="form-text rounded" data-alert="id_uni"></small>
                                     </div>
-                                    <div class="col-9">
-                                        <label for="cidade" class="form-label">Cidade</label>
-                                        <div>
-                                            <select id="cidade" name="cidade" class="form-control">
-                                                <option value=""></option>
-                                            </select>
-                                            <small class="form-text rounded" data-alert="cidade"></small>
-                                        </div>
+                                    <div class="col-md-2">
+                                        <label for="total">Total</label>
+                                        <input type="text" class="form-control" id="total" name="total" min="0" disabled>
+                                        <small class="form-text rounded" data-alert="total"></small>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
-                                <small class="form-text rounded" data-alert="email"></small>
+                                <label for="descricao">Descricao</label>
+                                <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Nome ..." maxlength="18">
+                                <small class="form-text rounded" data-alert="descricao"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_empresa" class="form-label">Fornecedor</span></label>
+                                <select id="id_empresa" name="id_empresa" class="form-control">
+                                    <option value="">Selecione um fornecedor</option>
+                                    <?php foreach ($fornec as $for) : ?>
+                                        <option value="<?= $for->id; ?>"><?= $for->razaoSocial; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <small class="form-text rounded" data-alert="id_empresa"></small>
                             </div>
                         </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer d-flex justify-content-center gap-3">
-                            <button id="sal" class="btn btn-success m-1">Salvar</button>
-                            <button id="alt" class="btn btn-warning m-1">Alterar</button>
-                            <button id="exc" class="btn btn-danger m-1">Excluir</button>
-                            <button type="reset" class="btn  btn-primary m-1">Limpar</button>
-                        </div>
-                    </form>
                 </div>
+                <!-- /.card-body -->
+                <div class="card-footer d-flex justify-content-center gap-3">
+                    <button id="sal" class="btn btn-success m-1">Salvar</button>
+                    <button id="alt" class="btn btn-warning m-1">Alterar</button>
+                    <button id="exc" class="btn btn-danger m-1">Excluir</button>
+                    <button type="reset" class="btn  btn-primary m-1">Limpar</button>
+                </div>
+                </form>
             </div>
-
         </div>
+
+    </div>
     </div>
 </section>
 
@@ -100,6 +103,7 @@
                 }
             }, "json");
         });
+
     });
 
     $(function() {

@@ -90,7 +90,7 @@ class Clientes extends Controller
                 if ($cliente->save()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
-                        'redirect' => $this->router->route('web.home')
+                        'redirect' => $this->router->route('clientes.home')
                     ]);
                     return;
                 }
@@ -111,7 +111,7 @@ class Clientes extends Controller
             /** FETCH DATA*/
             $ufs = $connect->query("SELECT ds_uf FROM cidades GROUP BY ds_uf ORDER BY ds_uf")->fetchAll();
             $clienteId = 0;
-            echo $this->view->render('registerclientes',compact('ufs', 'clienteId'));
+            echo $this->view->render('registerclientes', compact('ufs', 'clienteId'));
             return;
         }
 
@@ -125,14 +125,14 @@ class Clientes extends Controller
             if (!empty($data)) {
                 if (array_key_exists("type", $data)) {
                     $id = $data['id'];
-                    $nome = $dados['nome'];
-                    $cpf = $dados['cpf'];
-                    $fone  = $dados['fone'];
-                    $uf = $dados['uf'];
-                    $cidade = $dados['cidade'];
-                    $email = $dados['email'];
-                    $ncasa = $dados['ncasa'];
-                    $dataNasc = $dados['dataNasc'];
+                    $nome = $data['nome'];
+                    $cpf = $data['cpf'];
+                    $fone  = $data['fone'];
+                    $uf = $data['uf'];
+                    $cidade = $data['cidade'];
+                    $email = $data['email'];
+                    $ncasa = $data['ncasa'];
+                    $dataNasc = $data['dataNasc'];
 
                     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         echo $this->ajaxResponse([
@@ -154,7 +154,7 @@ class Clientes extends Controller
                     if ($cliente->save()) {
                         echo $this->ajaxResponse([
                             'type' => 'success',
-                            'redirect' => $this->router->route('web.home')
+                            'redirect' => $this->router->route('clientes.home')
                         ]);
                         return;
                     }
@@ -218,7 +218,7 @@ class Clientes extends Controller
                 if ($user->destroy()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
-                        'redirect' => $this->router->route('web.home')
+                        'redirect' => $this->router->route('clientes.home')
                     ]);
                     return;
                 }

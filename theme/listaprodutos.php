@@ -15,7 +15,7 @@
                     <div class="card-header d-flex align-items-center">
                         <h3 class="card-title">Tabela Clientes</h3>
                         <div class="ml-3">
-                            <a href="<?= $router->route("clientes.register"); ?>"><button type="button" class="btn btn-success">Novo</button></a>
+                            <a href="<?= $router->route("produto.register"); ?>"><button type="button" class="btn btn-success">Novo</button></a>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -32,20 +32,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($clientes)) : ?>
-                                    <?php foreach ($clientes as $cliente) : ?>
-                                        <tr data-id="<?= $cliente->id ?>" >
-                                            <td><?= $cliente->id ?></td>
-                                            <td><?= $cliente->nome ?></td>
-                                            <td><?php $date = new DateTimeImmutable($cliente->dataNasc); echo $date->format('d/m/Y'); ?></td>
-                                            <td><?= $cliente->email ?></td>
-                                            <td><?= $cliente->fone ?></td>
+                                <?php if (!empty($produtos)) : ?>
+                                    <?php foreach ($produtos as $produto) : ?>
+                                        <tr data-id="<?= $produto->id ?>" >
+                                            <td><?= $produto->id ?></td>
+                                            <td><?= $produto->nome ?></td>
+                                            <td><?=$produto->dataNasc?></td>
+                                            <td><?= $produto->email ?></td>
+                                            <td><?= $produto->fone ?></td>
                                             <td style="text-align: center;"><a href="<?= $router->route("clientes.update", ["id" => $cliente->id]) ?>" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                         </tr>
                                     <?php endforeach ?>
                                 <?php else : ?>
                                     <tr>
-                                        <td colspan="6" style="text-align: center">Não há clientes cadastradas</td>
+                                        <td colspan="6" style="text-align: center">Não há produtos cadastradas</td>
                                     </tr>
                                 <?php endif ?>
                             </tbody>
@@ -53,7 +53,7 @@
                                 <tr>
                                     <th>Codigo</th>
                                     <th>Nome</th>
-                                    <th>Data Nascimento</th>
+                                    <th>Quantidade Disponivel</th>
                                     <th>E-mail</th>
                                     <th>Telefone</th>
                                     <th>Ações</th>

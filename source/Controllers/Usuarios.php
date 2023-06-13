@@ -101,7 +101,7 @@ class Usuarios extends Controller
 
                 echo $this->ajaxResponse([
                     'type' => 'success',
-                    'redirect' => $this->router->route('web.home')
+                    'redirect' => $this->router->route('usuarios.home')
                 ]);
                 return;
             }
