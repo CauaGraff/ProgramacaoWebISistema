@@ -26,7 +26,6 @@ $router->post('/cidades', 'Web:cidades', 'web.cidades');
 $router->post('/login', 'Web:login', 'auth.login');
 $router->get('/logout', 'Web:logout', 'auth.logout');
 
-
 /**USUARIOS */
 $router->group('usuarios');
 $router->get('/', 'Usuarios:index', 'usuarios.index');
@@ -36,7 +35,6 @@ $router->get('/atualiza/{id}', 'Usuarios:update', 'usuarios.update');
 $router->post('/update', 'Usuarios:update', 'usuarios.post.update');
 $router->post('/dados', 'Usuarios:dados', 'usuarios.post.dados');
 $router->post('/delet', 'Usuarios:delet', 'usuarios.delet');
-
 
 /**EMPRESAS */
 $router->group('empresas');
@@ -57,7 +55,6 @@ $router->get('/atualiza/{id}', 'Clientes:update', 'clientes.update');
 $router->post('/update', 'Clientes:update', 'clientes.post.update');
 $router->post('/dados', 'Clientes:dados', 'clientes.post.dados');
 $router->post('/delet', 'Clientes:delet', 'clientes.delet');
-
 
 /** PRODUTOS */
 $router->group('produtos');
