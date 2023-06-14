@@ -1,7 +1,7 @@
 ENTIDADES QUE O SISTEMA DEVE TER
 
 Usuarios ---
-Empresas---
-Produtos
+Empresas ---
+Produtos 
 Pedidos
 Log

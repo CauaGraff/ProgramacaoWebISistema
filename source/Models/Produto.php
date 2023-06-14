@@ -25,6 +25,6 @@ class Produto extends DataLayer
 
     public function total()
     {
-        return $this->qtd * $this->preco;
+        return "R$ " . number_format($this->qtd * $this->preco, 2, ",", ".");
     }
 }

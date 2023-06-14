@@ -26,7 +26,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="preco">Preço</label>
-                                        <input type="number" class="form-control" id="preco" name="preco" min="0">
+                                        <input type="text" class="form-control" id="preco" name="preco" min="0">
                                         <small class="form-text rounded" data-alert="preco"></small>
                                     </div>
                                     <div class="col-md-2">

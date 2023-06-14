@@ -32,6 +32,7 @@ class Produto extends Controller
         if (Auth::verify('usuario_id')) {
 
             if (!empty($dados)) {
+
                 $nome = $dados['nome'];
                 $qtd = $dados['qtd'];
                 $preco = $dados['preco'];
@@ -52,11 +53,11 @@ class Produto extends Controller
                 }
 
                 if (empty($descricao)) {
-                    $erro['descricao'] = "Preencha a descricao";
+                    $erro['descricao'] = "Preencha a Descricao";
                 }
 
                 if (empty($id_empresa)) {
-                    $erro['id_empresa'] = "Selecione uma fornecedor";
+                    $erro['id_empresa'] = "Selecione um Fornecedor";
                 }
                 if (empty($id_uni)) {
                     $erro['id_uni'] = "Selecione uma unidade de medida";

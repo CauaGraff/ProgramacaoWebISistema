@@ -73,7 +73,6 @@ $router->post('/add/{produtoId}', 'Carrinho:add', 'carrinho.add');
 $router->post('/remove/{produtoId}', 'Carrinho:remove', 'carrinho.remove');
 
 $router->dispatch();
-
 if ($router->error()) {
     echo "Houve um erro " . $router->error();
 }
