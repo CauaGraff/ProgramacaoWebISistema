@@ -234,7 +234,7 @@
 
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("usuarios.delet"); ?>",
+                url: "<?= $router->route("clientes.delet"); ?>",
                 data: {
                     "id": id
                 },
@@ -259,11 +259,12 @@
             dataNasc = $("#dataNasc").val();
             uf = $("#uf").val();
             cidade = $("#cidade").val();
-            senha = $("#senha").val();
+            ncasa = $("#ncasa").val();
+            fone = $("#fone").val();
             email = $("#email").val();
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("usuarios.post.update"); ?>",
+                url: "<?= $router->route("clientes.post.update"); ?>",
                 data: {
                     "id": id,
                     "nome": nome,
@@ -271,8 +272,9 @@
                     "dataNasc": dataNasc,
                     "uf": uf,
                     "cidade": cidade,
-                    "senha": senha,
+                    "ncasa": ncasa,
                     "email": email,
+                    "fone": fone,
                     "type": "update"
                 },
                 dataType: "json",

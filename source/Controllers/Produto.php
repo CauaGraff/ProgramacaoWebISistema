@@ -35,7 +35,7 @@ class Produto extends Controller
                 $nome = $dados['nome'];
                 $qtd = $dados['qtd'];
                 $preco = $dados['preco'];
-                $descricao = $dados['desc'];
+                $descricao = $dados['descricao'];
                 $id_empresa = $dados['id_empresa'];
                 $id_uni = ['id_uni'];
 

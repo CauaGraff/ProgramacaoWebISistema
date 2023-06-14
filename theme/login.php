@@ -13,30 +13,6 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= shared_css("adminlte.min.css") ?>">
 </head>
-<?php
-// $ds_senha = addslashes($_REQUEST["ds_senha"]);
-// $ds_email = addslashes($_REQUEST["ds_email"]);
-
-// if ($_REQUEST["desconecta"] == "sim") {
-//     session_start();
-//     $_SESSION["CD_USUARIO"] = "";
-//     session_destroy();
-// }
-
-// if ((strlen($ds_senha) >= 3) && (strlen($ds_email) >= 3)) {
-//     session_start();
-//     include "conexao.php";
-//     $SQL = "select * from usuarios where ds_email='$ds_email' and ds_senha='$ds_senha'";
-//     $RSS = mysqli_query($conexao, $SQL) or print(mysqli_error());
-//     $RS = mysqli_fetch_assoc($RSS);
-//     if (intval($RS["cd_usuario"]) > 0) {
-//         $_SESSION["CD_USUARIO"] = $RS["cd_usuario"];
-//         $_SESSION["DS_USUARIO"] = $RS["ds_usuario"];
-//         echo "<meta http-equiv='refresh' content='0; url=menu.php'>";
-//     }
-// }
-
-?>
 
 <body class="hold-transition login-page">
     <div class="login-box">
@@ -46,11 +22,9 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-header">
-
+                <p class="login-box-msg">Conecte-se</p>
             </div>
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Conecte-se</p>
-
                 <form action="<?= $router->route("auth.login") ?>" method="post">
                     <div class="input-group mb-3">
                         <input type="email" id='email' name='email' class="form-control" placeholder="Email">

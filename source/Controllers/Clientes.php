@@ -90,7 +90,7 @@ class Clientes extends Controller
                 if ($cliente->save()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
-                        'redirect' => $this->router->route('clientes.home')
+                        'redirect' => $this->router->route('clientes.index')
                     ]);
                     return;
                 }
@@ -134,11 +134,40 @@ class Clientes extends Controller
                     $ncasa = $data['ncasa'];
                     $dataNasc = $data['dataNasc'];
 
+                    if (empty($nome)) {
+                        $erro['nome'] = "Preencha um nome";
+                    }
+
+                    if (empty($cpf) || !validaCPF($cpf)) {
+                        $erro['cpf'] = "Preencha um CPF valido";
+                    }
+
+                    if (empty($fone)) {
+                        $erro['fone'] = "Preencha o telefone";
+                    }
+
+                    if (empty($uf)) {
+                        $erro['uf'] = "Selecione um Estado";
+                    }
+
+                    if (empty($cidade)) {
+                        $erro['cidade'] = "Selecione uma Cidade";
+                    }
+
                     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                        echo $this->ajaxResponse([
-                            'type' => 'error',
-                            'mensagem' => 'E-mail inválido'
-                        ]);
+                        $erro['email'] = "E-mail invalido";
+                    }
+
+                    if (empty($ncasa)) {
+                        $erro['ncasa'] = "Preencha o Nº casa";
+                    }
+
+                    if (empty($dataNasc)) {
+                        $erro['dataNasc'] = "Preencha a data de nascimento";
+                    }
+
+                    if (!empty($erro)) {
+                        echo $this->ajaxResponse($erro);
                         return;
                     }
 
@@ -154,7 +183,7 @@ class Clientes extends Controller
                     if ($cliente->save()) {
                         echo $this->ajaxResponse([
                             'type' => 'success',
-                            'redirect' => $this->router->route('clientes.home')
+                            'redirect' => $this->router->route('clientes.index')
                         ]);
                         return;
                     }
@@ -218,7 +247,7 @@ class Clientes extends Controller
                 if ($user->destroy()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
-                        'redirect' => $this->router->route('clientes.home')
+                        'redirect' => $this->router->route('clientes.index')
                     ]);
                     return;
                 }

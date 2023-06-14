@@ -22,4 +22,9 @@ class Produto extends DataLayer
             false
         );
     }
+
+    public function total()
+    {
+        return $this->qtd * $this->preco;
+    }
 }

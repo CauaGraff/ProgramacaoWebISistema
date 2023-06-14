@@ -79,7 +79,7 @@ class Empresas extends Controller
                 if ($empresa->save()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
-                        'redirect' => $this->router->route('empresas.home')
+                        'redirect' => $this->router->route('empresas.index')
                     ]);
                     return;
                 }
@@ -140,7 +140,7 @@ class Empresas extends Controller
                     if ($empresa->save()) {
                         echo $this->ajaxResponse([
                             'type' => 'success',
-                            'redirect' => $this->router->route('empresas.home')
+                            'redirect' => $this->router->route('empresas.index')
                         ]);
                         return;
                     }
@@ -204,7 +204,7 @@ class Empresas extends Controller
                 if ($user->destroy()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
-                        'redirect' => $this->router->route('empresas.home')
+                        'redirect' => $this->router->route('empresas.index')
                     ]);
                     return;
                 }

@@ -11,8 +11,7 @@ class UnidadeMedida extends DataLayer
         parent::__construct(
             "unidademedida",
             [
-                "descicao",
-                "unid"
+                "nome", "simbolo", "descricao"
             ],
             'id',
             false

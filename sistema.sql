@@ -64,7 +64,7 @@ CREATE TABLE `clientes` (
 
 CREATE TABLE `empresas` (
   `id` int NOT NULL,
-  `CNPJ` char(14) COLLATE utf8mb4_general_ci NOT NULL,
+  `CNPJ` char(18) COLLATE utf8mb4_general_ci NOT NULL,
   `razaoSocial` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `fone` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,

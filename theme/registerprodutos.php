@@ -25,21 +25,21 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="prco">Preço</label>
-                                        <input type="number" class="form-control" id="prco" name="prco" min="0">
-                                        <small class="form-text rounded" data-alert="prco"></small>
+                                        <label for="preco">Preço</label>
+                                        <input type="number" class="form-control" id="preco" name="preco" min="0">
+                                        <small class="form-text rounded" data-alert="preco"></small>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="qtd">Quantidade</label>
                                         <input type="number" class="form-control" id="qtd" name="qtd" min="0">
                                         <small class="form-text rounded" data-alert="qtd"></small>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-md-4">
                                         <label for="id_uni" class="form-label">Unidade</span></label>
                                         <select id="id_uni" name="id_uni" class="form-control">
                                             <option value="">Selecione uma unidade</option>
                                             <?php foreach ($unis as $uni) : ?>
-                                                <option value="<?= $uni->id; ?>"><?= $uni->descricao; ?> | <?= $uni->unid; ?></option>
+                                                <option value="<?= $uni->id; ?>" title="<?= $uni->descricao ?>"><?= $uni->simbolo; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                         <small class="form-text rounded" data-alert="id_uni"></small>
@@ -53,7 +53,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="descricao">Descricao</label>
-                                <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Nome ..." maxlength="18">
+                                <textarea class="form-control" id="descricao" name="descricao" placeholder="" style="height:125px! important"></textarea>
                                 <small class="form-text rounded" data-alert="descricao"></small>
                             </div>
                             <div class="form-group">
@@ -84,8 +84,6 @@
 </section>
 
 <?php $v->start('js') ?>
-<script src="<?= shared_js("formatacnpj.js") ?>"></script>
-<script src="<?= shared_js("formatafone.js") ?>"></script>
 <script>
     $(function() {
         $("#uf").change(function() {
@@ -103,9 +101,17 @@
                 }
             }, "json");
         });
-
+        $("#id_uni").change(function() {
+            var qtd = $("#qtd").val();
+            var preco = $("#preco").val();
+            var total = qtd * preco;
+            console.log(total);
+            $("#total").val(total.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }));
+        })
     });
-
     $(function() {
         $("form").submit(function(e) {
             e.preventDefault();
@@ -113,12 +119,12 @@
 
         $("#cod").focus();
         var id;
-        var cnpj;
-        var razaoSocial;
-        var fone;
-        var uf;
-        var cidade;
-        var email;
+        var nome;
+        var preco;
+        var qtd;
+        var id_uni;
+        var descricao;
+        var id_empresa;
         $("#sal").click(function() {
             sal();
         })
@@ -174,22 +180,22 @@
         }
 
         function sal() {
-            cnpj = $("#CNPJ").val();
-            razaoSocial = $("#razaoSocial").val();
-            fone = $("#fone").val();
-            uf = $("#uf").val();
-            cidade = $("#cidade").val();
-            email = $("#email").val();
+            nome = $("#nome").val();
+            preco = $("#preco").val();
+            qtd = $("#qtd").val();
+            id_uni = $("#id_uni").val();
+            descricao = $("#descricao").val();
+            id_empresa = $("#id_empresa").val();
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("empresas.post.register"); ?>",
+                url: "<?= $router->route("produto.post.register"); ?>",
                 data: {
-                    "CNPJ": cnpj,
-                    "razaoSocial": razaoSocial,
-                    "fone": fone,
-                    "uf": uf,
-                    "cidade": cidade,
-                    "email": email
+                    "nome": nome,
+                    "preco": preco,
+                    "qtd": qtd,
+                    "id_uni": id_uni,
+                    "descricao": descricao,
+                    "id_empresa": id_empresa
                 },
                 dataType: "json",
                 error: function() {},
