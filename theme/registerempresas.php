@@ -116,10 +116,12 @@
         var cidade;
         var email;
         $("#sal").click(function() {
-            sal();
-        })
-        $("#alt").click(function() {
-            alterar();
+            id = $("#id").val();
+            if (id == 0) {
+                sal();
+            } else {
+                alterar();
+            }
         })
         $("#exc").click(function() {
             excluir();

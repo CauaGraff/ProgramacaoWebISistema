@@ -32,7 +32,6 @@ class Produto extends Controller
         if (Auth::verify('usuario_id')) {
 
             if (!empty($dados)) {
-
                 $nome = $dados['nome'];
                 $qtd = $dados['qtd'];
                 $preco = $dados['preco'];
@@ -67,7 +66,7 @@ class Produto extends Controller
                     echo $this->ajaxResponse($erro);
                     return;
                 }
-
+               
                 $produto = new ModelsProduto();
                 $produto->nome = $nome;
                 $produto->qtd = $qtd;

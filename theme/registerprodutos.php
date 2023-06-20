@@ -71,7 +71,6 @@
                 <!-- /.card-body -->
                 <div class="card-footer d-flex justify-content-center gap-3">
                     <button id="sal" class="btn btn-success m-1">Salvar</button>
-                    <button id="alt" class="btn btn-warning m-1">Alterar</button>
                     <button id="exc" class="btn btn-danger m-1">Excluir</button>
                     <button type="reset" class="btn  btn-primary m-1">Limpar</button>
                 </div>
@@ -117,7 +116,6 @@
             e.preventDefault();
         });
 
-        $("#cod").focus();
         var id;
         var nome;
         var preco;
@@ -126,19 +124,21 @@
         var descricao;
         var id_empresa;
         $("#sal").click(function() {
-            sal();
-        })
-        $("#alt").click(function() {
-            alterar();
+            id = $("#id").val();
+            if (id == 0) {
+                sal();
+            } else {
+                alterar();
+            }
         })
         $("#exc").click(function() {
             excluir();
         })
         $(document).ready(function() {
-            empresa();
+            prodto();
         })
 
-        function empresa() {
+        function prodto() {
             if (($("#id").val()) == 0) {
                 console.log($("#id").val());
                 return;

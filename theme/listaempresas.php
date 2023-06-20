@@ -1,11 +1,12 @@
 <?php $v->layout("_theme"); ?>
-<?php $v->start("css")?>
+<?php $v->start("css") ?>
 <style>
-    td, th{
+    td,
+    th {
         text-align: center;
     }
 </style>
-<?php $v->end()?>
+<?php $v->end() ?>
 <!-- Main content -->
 <section class="content mt-3">
     <div class="container-fluid">
@@ -13,7 +14,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <h3 class="card-title">Tabela Usuarios</h3>
+                        <h3 class="card-title">Tabela Fornecedores</h3>
                         <div class="ml-3">
                             <a href="<?= $router->route("empresas.register"); ?>"><button type="button" class="btn btn-success">Novo</button></a>
                         </div>
