@@ -2,7 +2,9 @@
 
 namespace Source\Controllers;
 
+use Source\Models\Empresa;
 use CoffeeCode\Router\Router;
+use Source\Models\UnidadeMedida;
 use CoffeeCode\DataLayer\Connect;
 use Source\Controllers\Controller;
 use Source\Models\Produto as ModelsProduto;
@@ -37,7 +39,7 @@ class Produto extends Controller
                 $preco = $dados['preco'];
                 $descricao = $dados['descricao'];
                 $id_empresa = $dados['id_empresa'];
-                $id_uni = ['id_uni'];
+                $id_uni = $dados['id_uni'];
 
                 if (empty($nome)) {
                     $erro['nome'] = "Preencha o nome do produto";
@@ -66,7 +68,7 @@ class Produto extends Controller
                     echo $this->ajaxResponse($erro);
                     return;
                 }
-               
+
                 $produto = new ModelsProduto();
                 $produto->nome = $nome;
                 $produto->qtd = $qtd;
@@ -74,7 +76,6 @@ class Produto extends Controller
                 $produto->descricao = $descricao;
                 $produto->id_empresa = $id_empresa;
                 $produto->id_uni = $id_uni;
-
                 if ($produto->save()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
@@ -114,52 +115,34 @@ class Produto extends Controller
             if (!empty($data)) {
                 if (array_key_exists("type", $data)) {
                     $id = $data['id'];
-                    $CNPJ = $data['CNPJ'];
-                    $razaoSocial = $data['razaoSocial'];
-                    $fone  = $data['fone'];
-                    $uf = $data['uf'];
-                    $cidade = $data['cidade'];
-                    $email = $data['email'];
+                    $nome = $data['nome'];
+                    $qtd = $data['qtd'];
+                    $preco = $data['preco'];
+                    $descricao = $data['descricao'];
+                    $id_empresa = $data['id_empresa'];
+                    $id_uni = $data['id_uni'];
 
-                    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                        echo $this->ajaxResponse([
-                            'type' => 'error',
-                            'mensagem' => 'E-mail inválido'
-                        ]);
-                        return;
-                    }
-
-                    $empresa = (new Empresa())->findById($id);
-                    $empresa->CNPJ = $CNPJ;
-                    $empresa->razaoSocial = $razaoSocial;
-                    $empresa->fone = $fone;
-                    $empresa->id_cidade = $cidade;
-                    $empresa->uf = $uf;
-                    $empresa->email = $email;
-                    if ($empresa->save()) {
+                    $produto = (new ModelsProduto())->findById($id);;
+                    $produto->nome = $nome;
+                    $produto->qtd = $qtd;
+                    $produto->preco = $preco;
+                    $produto->descricao = $descricao;
+                    $produto->id_empresa = $id_empresa;
+                    $produto->id_uni = $id_uni;
+                    if ($produto->save()) {
                         echo $this->ajaxResponse([
                             'type' => 'success',
-                            'redirect' => $this->router->route('web.home')
+                            'redirect' => $this->router->route('produto.index')
                         ]);
                         return;
                     }
                     return;
                 }
-                $empresaId = $data['id'];
-                /** GET PDO instance AND errors*/
-                $connect = Connect::getInstance();
-                $error = Connect::getError();
+                $produtoId = $data['id'];
 
-                /** CHECK connection/errors */
-                if ($error) {
-                    echo $error->getMessage();
-                    exit;
-                }
-
-                /** FETCH DATA*/
-                $ufs = $connect->query("SELECT ds_uf FROM cidades GROUP BY ds_uf ORDER BY ds_uf")
-                    ->fetchAll();
-                echo $this->view->render('registerempresas', compact('empresaId', 'ufs'));
+                $unis = (new UnidadeMedida())->find()->fetch(true);
+                $fornec = (new Empresa())->find()->fetch(true);
+                echo $this->view->render('registerprodutos', compact('produtoId', 'unis', 'fornec'));
                 return;
             }
         }
@@ -172,19 +155,9 @@ class Produto extends Controller
         if (Auth::verify('usuario_id')) {
             if (!empty($data)) {
                 $id = $data['id'];
-                /* * GET PDO instance AND errors */
-                $connect = Connect::getInstance();
-                $error = Connect::getError();
-                /* * CHECK connection/errors */
-                if ($error) {
-                    echo $error->getMessage();
-                    exit;
-                }
-                /* * FETCH DATA */
-                $users = [];
-                $users = $connect->query("SELECT * FROM empresas WHERE id={$id}")->fetchAll();
+                $produto = (new ModelsProduto())->findById($id)->data();
                 echo $this->ajaxResponse([
-                    "data" => $users,
+                    "data" => $produto,
                     "type" => "success"
                 ]);
                 return;
@@ -203,7 +176,7 @@ class Produto extends Controller
                 if ($user->destroy()) {
                     echo $this->ajaxResponse([
                         'type' => 'success',
-                        'redirect' => $this->router->route('web.home')
+                        'redirect' => $this->router->route('produto.index')
                     ]);
                     return;
                 }

@@ -85,26 +85,10 @@
 <?php $v->start('js') ?>
 <script>
     $(function() {
-        $("#uf").change(function() {
-            var value = $(this).val();
-            $.post(" <?= $router->route("web.cidades"); ?>", {
-                ufid: value
-            }, function(result) {
-                $("#cidade").empty();
-                if (result) {
-                    var options = '';
-                    $.each(result, function(i, v) {
-                        options = options + '<option value="' + v.cd_cidade + '">' + v.ds_cidade + '</option>'
-                    });
-                    $("#cidade").html(options);
-                }
-            }, "json");
-        });
         $("#id_uni").change(function() {
             var qtd = $("#qtd").val();
             var preco = $("#preco").val();
             var total = qtd * preco;
-            console.log(total);
             $("#total").val(total.toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
@@ -140,13 +124,12 @@
 
         function prodto() {
             if (($("#id").val()) == 0) {
-                console.log($("#id").val());
                 return;
             }
             var id = $("#id").val();
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("empresas.post.dados"); ?>",
+                url: "<?= $router->route("produto.post.dados"); ?>",
                 data: {
                     "id": id
                 },
@@ -154,25 +137,13 @@
                 error: function() {},
                 success: function(response) {
                     if (response.type == "success") {
-                        $("#CNPJ").val(response.data[0].CNPJ);
-                        $("#razaoSocial").val(response.data[0].razaoSocial);
-                        $("#fone").val(response.data[0].fone);
-                        $("#uf").val(response.data[0].uf);
-                        $("#email").val(response.data[0].email);
-                        $.post(" <?= $router->route("web.cidades"); ?>", {
-                            ufid: response.data[0].uf
-                        }, function(result) {
-                            $("#cidade").empty();
-                            if (result) {
-                                var options = '';
-                                $.each(result, function(i, v) {
-                                    options = options + '<option value="' + v.cd_cidade + '">' + v.ds_cidade + '</option>'
-                                });
-                                $("#cidade").html(options);
-                                $('#cidade').val(response.data[0].id_cidade);
-                            }
-                        }, "json");;
-                        $("#header").text("Atualizar dados Fornecedor ID " + response.data[0].id);
+                        $("#nome").val(response.data.nome);
+                        $("#preco").val(response.data.preco);
+                        $("#qtd").val(response.data.qtd);
+                        $("#id_uni").val(response.data.id_uni);
+                        $("#descricao").val(response.data.descricao);
+                        $("#id_empresa").val(response.data.id_empresa);
+                        $("#header").text("Atualizar dados Produto ID " + response.data.id);
                     }
                 },
                 beforeSend: function() {}
@@ -222,7 +193,7 @@
 
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("empresas.delet"); ?>",
+                url: "<?= $router->route("produto.delet"); ?>",
                 data: {
                     "id": id
                 },
@@ -242,23 +213,23 @@
 
         function alterar() {
             id = $("#id").val();
-            cnpj = $("#CNPJ").val();
-            razaoSocial = $("#razaoSocial").val();
-            fone = $("#fone").val();
-            uf = $("#uf").val();
-            cidade = $("#cidade").val();
-            email = $("#email").val();
+            nome = $("#nome").val();
+            preco = $("#preco").val();
+            qtd = $("#qtd").val();
+            id_uni = $("#id_uni").val();
+            descricao = $("#descricao").val();
+            id_empresa = $("#id_empresa").val();
             $.ajax({
                 method: "POST",
-                url: "<?= $router->route("empresas.post.update"); ?>",
+                url: "<?= $router->route("produto.post.update"); ?>",
                 data: {
                     "id": id,
-                    "CNPJ": cnpj,
-                    "razaoSocial": razaoSocial,
-                    "fone": fone,
-                    "uf": uf,
-                    "cidade": cidade,
-                    "email": email,
+                    "nome": nome,
+                    "preco": preco,
+                    "qtd": qtd,
+                    "id_uni": id_uni,
+                    "descricao": descricao,
+                    "id_empresa": id_empresa,
                     "type": "update"
                 },
                 dataType: "json",

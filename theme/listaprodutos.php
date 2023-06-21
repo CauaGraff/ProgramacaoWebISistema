@@ -41,7 +41,7 @@
                                             <td><?= $produto->qtd ?></td>
                                             <td><?= "R$ " . number_format($produto->preco, 2, ",", ".") ?></td>
                                             <td><?= $produto->total ?></td>
-                                            <td style="text-align: center;"><a href="<?= $router->route("clientes.update", ["id" => $produto->id]) ?>" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <td style="text-align: center;"><a href="<?= $router->route("produto.update", ["id" => $produto->id]) ?>" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                         </tr>
                                     <?php endforeach ?>
                                 <?php else : ?>
