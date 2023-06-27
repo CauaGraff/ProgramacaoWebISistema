@@ -66,11 +66,10 @@ $router->post('/update', 'Produto:update', 'produto.post.update');
 $router->post('/dados', 'Produto:dados', 'produto.post.dados');
 $router->post('/delet', 'Produto:delet', 'produto.delet');
 
-/** CARRINHO */
-$router->group('carrinho');
-$router->get('/', 'Carrinho:index', 'carrinho.index');
-$router->post('/add/{produtoId}', 'Carrinho:add', 'carrinho.add');
-$router->post('/remove/{produtoId}', 'Carrinho:remove', 'carrinho.remove');
+/**ORÇAMENTOS */
+$router->group('orcamento');
+$router->get('/', 'Orcamento:index', 'orcamento.index');
+
 
 $router->dispatch();
 if ($router->error()) {

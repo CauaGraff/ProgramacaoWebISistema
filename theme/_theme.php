@@ -107,7 +107,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= $router->route("produto.index")?>" class="nav-link">
+                                    <a href="<?= $router->route("produto.index") ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Produtos</p>
                                     </a>
@@ -119,9 +119,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../forms/validation.html" class="nav-link">
+                                    <a href="<?= $router->route("orcamento.index") ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Validation</p>
+                                        <p>Orçamento</p>
                                     </a>
                                 </li>
                             </ul>
@@ -227,7 +227,7 @@
     <script src="<?= shared_plugins("datatables-buttons/js/buttons.colVis.min.js") ?>"></script>
     <script src="<?= shared_plugins("bs-custom-file-input/bs-custom-file-input.min.js") ?>"></script>
     <script src="<?= shared_js("adminlte.min.js") ?>"></script>
-    <!-- <script src="<?= shared_js("de_mo.js") ?>"></script> -->
+    <script src="<?= shared_js("de_mo.js") ?>"></script>
     <script src="<?= shared_plugins("jquery/jquery.min.js") ?>"></script>
     <?= $v->section("js"); ?>
 

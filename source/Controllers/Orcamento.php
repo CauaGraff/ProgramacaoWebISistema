@@ -2,14 +2,14 @@
 
 namespace Source\Controllers;
 
-use Source\Models\Empresa;
 use CoffeeCode\Router\Router;
 use Source\Models\UnidadeMedida;
 use CoffeeCode\DataLayer\Connect;
 use Source\Controllers\Controller;
+use Source\Models\Orcamento as ModelsOrcamento;
 use Source\Models\Produto as ModelsProduto;
 
-class Produto extends Controller
+class Orcamento extends Controller
 {
     public function __construct(Router $router)
     {
@@ -19,9 +19,19 @@ class Produto extends Controller
     public function index()
     {
         if (Auth::verify('usuario_id')) {
+            /** GET PDO instance AND errors*/
+            $connect = Connect::getInstance();
+            $error = Connect::getError();
 
-            $produtos = (new ModelsProduto())->find()->fetch(true);
-            echo $this->view->render('listaprodutos', compact('produtos'));
+            /** CHECK connection/errors */
+            if ($error) {
+                echo $error->getMessage();
+                exit;
+            }
+
+            /** FETCH DATA*/
+            $orcamentos = $connect->query("SELECT o.*, u.nome as nomeUsuario, c.nome as nomeCliente FROM orcamentos o INNER JOIN usuarios u on o.usuario_id = u.id INNER JOIN clientes c on o.cliente_id = c.id")->fetchAll();
+            echo $this->view->render('listaorcamento', compact('orcamentos'));
             return;
         }
 
