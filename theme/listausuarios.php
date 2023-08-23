@@ -1,11 +1,12 @@
 <?php $v->layout("_theme"); ?>
-<?php $v->start("css")?>
+<?php $v->start("css") ?>
 <style>
-    td, th{
+    td,
+    th {
         text-align: center;
     }
 </style>
-<?php $v->end()?>
+<?php $v->end() ?>
 <!-- Main content -->
 <section class="content mt-3">
     <div class="container-fluid">
@@ -20,7 +21,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example2" class="table table-bordered table-hover">
+                        <table id="example1" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>Codigo</th>

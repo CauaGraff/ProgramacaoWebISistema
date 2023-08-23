@@ -59,22 +59,27 @@ class Web extends Controller
                 $senha = $dados['senha'];
                 $email = $dados['email'];
 
+                $erro = [];
+
                 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    echo "E-mail inválido";
-                    return;
+                    $erro["email"] = "Prencha o e-mail";
                 }
 
                 if (empty($senha)) {
-                    echo "Senha inválida";
+                    $erro["senha"] = "Preencha a senha";
+                }
+
+                if (!empty($erro)) {
+                    echo $this->ajaxResponse($erro);
                     return;
                 }
 
                 if (Auth::attempt($dados)) {
-                    $this->router->redirect('web.home');
+                    $this->router->redirect('web.home', ["mensagem" => "Logado com sucesso"]);
                     return;
                 }
 
-                echo "Não foi possível realizar o login " . $email;
+                echo $this->ajaxResponse(["Não foi possível realizar o login " . $email]);
                 return;
             }
 

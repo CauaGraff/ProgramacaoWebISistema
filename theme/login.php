@@ -49,12 +49,6 @@
                         <!-- /.col -->
                     </div>
                 </form>
-                <p class="mb-1">
-                    <a href="<?= $router->route('web.home') ?>">Esqueci a senha</a>
-                </p>
-                <p class="mb-0">
-                    <a href="<?= $router->route('usuarios.register') ?>" class="text-center">Novo Registro</a>
-                </p>
             </div>
             <!-- /.login-card-body -->
         </div>
@@ -63,6 +57,7 @@
 
     <!-- jQuery -->
     <script src="<?= shared_plugins("jquery/jquery.min.js") ?>"></script>
+    <!-- ajax para mostrar mensagem do login -->
     <!-- Bootstrap 4 -->
     <script src="<?= shared_plugins("bootstrap/js/bootstrap.bundle.min.js") ?>"></script>
     <!-- AdminLTE App -->
