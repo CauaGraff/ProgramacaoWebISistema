@@ -268,7 +268,6 @@
                 dataType: "json",
                 error: function() {},
                 success: function(response) {
-
                     if (response.type == "success") {
                         window.location.href = response.redirect
                     }

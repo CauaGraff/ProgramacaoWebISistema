@@ -53,41 +53,42 @@ class Web extends Controller
 
     public function login(array $dados)
     {
-        // se ele não tem sessão
-        if (!Auth::verify('usuario_id')) {
-            if (!empty($dados)) {
-                $senha = $dados['senha'];
-                $email = $dados['email'];
 
-                $erro = [];
+        if (!empty($dados)) {
+            $senha = $dados['senha'];
+            $email = $dados['email'];
 
-                if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $erro["email"] = "Prencha o e-mail";
-                }
+            $erro = [];
 
-                if (empty($senha)) {
-                    $erro["senha"] = "Preencha a senha";
-                }
+            if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $erro["email"] = "Prencha o e-mail";
+            }
 
-                if (!empty($erro)) {
-                    echo $this->ajaxResponse($erro);
-                    return;
-                }
+            if (empty($senha)) {
+                $erro["senha"] = "Preencha a senha";
+            }
 
-                if (Auth::attempt($dados)) {
-                    $this->router->redirect('web.home', ["mensagem" => "Logado com sucesso"]);
-                    return;
-                }
-
-                echo $this->ajaxResponse(["Não foi possível realizar o login " . $email]);
+            if (!empty($erro)) {
+                echo $this->ajaxResponse($erro);
                 return;
             }
 
-            echo $this->view->render('login');
+            if (Auth::attempt($dados)) {
+                $this->router->redirect('web.home', ["mensagem" => "Logado com sucesso"]);
+                return;
+            }
+
+            echo $this->ajaxResponse(
+                [
+                    "type" => "erro",
+                    "mensagem" => "Não foi possível realizar o login " . $email
+                ]
+            );
             return;
         }
 
-        $this->router->redirect('web.home');
+        echo $this->view->render('login');
+        return;
     }
 
     public function logout()

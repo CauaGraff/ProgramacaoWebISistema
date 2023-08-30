@@ -30,7 +30,7 @@ class Orcamento extends Controller
             }
 
             /** FETCH DATA*/
-            $orcamentos = $connect->query("SELECT o.*, u.nome as nomeUsuario, c.nome as nomeCliente FROM orcamentos o INNER JOIN usuarios u on o.usuario_id = u.id INNER JOIN clientes c on o.cliente_id = c.id")->fetchAll();
+            $orcamentos = $connect->query("SELECT o.*, u.nome as nomeUsuario, c.nome as nomeCliente FROM orcamentos o INNER JOIN usuarios u on o.usuarioId = u.id INNER JOIN clientes c on o.clienteId = c.id")->fetchAll();
             echo $this->view->render('listaorcamento', compact('orcamentos'));
             return;
         }

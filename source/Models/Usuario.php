@@ -16,8 +16,7 @@ class Usuario extends DataLayer
                 "senha",
                 "email",
                 "dataNasc",
-                "cidade",
-                "estado"
+                "cidade_id"
             ],
             'id',
             false

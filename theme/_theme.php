@@ -227,7 +227,7 @@
     <script src="<?= shared_plugins("datatables-buttons/js/buttons.colVis.min.js") ?>"></script>
     <script src="<?= shared_plugins("bs-custom-file-input/bs-custom-file-input.min.js") ?>"></script>
     <script src="<?= shared_js("adminlte.min.js") ?>"></script>
-    <script src="<?= shared_js("de_mo.js") ?>"></script>
+    <!-- <script src="<?= shared_js("demo.js") ?>"></script> -->
     <script src="<?= shared_plugins("jquery/jquery.min.js") ?>"></script>
     <?= $v->section("js"); ?>
 

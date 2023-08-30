@@ -80,8 +80,7 @@ class Usuarios extends Controller
             $usuario->senha = password_hash($senha, PASSWORD_DEFAULT);
             $usuario->email = $email;
             $usuario->dataNasc = $dataNasc;
-            $usuario->cidade = $cidade;
-            $usuario->estado = $uf;
+            $usuario->cidade_id = $cidade;
 
 
             if ($usuario->save()) {
