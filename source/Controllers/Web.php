@@ -74,7 +74,10 @@ class Web extends Controller
             }
 
             if (Auth::attempt($dados)) {
-                $this->router->redirect('web.home', ["mensagem" => "Logado com sucesso"]);
+                echo $this->ajaxResponse([
+                    'type' => 'success',
+                    'redirect' => $this->router->route('web.home')
+                ]);
                 return;
             }
 

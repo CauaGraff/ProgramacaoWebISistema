@@ -36,7 +36,7 @@ CREATE TABLE `cidades` (
   `cd_uf_ibge` int DEFAULT NULL,
   `vl_latitude` double(10,8) DEFAULT NULL,
   `vl_longitude` double(10,8) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) 
 
 --
 -- Extraindo dados da tabela `cidades`
@@ -9923,7 +9923,7 @@ CREATE TABLE `clientes` (
   `uf` char(2) DEFAULT NULL,
   `cidade_id` int NOT NULL,
   `ncasa` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
 --
 -- Extraindo dados da tabela `clientes`
@@ -9968,7 +9968,7 @@ CREATE TABLE `orcamentos` (
   `usuarioId` int NOT NULL,
   `valor` float(8,2) NOT NULL DEFAULT '0.00',
   `OBS` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
 -- --------------------------------------------------------
 
@@ -9984,7 +9984,7 @@ CREATE TABLE `produto` (
   `descricao` text NOT NULL,
   `id_empresa` int NOT NULL,
   `id_uni` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
 --
 -- Extraindo dados da tabela `produto`
@@ -10005,7 +10005,7 @@ CREATE TABLE `unidademedida` (
   `nome` varchar(50) NOT NULL,
   `simbolo` varchar(10) NOT NULL,
   `descricao` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) 
 
 --
 -- Extraindo dados da tabela `unidademedida`
