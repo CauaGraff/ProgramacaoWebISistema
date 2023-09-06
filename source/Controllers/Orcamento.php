@@ -8,12 +8,16 @@ use CoffeeCode\DataLayer\Connect;
 use Source\Controllers\Controller;
 use Source\Models\Orcamento as ModelsOrcamento;
 use Source\Models\Produto as ModelsProduto;
+use Source\Facades\Cart;
 
 class Orcamento extends Controller
 {
+    private $cart;
+
     public function __construct(Router $router)
     {
         parent::__construct($router);
+        $this->cart = new Cart();
     }
 
     public function index()
@@ -97,21 +101,7 @@ class Orcamento extends Controller
                 return;
             }
 
-            /** GET PDO instance AND errors*/
-            $connect = Connect::getInstance();
-            $error = Connect::getError();
-
-            /** CHECK connection/errors */
-            if ($error) {
-                echo $error->getMessage();
-                exit;
-            }
-
-            /** FETCH DATA*/
-            $unis = $connect->query("SELECT * FROM unidademedida")->fetchAll();
-            $fornec = $connect->query("SELECT * FROM empresas")->fetchAll();
-            $produtoId = 0;
-            echo $this->view->render('registerprodutos', compact('unis', "produtoId", "fornec"));
+            echo $this->view->render('registerorcamento');
             return;
         }
 
@@ -119,80 +109,40 @@ class Orcamento extends Controller
         return;
     }
 
-    public  function update(array $data)
+    public function add(array $data): void
     {
-        if (Auth::verify('usuario_id')) {
-            if (!empty($data)) {
-                if (array_key_exists("type", $data)) {
-                    $id = $data['id'];
-                    $nome = $data['nome'];
-                    $qtd = $data['qtd'];
-                    $preco = $data['preco'];
-                    $descricao = $data['descricao'];
-                    $id_empresa = $data['id_empresa'];
-                    $id_uni = $data['id_uni'];
-
-                    $produto = (new ModelsProduto())->findById($id);;
-                    $produto->nome = $nome;
-                    $produto->qtd = $qtd;
-                    $produto->preco = $preco;
-                    $produto->descricao = $descricao;
-                    $produto->id_empresa = $id_empresa;
-                    $produto->id_uni = $id_uni;
-                    if ($produto->save()) {
-                        echo $this->ajaxResponse([
-                            'type' => 'success',
-                            'redirect' => $this->router->route('produto.index')
-                        ]);
-                        return;
-                    }
-                    return;
-                }
-                $produtoId = $data['id'];
-
-                $unis = (new UnidadeMedida())->find()->fetch(true);
-                $fornec = (new Empresa())->find()->fetch(true);
-                echo $this->view->render('registerprodutos', compact('produtoId', 'unis', 'fornec'));
-                return;
-            }
+        $id = filter_var($data["id"], FILTER_VALIDATE_INT);
+        $product = (new ModelsProduto())->findById($id);
+        if (!$id || !$product) {
+            echo $this->ajaxResponse([
+                "type" => "error",
+                "mensage" => "Erro ao adicinar produto"
+            ]);
+            return;
         }
-        $this->router->redirect('web.login');
-        return;
+
+        $this->cart->add($product);
+        echo json_encode($this->cart->cart());
     }
 
-    public function dados(array $data)
+    public function remove(array $data): void
     {
-        if (Auth::verify('usuario_id')) {
-            if (!empty($data)) {
-                $id = $data['id'];
-                $produto = (new ModelsProduto())->findById($id)->data();
-                echo $this->ajaxResponse([
-                    "data" => $produto,
-                    "type" => "success"
-                ]);
-                return;
-            }
+        $id = filter_var($data["id"], FILTER_VALIDATE_INT);
+        $product = (new ModelsProduto())->findById($id);
+        if (!$id || !$product) {
+            echo $this->ajaxResponse([
+                "type" => "error",
+                "mensage" => "Erro ao remover produto"
+            ]);
+            return;
         }
-        $this->router->redirect('web.login');
-        return;
-    }
 
-    public function delet(array $data)
+        $this->cart->remove($product);
+        echo json_encode($this->cart->cart());
+    }
+    public function clear(): void
     {
-        if (Auth::verify('usuario_id')) {
-            if (!empty($data)) {
-                $id = $data['id'];
-                $user = (new ModelsProduto())->findById($id);
-                if ($user->destroy()) {
-                    echo $this->ajaxResponse([
-                        'type' => 'success',
-                        'redirect' => $this->router->route('produto.index')
-                    ]);
-                    return;
-                }
-            }
-        }
-        $this->router->redirect('web.login');
-        return;
+        $this->cart->clear();
+        echo json_encode($this->cart->cart());
     }
 }
