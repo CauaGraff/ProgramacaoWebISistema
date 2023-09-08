@@ -41,36 +41,93 @@
     </div>
 
     <div class="col-md-5 col-lg-5" style='margin:6px;background-color:#EEEEEE;border-radius:9px;'>
-        <center>
-            <h3 style='font-size:14px;'>Disponíveis </h3>
-        </center>
-        <table style="width:100%">
-            <tbody>
-                <tr style='font-weight:bold'>
-                    <td>Descrição</td>
-                    <td style='text-align:right'>Quant</td>
-                    <td style='text-align:right'>R$ Venda</td>
-                </tr>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Disponiveis</h3>
+                <div class="card-tools">
+                    <ul class="pagination pagination-sm float-right">
+                        <li class="page-item"><a class="page-link" href="#">«</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                    </ul>
+                </div>
+            </div>
 
-            </tbody>
-        </table>
+            <div class="card-body p-0">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Produto</th>
+                            <th>QTD</th>
+                            <th style="width: 40px">Preço</th>
+                        </tr>
+                    </thead>
+                    <tbody>,
+                        <?php foreach ($produtos as $produto) : ?>
+                            <tr>
+                                <td><?= $produto->id ?>.</td>
+                                <td><?= $produto->nome ?></td>
+                                <td> <?= $produto->qtd ?> </td>
+                                <td><span class=" badge bg-success" style="width: 100%;"><?= $produto->paraBrl() ?></span></td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+    <div class="col-md-5 col-lg-5" style='margin:6px;background-color:#EEEEEE;border-radius:9px;'>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Selecionados</h3>
+                <div class="card-tools">
+                    <ul class="pagination pagination-sm float-right">
+                        <li class="page-item"><a class="page-link" href="#">«</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">»</a></li>
+                    </ul>
+                </div>
+            </div>
 
-    <div class="col-md-6 col-lg-6" style='margin:6px;background-color:#EEEEEE;border-radius:9px;'>
-        <center>
-            <h3 style='font-size:14px;'>Selecionados </h3>
-        </center>
-        <table style="width:100%">
-            <tbody>
-                <tr style='font-weight:bold'>
-                    <td>Descrição</td>
-                    <td style='text-align:right'>Quant</td>
-                    <td style='text-align:right'>R$ Unit</td>
-                    <td style='text-align:right'>Subtot</td>
-                </tr>
+            <div class="card-body p-0">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Produto</th>
+                            <th>QTD</th>
+                            <th style="width: 40px">Preço</th>
+                        </tr>
+                    </thead>
+                    <tbody>,
+                        <?php foreach ($produtos as $produto) : ?>
+                            <tr>
+                                <td><?= $produto->id ?>.</td>
+                                <td><?= $produto->nome ?></td>
+                                <td> <?= $produto->qtd ?> </td>
+                                <div class="cart-row-cell quant">
 
-            </tbody>
-        </table>
+                                    <ul>
+                                        <li><a href="#">-</a></li>
+
+                                        <li>2</li>
+
+                                        <li><a href="#">+</a></li>
+                                    </ul>
+
+                                </div>
+                                <td><span class=" badge bg-success" style="width: 100%;"><?= $produto->paraBrl() ?></span></td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 </main>

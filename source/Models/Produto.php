@@ -27,4 +27,9 @@ class Produto extends DataLayer
     {
         return "R$ " . number_format($this->qtd * $this->preco, 2, ",", ".");
     }
+
+    public function paraBrl()
+    {
+        return "R$ " . number_format($this->preco, 2, ",", ".");
+    }
 }

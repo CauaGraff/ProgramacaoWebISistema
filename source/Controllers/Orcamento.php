@@ -100,8 +100,8 @@ class Orcamento extends Controller
 
                 return;
             }
-
-            echo $this->view->render('registerorcamento');
+            $produtos = (new ModelsProduto())->find()->fetch(true);
+            echo $this->view->render('registerorcamento', compact("produtos"));
             return;
         }
 
