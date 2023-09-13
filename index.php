@@ -70,7 +70,9 @@ $router->post('/delet', 'Produto:delet', 'produto.delet');
 $router->group('orcamento');
 $router->get('/', 'Orcamento:index', 'orcamento.index');
 $router->get('/cadastro', 'Orcamento:register', 'orcamento.cadastro');
-
+$router->post('/add/{id}', 'Orcamento:add', 'orcamento.add');
+$router->post('/remover/{id}', 'Orcamento:remover', 'orcamento.re');
+$router->post('/clear', 'Orcamento:clear', 'orcamento.clear');
 
 $router->dispatch();
 if ($router->error()) {

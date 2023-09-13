@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-sm-3">Item: <span class="cart_amount">0</span></div>
                     <div class="col-sm-3">Total: R$ <span class="cart_total">0,00</span></div>
-                    <div class="col"><button class="w-100 btn btn-primary btn-lg" data-action="<?= $router->route("cart.clear"); ?>">Limpar</button></div>
+                    <div class="col"><button class="w-100 btn btn-primary btn-lg" data-action="<?= $router->route("orcamento.clear"); ?>">Limpar</button></div>
                     <div class="col"><a class="w-100 btn btn-primary btn-lg" href="<?= $router->route("web.order"); ?>">Concluir</a></div>
                 </div>
                 <hr class="my-4">
@@ -39,24 +39,14 @@
             </form>
         </div>
     </div>
-
-    <div class="col-md-5 col-lg-5" style='margin:6px;background-color:#EEEEEE;border-radius:9px;'>
-        <div class="card">
+    <div style="display: flex; gap:5px;">
+        <div class="card" style="width: 50%;">
             <div class="card-header">
                 <h3 class="card-title">Disponiveis</h3>
-                <div class="card-tools">
-                    <ul class="pagination pagination-sm float-right">
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li>
-                    </ul>
-                </div>
             </div>
 
-            <div class="card-body p-0">
-                <table class="table table-hover">
+            <div class="card-body">
+                <table class="table table-bordered" style="width: 100%;">
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
@@ -65,37 +55,39 @@
                             <th style="width: 40px">Preço</th>
                         </tr>
                     </thead>
-                    <tbody>,
+                    <tbody>
                         <?php foreach ($produtos as $produto) : ?>
-                            <tr>
-                                <td><?= $produto->id ?>.</td>
+                            <tr data-action="<?= $router->route("orcamento.add", ["id" => $produto->id]); ?>">
+                                <td><?= $produto->id ?></td>
                                 <td><?= $produto->nome ?></td>
-                                <td> <?= $produto->qtd ?> </td>
+                                <td class="align-middle">
+                                    <div class="d-flex flex-row">
+                                        <?= $produto->qtd ?>
+                                </td>
                                 <td><span class=" badge bg-success" style="width: 100%;"><?= $produto->paraBrl() ?></span></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>
                 </table>
+            </div>
+
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                    <li class="page-item"><a class="page-link" href="#">«</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">»</a></li>
+                </ul>
             </div>
         </div>
-    </div>
-    <div class="col-md-5 col-lg-5" style='margin:6px;background-color:#EEEEEE;border-radius:9px;'>
-        <div class="card">
+        <div class="card" style="width: 50%;">
             <div class="card-header">
-                <h3 class="card-title">Selecionados</h3>
-                <div class="card-tools">
-                    <ul class="pagination pagination-sm float-right">
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li>
-                    </ul>
-                </div>
+                <h3 class="card-title">Lista Orcamento</h3>
             </div>
 
-            <div class="card-body p-0">
-                <table class="table table-hover">
+            <div class="card-body">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
@@ -104,28 +96,20 @@
                             <th style="width: 40px">Preço</th>
                         </tr>
                     </thead>
-                    <tbody>,
-                        <?php foreach ($produtos as $produto) : ?>
-                            <tr>
-                                <td><?= $produto->id ?>.</td>
-                                <td><?= $produto->nome ?></td>
-                                <td> <?= $produto->qtd ?> </td>
-                                <div class="cart-row-cell quant">
+                    <tbody id="listaOrcamento">
 
-                                    <ul>
-                                        <li><a href="#">-</a></li>
-
-                                        <li>2</li>
-
-                                        <li><a href="#">+</a></li>
-                                    </ul>
-
-                                </div>
-                                <td><span class=" badge bg-success" style="width: 100%;"><?= $produto->paraBrl() ?></span></td>
-                            </tr>
-                        <?php endforeach ?>
                     </tbody>
                 </table>
+            </div>
+
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                    <li class="page-item"><a class="page-link" href="#">«</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">»</a></li>
+                </ul>
             </div>
         </div>
     </div>
@@ -161,6 +145,8 @@
             var cart_message = $(".cart_message");
             var cart_amount = $(".cart_amount");
             var cart_total = $(".cart_total");
+            $("#listaOrcamento").html("").fadeOut(200);
+
             var formater = Intl.NumberFormat("pt-BR", {
                 style: "currency",
                 currency: "BRL"
@@ -174,10 +160,27 @@
                 cart_message.fadeOut(200);
             }
 
-            $("span[class^='item_']").html("0");
+            $("input[id^='item_']").html("0");
             if (cart.items) {
+
                 $.each(cart.items, function(index, item) {
-                    $(".item_" + item.id).html(item.amount);
+                    var tamplate = "<tr>"
+                    tamplate += "<td>" + item.id + "</td>"
+                    tamplate += "<td>" + item.product + "</td>"
+                    tamplate += "<td class='align-middle'>"
+                    tamplate += "<div class='d-flex flex-row'>"
+                    tamplate += "<button class='btn btn-link px-2'>"
+                    tamplate += "<i class='fas fa-minus'></i>"
+                    tamplate += "</button>"
+                    tamplate += "<input id='item_'" + item.id + " min='0' name='quantity' value='" + item.amount + "' type='text' class='form-control form-control-sm' style='width: 50px;' />"
+                    tamplate += "<button class='btn btn-link px-2'>"
+                    tamplate += "<i class='fas fa-plus'></i>"
+                    tamplate += "</button>"
+                    tamplate += "</div>"
+                    tamplate += "</td>"
+                    tamplate += "<td><span class=' badge bg-success' style='width: 100%;'>" + formater.format(item.preco) + "</span></td>"
+                    tamplate += "</tr>"
+                    $("#listaOrcamento").append(tamplate).fadeIn(200);
                 });
             }
 
