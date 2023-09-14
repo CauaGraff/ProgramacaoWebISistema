@@ -74,6 +74,11 @@ $router->post('/add/{id}', 'Orcamento:add', 'orcamento.add');
 $router->post('/remover/{id}', 'Orcamento:remover', 'orcamento.re');
 $router->post('/clear', 'Orcamento:clear', 'orcamento.clear');
 
+/**WDS */
+$router->group('json');
+$router->get("/", "Wds:index", "wds.clientes");
+$router->get("/clientes", "Wds:clientes", "wds.clientes");
+
 $router->dispatch();
 if ($router->error()) {
     echo "Houve um erro " . $router->error();
