@@ -145,7 +145,7 @@
             var cart_message = $(".cart_message");
             var cart_amount = $(".cart_amount");
             var cart_total = $(".cart_total");
-            $("#listaOrcamento").html("").fadeOut(200);
+            $("#listaOrcamento").reload();
 
             var formater = Intl.NumberFormat("pt-BR", {
                 style: "currency",

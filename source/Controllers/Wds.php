@@ -23,8 +23,23 @@ class Wds extends Controller
     public function clientes()
     {
         $linhas = [];
-        $clientes = (new Clientes())->find()->fetch(true);
+        /*
+ * GET PDO instance AND errors
+ */
+        $connect = Connect::getInstance();
+        $error = Connect::getError();
 
+        /*
+ * CHECK connection/errors
+ */
+        if ($error) {
+            echo $error->getMessage();
+            exit;
+        }
+        /*
+ * FETCH DATA
+ */
+        $clientes = $connect->query("SELECT c.id, c.nome, c.dataNasc, c.CPF, c.email, c.fone, c.uf, c.ncasa, ci.ds_cidade FROM clientes c inner JOIN cidades ci on ci.cd_cidade = c.cidade_id ");
 
         foreach ($clientes as $cliente) {
             $id = $cliente->id;
@@ -34,8 +49,8 @@ class Wds extends Controller
             $email = $cliente->email;
             $fone = $cliente->fone;
             $uf = $cliente->uf;
-            $cidade_id = $cliente->cidade_id;
-            $nCasa = $cliente->nCasa;
+            $cidade_id = $cliente->ds_cidade;
+            $nCasa = $cliente->ncasa;
             $linhas[] = ['id' => $id, 'nome' => $nome, 'dataNasc' => $dataNasc, 'cpf' => $cpf, 'email' => $email, 'fone' => $fone, 'uf' => $uf, 'cidade_id' => $cidade_id, 'nCasa' => $nCasa];
         }
 
