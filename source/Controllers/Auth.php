@@ -5,6 +5,7 @@ namespace Source\Controllers;
 use CoffeeCode\Router\Router;
 use Source\Controllers\Controller;
 use Source\Models\Usuario;
+use Source\Models\UsuarioWS;
 
 class Auth extends Controller
 {
@@ -30,6 +31,25 @@ class Auth extends Controller
         }
 
         $_SESSION['usuario_id'] = $usuario->id;
+        return true;
+    }
+
+    public static function attemptUserWs(array $dados): bool
+    {
+        $psw = $dados['psw'];
+        $id = $dados['id'];
+
+        $usuario = new UsuarioWS();
+        $usuario->findById($id);
+
+        if (!$usuario = $usuario->fetch()) {
+            return false;
+        }
+
+        if ($psw != $usuario->psw) {
+            return false;
+        }
+
         return true;
     }
 

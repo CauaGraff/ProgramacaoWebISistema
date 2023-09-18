@@ -10040,6 +10040,23 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nome`, `CPF`, `senha`, `email`, `dataNasc`, `cidade_id`) VALUES
 (33, 'Caua', '116.757.079-01', '$2y$10$Ihp91BTNRlLSg3DaKxNWfORGde6vffRHsfb1SrPSXAE4gnCNwcjOy', 'cauagraff@gmail.com', '2004-02-13', 8314);
 
+
+CREATE TABLE `user_ws` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(50) DEFAULT NULL,
+  `psw` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+INSERT INTO `user_ws` VALUES (1,'Max','Max');
+INSERT INTO `user_ws` VALUES (2,'Cauan','Cauan');
+INSERT INTO `user_ws` VALUES (3,'Lucas','Lucas');
+INSERT INTO `user_ws` VALUES (4,'Wesley','Wesley');
+INSERT INTO `user_ws` VALUES (5,'Ricardo','Ricardo');
+INSERT INTO `user_ws` VALUES (6,'Felipe','Felipe');
+INSERT INTO `user_ws` VALUES (7,'Eduardo','Eduardo');
+INSERT INTO `user_ws` VALUES (8,'Nicolas','Nicolas');
+INSERT INTO `user_ws` VALUES (9,'Igor','Igor');
+
 --
 -- Índices para tabelas despejadas
 --

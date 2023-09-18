@@ -76,8 +76,12 @@ $router->post('/clear', 'Orcamento:clear', 'orcamento.clear');
 
 /**WDS */
 $router->group('json');
-$router->get("/", "Wds:index", "wds.clientes");
+$router->get("/", "Wds:index", "wds.index");
 $router->get("/clientes", "Wds:clientes", "wds.clientes");
+$router->get("/empresas", "Wds:empresas", "wds.empresas");
+$router->get("/produtos", "Wds:produtos", "wds.produtos");
+$router->get("/unidadesMedida", "Wds:unidadesMedida", "wds.unidadesmedida");
+$router->get("/cidades", "Wds:cidades", "wds.cidades");
 
 $router->dispatch();
 if ($router->error()) {

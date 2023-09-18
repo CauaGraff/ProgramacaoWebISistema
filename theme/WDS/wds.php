@@ -18,15 +18,39 @@
             text-align: justify;
             text-indent: 1cm;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
     </style>
 </head>
 
 <body>
     <div>
         <h1 class="titulo">Documentação WS</h1>
-
-
-
         <table border="">
             <thead>
                 <tr>
@@ -59,45 +83,79 @@
                 </li>
             </h1>
 
-            <h2>Entidade CADASTROS</h2>
-            End point: usuarios_ws.php
+            <p>Para acessar as entidades, semrpe user o cdu e o pwd</p>
+            <p>http://192.168.0.104/ProgramacaoWebISistema/json/{entidade}?id=1&pwd=Max</p>
+
+            <h2>Entidade CLIENTES</h2>
+            End point: <a href="<?= $router->route("wds.clientes") ?>"> json/clientes</a>
             <table border="">
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>tipo</th>
+                        <th>Tamanho</th>
+                        <th>Obs</th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
-                        <td>Campo</td>
-                        <td>tipo</td>
-                        <td>Tamanho</td>
-                        <td>Obs</td>
-                    </tr>
-                    <tr>
-                        <td>cd_nome</td>
+                        <td>id</td>
                         <td>Int</td>
                         <td>-</td>
                         <td>Chave primaria</td>
                     </tr>
                     <tr>
-                        <td>ds_nome</td>
+                        <td>nome</td>
                         <td>string</td>
-                        <td>50</td>
-                        <td></td>
+                        <td>40</td>
+                        <td>-</td>
                     </tr>
                     <tr>
-                        <td>ds_email</td>
-                        <td>string</td>
-                        <td>100</td>
-                        <td></td>
+                        <td>dataNasc</td>
+                        <td>date</td>
+                        <td>-</td>
+                        <td>-</td>
                     </tr>
                     <tr>
-                        <td>ds_cpf</td>
-                        <td>string</td>
+                        <td>cpf</td>
+                        <td>char</td>
                         <td>15</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>string</td>
+                        <td>40</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>fone</td>
+                        <td>string</td>
+                        <td>40</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>uf</td>
+                        <td>char</td>
+                        <td>2</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>cidadeId</td>
+                        <td>int</td>
+                        <td>-</td>
                         <td>Chave estarngeira</td>
+                    </tr>
+                    <tr>
+                        <td>nCasa</td>
+                        <td>int</td>
+                        <td>-</td>
+                        <td>-</td>
                     </tr>
                 </tbody>
             </table>
-            <br>
 
-            <h2>Entidade Produtos</h2>
+            <h2>Entidade Empresas</h2>
             End point: produtos_ws.php
             <table border="">
                 <tbody>
