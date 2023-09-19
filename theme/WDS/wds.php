@@ -34,7 +34,7 @@
         th,
         td {
             padding: 8px;
-            text-align: left;
+            text-align: center;
         }
 
         th {
@@ -83,11 +83,11 @@
                 </li>
             </h1>
 
-            <p>Para acessar as entidades, semrpe user o cdu e o pwd</p>
+            <p>Para acessar as entidades, sempre user o id e o pwd</p>
             <p>http://192.168.0.104/ProgramacaoWebISistema/json/{entidade}?id=1&pwd=Max</p>
 
             <h2>Entidade CLIENTES</h2>
-            End point: <a href="<?= $router->route("wds.clientes") ?>"> json/clientes</a>
+            End point: <a href="<?= $router->route("wds.clientes") ?>"> /clientes</a>
             <table border="">
                 <thead>
                     <tr>
@@ -155,44 +155,157 @@
                 </tbody>
             </table>
 
-            <h2>Entidade Empresas</h2>
-            End point: produtos_ws.php
+            <h2>Entidade EMPRESAS</h2>
+            End point: <a href="<?= $router->route("wds.empresas") ?>"> /empresas</a>
             <table border="">
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>tipo</th>
+                        <th>Tamanho</th>
+                        <th>Obs</th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
-                        <td>Campo</td>
-                        <td>tipo</td>
-                        <td>Tamanho</td>
-                        <td>Obs</td>
-                    </tr>
-                    <tr>
-                        <td>cd_produto</td>
+                        <td>id</td>
                         <td>Int</td>
                         <td>-</td>
                         <td>Chave primaria</td>
                     </tr>
                     <tr>
-                        <td>ds_produto</td>
+                        <td>CNPJ</td>
                         <td>string</td>
-                        <td>50</td>
-                        <td></td>
+                        <td>18</td>
+                        <td>-</td>
                     </tr>
                     <tr>
-                        <td>ds_unidade</td>
+                        <td>razaoSocial</td>
                         <td>string</td>
-                        <td>100</td>
-                        <td></td>
+                        <td>40</td>
+                        <td>-</td>
                     </tr>
                     <tr>
-                        <td>vl_unitario</td>
+                        <td>email</td>
                         <td>string</td>
-                        <td>15</td>
+                        <td>40</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>fone</td>
+                        <td>string</td>
+                        <td>40</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>uf</td>
+                        <td>string</td>
+                        <td>2</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>cidadeId</td>
+                        <td>int</td>
+                        <td>-</td>
+                        <td>Chave estarngeira</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>Entidade PRODUTOS</h2>
+            End point: <a href="<?= $router->route("wds.produtos") ?>"> /produtos</a>
+            <table border="">
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>tipo</th>
+                        <th>Tamanho</th>
+                        <th>Obs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>id</td>
+                        <td>Int</td>
+                        <td>-</td>
+                        <td>Chave primaria</td>
+                    </tr>
+                    <tr>
+                        <td>nome</td>
+                        <td>string</td>
+                        <td>40</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>qtd</td>
+                        <td>int</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>preco</td>
+                        <td>float</td>
+                        <td>18.2</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>descricao</td>
+                        <td>text</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>empresaId</td>
+                        <td>int</td>
+                        <td>-</td>
+                        <td>Chave estrangeira</td>
+                    </tr>
+                    <tr>
+                        <td>unidadeId</td>
+                        <td>int</td>
+                        <td>-</td>
                         <td>Chave estarngeira</td>
                     </tr>
                 </tbody>
             </table>
 
-
+            <h2>Entidade UNIDADES DE MEDIDA</h2>
+            End point: <a href="<?= $router->route("wds.unidadesmedida") ?>"> /unidadesMedida</a>
+            <table border="">
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>tipo</th>
+                        <th>Tamanho</th>
+                        <th>Obs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>id</td>
+                        <td>Int</td>
+                        <td>-</td>
+                        <td>Chave primaria</td>
+                    </tr>
+                    <tr>
+                        <td>nome</td>
+                        <td>string</td>
+                        <td>40</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>simbolo</td>
+                        <td>string</td>
+                        <td>10</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>descricao</td>
+                        <td>string</td>
+                        <td>40</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
         </ol>
     </div>
 </body>

@@ -9,7 +9,7 @@ class Cidades extends DataLayer
     public function __construct()
     {
         parent::__construct(
-            "cidade",
+            "cidades",
             [
                 "ds_cidade",
                 "cd_cidade_ibge",

@@ -36,7 +36,7 @@ class Auth extends Controller
 
     public static function attemptUserWs(array $dados): bool
     {
-        $psw = $dados['psw'];
+        $pwd = $dados['pwd'];
         $id = $dados['id'];
 
         $usuario = new UsuarioWS();
@@ -46,7 +46,7 @@ class Auth extends Controller
             return false;
         }
 
-        if ($psw != $usuario->psw) {
+        if ($pwd != $usuario->psw) {
             return false;
         }
 
