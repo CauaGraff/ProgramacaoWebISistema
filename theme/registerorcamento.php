@@ -1,7 +1,6 @@
 <?php $v->layout("_theme"); ?>
 
 <?php $v->start("css"); ?>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <?php $v->end(); ?>
 
 
@@ -118,13 +117,6 @@
 
 
 <?php $v->start("js"); ?>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#cliente').select2();
-    });
-</script>
-
 <script>
     $(function() {
         $("[data-action]").click(function(e) {

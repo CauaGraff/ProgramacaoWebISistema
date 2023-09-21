@@ -10,6 +10,7 @@ use CoffeeCode\Router\Router;
 use Source\Models\UnidadeMedida;
 use CoffeeCode\DataLayer\Connect;
 use Source\Controllers\Controller;
+use Source\Models\UsuarioWS;
 
 class Wds extends Controller
 {
@@ -20,7 +21,8 @@ class Wds extends Controller
 
     public function index()
     {
-        echo $this->view->render("WDS/wds");
+        $userWs = (new UsuarioWS())->find()->fetch(true);
+        echo $this->view->render("WDS/wds", compact("userWs"));
     }
 
     public function clientes()

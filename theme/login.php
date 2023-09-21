@@ -59,6 +59,7 @@
             <!-- /.login-card-body -->
         </div>
     </div>
+    <h1><a href="<?= $router->route('wds.index') ?>">Web Service --- http://192.168.0.104/ProgramacaoWebISistema/json</a></h1>
     <!-- /.login-box -->
 
     <!-- jQuery -->

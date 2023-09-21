@@ -83,8 +83,11 @@
                 </li>
             </h1>
 
-            <p>Para acessar as entidades, sempre user o id e o pwd</p>
-            <p>http://192.168.0.104/ProgramacaoWebISistema/json/{entidade}?id=1&pwd=Max</p>
+            <p>Para acessar as entidades, sempre usar o id e o pwd de cadastro.</p>
+
+
+
+            <p>http://192.168.0.103/ProgramacaoWebISistema/json/{entidade}?id=1&pwd=Max</p>
 
             <h2>Entidade CLIENTES</h2>
             End point: <a href="<?= $router->route("wds.clientes") ?>"> /clientes</a>
