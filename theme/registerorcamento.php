@@ -2,7 +2,7 @@
 
 <?php $v->start("css"); ?>
 <?php $v->end(); ?>
-
+<?php var_dump($_SESSION["orcamento"]) ?>
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <center>
@@ -45,7 +45,7 @@
             </div>
 
             <div class="card-body">
-                <table class="table table-bordered" style="width: 100%;">
+                <table class="table table-bordered" style="width: 100%;" id="disponivel">
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
@@ -56,7 +56,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($produtos as $produto) : ?>
-                            <tr data-action="<?= $router->route("orcamento.add", ["id" => $produto->id]); ?>">
+                            <tr data-action="<?= $router->route("orcamento.add", ["id" => $produto->id]); ?>" class="<?php if ($produto) ?>">
                                 <td><?= $produto->id ?></td>
                                 <td><?= $produto->nome ?></td>
                                 <td class="align-middle">
@@ -122,7 +122,6 @@
         $("[data-action]").click(function(e) {
             e.preventDefault();
             var data = $(this).data();
-
             $.post(data.action, function(cart) {
                 ajaxCart(cart);
             }, "json");
@@ -137,7 +136,6 @@
             var cart_message = $(".cart_message");
             var cart_amount = $(".cart_amount");
             var cart_total = $(".cart_total");
-            $("#listaOrcamento").reload();
 
             var formater = Intl.NumberFormat("pt-BR", {
                 style: "currency",

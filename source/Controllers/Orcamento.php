@@ -20,6 +20,11 @@ class Orcamento extends Controller
         $this->orcamentos = new FacadesOrcamento();
     }
 
+    public function orcamento(array $data): void
+    {
+        echo $this->ajaxResponse($this->orcamentos->orcamentos());
+    }
+
     public function index()
     {
         if (Auth::verify('usuario_id')) {

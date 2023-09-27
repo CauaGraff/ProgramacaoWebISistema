@@ -69,6 +69,7 @@ $router->post('/delet', 'Produto:delet', 'produto.delet');
 /**ORÇAMENTOS */
 $router->group('orcamento');
 $router->get('/', 'Orcamento:index', 'orcamento.index');
+$router->post("/items", "Orcament:orcamento", "orcamento.ocramento");
 $router->get('/cadastro', 'Orcamento:register', 'orcamento.cadastro');
 $router->post('/add/{id}', 'Orcamento:add', 'orcamento.add');
 $router->post('/remover/{id}', 'Orcamento:remover', 'orcamento.re');
