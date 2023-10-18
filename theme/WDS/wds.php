@@ -97,7 +97,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <? foreach ($userWs as $user) : ?>
+                    <?php foreach ($userWs as $user) : ?>
                         <tr>
                             <td><?= $user->id ?></td>
                             <td><?= $user->psw ?></td>
@@ -126,7 +126,7 @@
                     </tr>
                     <tr>
                         <td>nome</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>40</td>
                         <td>-</td>
                     </tr>
@@ -144,13 +144,13 @@
                     </tr>
                     <tr>
                         <td>email</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>40</td>
                         <td>-</td>
                     </tr>
                     <tr>
                         <td>fone</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>40</td>
                         <td>-</td>
                     </tr>
@@ -195,31 +195,31 @@
                     </tr>
                     <tr>
                         <td>CNPJ</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>18</td>
                         <td>-</td>
                     </tr>
                     <tr>
                         <td>razaoSocial</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>40</td>
                         <td>-</td>
                     </tr>
                     <tr>
                         <td>email</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>40</td>
                         <td>-</td>
                     </tr>
                     <tr>
                         <td>fone</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>40</td>
                         <td>-</td>
                     </tr>
                     <tr>
                         <td>uf</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>2</td>
                         <td>-</td>
                     </tr>
@@ -251,7 +251,7 @@
                     </tr>
                     <tr>
                         <td>nome</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>40</td>
                         <td>-</td>
                     </tr>
@@ -308,19 +308,19 @@
                     </tr>
                     <tr>
                         <td>nome</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>40</td>
                         <td>-</td>
                     </tr>
                     <tr>
                         <td>simbolo</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>10</td>
                         <td>-</td>
                     </tr>
                     <tr>
                         <td>descricao</td>
-                        <td>string</td>
+                        <td>varchar</td>
                         <td>40</td>
                         <td>-</td>
                     </tr>

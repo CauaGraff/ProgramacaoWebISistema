@@ -2,15 +2,16 @@
 
 namespace Source\Controllers;
 
+use DateTime;
+use Source\Models\LogsWS;
 use Source\Models\Cidades;
 use Source\Models\Empresa;
 use Source\Models\Produto;
 use Source\Models\Clientes;
+use Source\Models\UsuarioWS;
 use CoffeeCode\Router\Router;
 use Source\Models\UnidadeMedida;
-use CoffeeCode\DataLayer\Connect;
 use Source\Controllers\Controller;
-use Source\Models\UsuarioWS;
 
 class Wds extends Controller
 {
@@ -47,6 +48,15 @@ class Wds extends Controller
                         $nCasa = $cliente->ncasa;
                         $linhas[] = ["id" => $id, "nome" => $nome, "dataNasc" => $dataNasc, "cpf" => $cpf, "email" => $email, "fone" => $fone, "uf" => $uf, "cidadeId" => $cidade_id, "nCasa" => $nCasa];
                     }
+                    $log = new LogsWS();
+                    $log->dataAcesso = (new DateTime())->format("Y-m-d H:m:s");
+                    $log->es = "S";
+                    $log->entidade = "Clientes";
+                    $log->origem = $id;
+                    $log->registros = count($linhas);
+                    $log->atualizados = 0;
+                    $log->inseridos = 0;
+                    $log->save();
                     $json_string = json_encode($linhas);
                     echo $json_string;
                     return;
@@ -81,6 +91,15 @@ class Wds extends Controller
                         $cidade_id = $empresa->id_cidade;
                         $linhas[] = ["id" => $id, "CNPJ" => $CNPJ, "razaoSocial" => $razaoSocial, "email" => $email, "fone" => $fone, "uf" => $uf, "cidadeId" => $cidade_id];
                     }
+                    $log = new LogsWS();
+                    $log->dataAcesso = (new DateTime())->format("Y-m-d H:m:s");
+                    $log->es = "S";
+                    $log->entidade = "Empresas";
+                    $log->origem = $id;
+                    $log->registros = count($linhas);
+                    $log->atualizados = 0;
+                    $log->inseridos = 0;
+                    $log->save();
                     $json_string = json_encode($linhas);
                     echo $json_string;
                     return;
@@ -114,6 +133,15 @@ class Wds extends Controller
                         $unidadeId = $produto->id_uni;
                         $linhas[] = ["id" => $id, "nome" => $nome, "qtd" => $qtd, "preco" => $preco, "descricao" => $descricao, "empresaId" => $empresaId, "unidadeId" => $unidadeId];
                     }
+                    $log = new LogsWS();
+                    $log->dataAcesso = (new DateTime())->format("Y-m-d H:m:s");
+                    $log->es = "S";
+                    $log->entidade = "Produtos";
+                    $log->origem = $id;
+                    $log->registros = count($linhas);
+                    $log->atualizados = 0;
+                    $log->inseridos = 0;
+                    $log->save();
                     $json_string = json_encode($linhas);
                     echo $json_string;
                     return;
@@ -144,6 +172,15 @@ class Wds extends Controller
                         $descricao = $unidade->descricao;
                         $linhas[] = ["id" => $id, "nome$nome" => $nome, "simbolo" => $simbolo, "descricao" => $descricao];
                     }
+                    $log = new LogsWS();
+                    $log->dataAcesso = (new DateTime())->format("Y-m-d H:m:s");
+                    $log->es = "S";
+                    $log->entidade = "UnidadeMedida";
+                    $log->origem = $id;
+                    $log->registros = count($linhas);
+                    $log->atualizados = 0;
+                    $log->inseridos = 0;
+                    $log->save();
                     $json_string = json_encode($linhas);
                     echo $json_string;
                     return;

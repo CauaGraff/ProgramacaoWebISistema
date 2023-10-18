@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 30-Ago-2023 às 17:49
+-- Tempo de geração: 18-Out-2023 às 17:47
 -- Versão do servidor: 8.0.29-0ubuntu0.20.04.3
 -- versão do PHP: 7.4.3
 
@@ -36,7 +36,7 @@ CREATE TABLE `cidades` (
   `cd_uf_ibge` int DEFAULT NULL,
   `vl_latitude` double(10,8) DEFAULT NULL,
   `vl_longitude` double(10,8) DEFAULT NULL
-) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Extraindo dados da tabela `cidades`
@@ -9923,14 +9923,27 @@ CREATE TABLE `clientes` (
   `uf` char(2) DEFAULT NULL,
   `cidade_id` int NOT NULL,
   `ncasa` int NOT NULL
-) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `clientes`
 --
 
 INSERT INTO `clientes` (`id`, `nome`, `dataNasc`, `CPF`, `email`, `fone`, `uf`, `cidade_id`, `ncasa`) VALUES
-(1, 'asdf', '2004-02-13', '11675707901', 'cauagraff@gmail.com', '(49)98803-6060', 'SC', 8314, 60);
+(1, 'asdf', '2004-02-13', '116.757.079-01', 'cauagraff@gmail.com', '(49)98803-6060', 'SC', 8314, 60),
+(2, 'Andrea Luciana Sarah Novaes', '1961-04-10', '787.950.428-14', 'andrealuciananovaes@outllok.com', '(69) 98286-1953', 'SC', 8314, 735),
+(3, 'Leandro Francisco Melo', '1952-08-10', '041.240.625-08', 'leandro-melo76@jerasistemas.com.br', '(61) 99571-6078', 'SC', 8314, 815),
+(4, 'Adriana Andrea Raimunda Almeida', '1989-07-06', '201.088.251-24', 'adriana_andrea_almeida@hotmmail.com', '(54) 99802-6775', 'SC', 8314, 292),
+(5, 'Mateus Luís Rezende', '1959-04-07', '841.532.738-21', 'mateus_rezende@onvale.com', '(82) 99537-8524', 'SC', 8314, 449),
+(6, 'Rafaela Luzia Pereira', '1956-12-10', '464.866.500-79', 'rafaela.luzia.pereira@valdulion.com.br', '(85) 98483-2597', 'SC', 8314, 977),
+(7, 'Giovanni Felipe Geraldo Porto', '1948-06-10', '701.501.894-27', 'giovannifelipeporto@comercialrizzo.com', '(91) 99443-7445', 'SC', 8314, 694),
+(8, 'Lara Fernanda Assis', '1979-07-06', '043.310.252-76', 'larafernandaassis@atualmarcenaria.com.br', '(11) 98776-4797', 'SC', 8314, 525),
+(9, 'Daiane Sophia Rebeca da Luz', '1951-12-02', '516.115.614-77', 'daianesophiadaluz@lhp.com.br', '(85) 98944-6891', 'SC', 8314, 505),
+(10, 'Pietra Cristiane Sarah Jesus', '1989-11-10', '369.899.788-64', 'pietra.cristiane.jesus@facebook.com', '(79) 99558-4980', 'SC', 8314, 441),
+(11, 'Tomás Kevin Rodrigo Ribeiro', '1995-02-05', '840.700.983-05', 'tomas.kevin.ribeiro@band.com', '(85) 99981-3185', 'SC', 8314, 178),
+(12, 'Joaquim Isaac Campos', '1944-04-04', '427.386.792-34', 'joaquim-campos82@termakui.com.br', '(83) 99593-3203', 'SC', 8314, 857),
+(13, 'Victor Lorenzo Costa', '1976-05-07', '676.196.171-83', 'victor-costa91@premierpet.com.br', '(79) 98733-5069', 'SC', 8314, 324),
+(14, 'Cláudio Enzo Fogaça', '2003-11-08', '639.658.382-88', 'claudio_fogaca@dlh.de', '(66) 98899-6765', 'SC', 8314, 281);
 
 -- --------------------------------------------------------
 
@@ -9953,7 +9966,37 @@ CREATE TABLE `empresas` (
 --
 
 INSERT INTO `empresas` (`id`, `CNPJ`, `razaoSocial`, `email`, `fone`, `uf`, `id_cidade`) VALUES
-(2, '99.141.406/0001-51', 'adfad', 'teste2222@gmail.com', '(34)12341-2341', 'ES', 1874);
+(2, '99.141.406/0001-51', 'adfad', 'teste2222@gmail.com', '(34)12341-2341', 'ES', 1874),
+(3, '12.068.243/0001-40', 'Marcelo e Nelson Consultoria Financeira Ltda', 'pesquisa@marceloenelsonconsultoriafinanceiraltda.com.br', '(49)98399-890', 'ES', 1885),
+(4, '79.881.866/0001-09', 'Nelson e Heloise Publicidade e Propaganda ME', 'contabilidade@nelsoneheloisepublicidadeepropagandame.com.br', '(47)26815-365', 'PB', 4910),
+(5, '73.111.672/0001-48', 'Amanda e Filipe Entregas Expressas ME', 'atendimento@amandaefilipeentregasexpressasme.com.br', '(49)29764-337', 'SC', 8209);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `logs_ws`
+--
+
+CREATE TABLE `logs_ws` (
+  `id` int NOT NULL,
+  `dataAcesso` datetime NOT NULL,
+  `es` char(1) NOT NULL,
+  `entidade` varchar(40) NOT NULL,
+  `origem` int NOT NULL,
+  `registros` int NOT NULL,
+  `atualizados` int NOT NULL,
+  `inseridos` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `logs_ws`
+--
+
+INSERT INTO `logs_ws` (`id`, `dataAcesso`, `es`, `entidade`, `origem`, `registros`, `atualizados`, `inseridos`) VALUES
+(1, '2023-10-18 15:10:07', 'S', 'Clientes', 1, 1, 0, 0),
+(2, '2023-10-18 15:10:59', 'S', 'Clientes', 1, 1, 0, 0),
+(3, '2023-10-18 15:10:32', 'S', 'Clientes', 1, 1, 0, 0),
+(4, '2023-10-18 15:10:52', 'S', 'Clientes', 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -9968,7 +10011,7 @@ CREATE TABLE `orcamentos` (
   `usuarioId` int NOT NULL,
   `valor` float(8,2) NOT NULL DEFAULT '0.00',
   `OBS` text NOT NULL
-) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -9984,15 +10027,43 @@ CREATE TABLE `produto` (
   `descricao` text NOT NULL,
   `id_empresa` int NOT NULL,
   `id_uni` int NOT NULL
-) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `produto`
 --
 
 INSERT INTO `produto` (`id`, `nome`, `qtd`, `preco`, `descricao`, `id_empresa`, `id_uni`) VALUES
-(1, 'celular s10', 32, '1586.60', 'sdfadfsdfadfasdfasfadasfdadadfa', 2, 4),
-(2, 'asdf', 2, '32.00', 'asdf', 2, 1);
+(1, 'Rice Wine - Aji Mirin', 9132, '4164.24', 'est et tempus semper est quam pharetra magna ac consequat metus', 5, 2),
+(2, 'Salmon Steak - Cohoe 8 Oz', 7242, '8870.49', 'urna pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo', 2, 1),
+(3, 'Mushroom - Porcini Frozen', 1235, '2974.15', 'ut tellus nulla ut erat id mauris vulputate elementum nullam varius nulla facilisi cras non velit nec nisi vulputate nonummy', 2, 3),
+(4, 'Wine - Sake', 9911, '2768.12', 'vel enim sit amet nunc viverra dapibus nulla suscipit ligula', 5, 3),
+(5, 'Shrimp - 100 / 200 Cold Water', 658, '1640.11', 'nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus', 5, 4),
+(6, 'Tea - Lemon Green Tea', 1939, '1390.70', 'nunc rhoncus dui vel sem sed sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet', 5, 4),
+(7, 'Wine - Gewurztraminer Pierre', 3293, '2633.16', 'quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque', 3, 1),
+(8, 'Carrots - Jumbo', 4899, '2687.73', 'natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis', 4, 2),
+(9, 'Cheese - Goat With Herbs', 6014, '8944.87', 'nullam orci pede venenatis non sodales sed tincidunt eu felis fusce posuere felis sed lacus morbi sem', 3, 3),
+(10, 'Bread - 10 Grain', 5363, '3150.55', 'posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut', 3, 3),
+(11, 'Goulash Seasoning', 3156, '45.40', 'leo pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit', 4, 2),
+(12, 'Milk Powder', 2648, '803.92', 'donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est lacinia nisi venenatis', 2, 3),
+(13, 'Pasta - Cannelloni, Sheets, Fresh', 2916, '1757.13', 'in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum', 5, 1),
+(14, 'Papayas', 3951, '5622.48', 'vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed', 3, 4),
+(15, 'Almonds Ground Blanched', 4772, '5548.13', 'tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus', 5, 4),
+(16, 'Brandy Cherry - Mcguinness', 1669, '1460.65', 'semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam dui proin', 3, 4),
+(17, 'Juice - Cranberry 284ml', 1225, '6707.73', 'donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris enim', 4, 3),
+(18, 'Muffin Mix - Raisin Bran', 1152, '2188.01', 'elementum in hac habitasse platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo', 2, 3),
+(19, 'Spice - Greek 1 Step', 2472, '6541.71', 'lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam', 4, 1),
+(20, 'Wine - Tio Pepe Sherry Fino', 7862, '9323.99', 'a nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet maecenas', 5, 2),
+(21, 'Piping Jelly - All Colours', 8125, '6256.27', 'in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut', 2, 4),
+(22, 'Fenngreek Seed', 136, '3666.09', 'rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa', 5, 2),
+(23, 'Tomatoes Tear Drop Yellow', 2733, '1756.99', 'nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh', 3, 3),
+(24, 'Ham Black Forest', 8350, '2768.74', 'pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue', 3, 3),
+(25, 'Beef - Tender Tips', 7536, '8204.54', 'neque sapien placerat ante nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor', 2, 1),
+(26, 'Wakami Seaweed', 3767, '5563.15', 'in imperdiet et commodo vulputate justo in blandit ultrices enim lorem ipsum', 5, 2),
+(27, 'Chocolate Eclairs', 9605, '7316.12', 'ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor', 3, 3),
+(28, 'Caviar - Salmon', 8542, '156.71', 'donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac est lacinia nisi venenatis tristique fusce', 4, 2),
+(29, 'Beef - Bones, Cut - Up', 4454, '8599.85', 'neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum', 3, 3),
+(30, 'Sea Bass - Fillets', 4350, '1742.24', 'viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -10005,7 +10076,7 @@ CREATE TABLE `unidademedida` (
   `nome` varchar(50) NOT NULL,
   `simbolo` varchar(10) NOT NULL,
   `descricao` varchar(100) DEFAULT NULL
-) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `unidademedida`
@@ -10016,6 +10087,33 @@ INSERT INTO `unidademedida` (`id`, `nome`, `simbolo`, `descricao`) VALUES
 (2, 'Litro', 'L', 'Unidade de medida de volume'),
 (3, 'Metro', 'm', 'Unidade de medida de comprimento'),
 (4, 'Unidade', 'un', 'Unidade de medida individual');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `user_ws`
+--
+
+CREATE TABLE `user_ws` (
+  `id` int NOT NULL,
+  `user` varchar(50) DEFAULT NULL,
+  `psw` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `user_ws`
+--
+
+INSERT INTO `user_ws` (`id`, `user`, `psw`) VALUES
+(1, 'Max', 'Max'),
+(2, 'Cauan', 'Cauan'),
+(3, 'Lucas', 'Lucas'),
+(4, 'Wesley', 'Wesley'),
+(5, 'Ricardo', 'Ricardo'),
+(6, 'Felipe', 'Felipe'),
+(7, 'Eduardo', 'Eduardo'),
+(8, 'Nicolas', 'Nicolas'),
+(9, 'Igor', 'Igor');
 
 -- --------------------------------------------------------
 
@@ -10038,24 +10136,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `CPF`, `senha`, `email`, `dataNasc`, `cidade_id`) VALUES
-(33, 'Caua', '116.757.079-01', '$2y$10$Ihp91BTNRlLSg3DaKxNWfORGde6vffRHsfb1SrPSXAE4gnCNwcjOy', 'cauagraff@gmail.com', '2004-02-13', 8314);
-
-
-CREATE TABLE `user_ws` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user` varchar(50) DEFAULT NULL,
-  `psw` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
-INSERT INTO `user_ws` VALUES (1,'Max','Max');
-INSERT INTO `user_ws` VALUES (2,'Cauan','Cauan');
-INSERT INTO `user_ws` VALUES (3,'Lucas','Lucas');
-INSERT INTO `user_ws` VALUES (4,'Wesley','Wesley');
-INSERT INTO `user_ws` VALUES (5,'Ricardo','Ricardo');
-INSERT INTO `user_ws` VALUES (6,'Felipe','Felipe');
-INSERT INTO `user_ws` VALUES (7,'Eduardo','Eduardo');
-INSERT INTO `user_ws` VALUES (8,'Nicolas','Nicolas');
-INSERT INTO `user_ws` VALUES (9,'Igor','Igor');
+(33, 'Caua', '116.757.079-01', '$2y$10$Ihp91BTNRlLSg3DaKxNWfORGde6vffRHsfb1SrPSXAE4gnCNwcjOy', 'cauagraff@gmail.com', '2004-02-13', 8314),
+(34, 'Emily', '618.743.210-00', '$2y$10$ioVpV/OJYrNHP4sPMpUOd.qSjdufqJ0xmWovp95xcazYlUN6U9IkS', 'Emily@gmail.com', '2023-10-18', 2701);
 
 --
 -- Índices para tabelas despejadas
@@ -10081,6 +10163,12 @@ ALTER TABLE `empresas`
   ADD KEY `FK_EmpresasCidade` (`id_cidade`);
 
 --
+-- Índices para tabela `logs_ws`
+--
+ALTER TABLE `logs_ws`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `orcamentos`
 --
 ALTER TABLE `orcamentos`
@@ -10103,6 +10191,12 @@ ALTER TABLE `unidademedida`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `user_ws`
+--
+ALTER TABLE `user_ws`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -10122,13 +10216,19 @@ ALTER TABLE `cidades`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `empresas`
 --
 ALTER TABLE `empresas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `logs_ws`
+--
+ALTER TABLE `logs_ws`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `orcamentos`
@@ -10140,7 +10240,7 @@ ALTER TABLE `orcamentos`
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de tabela `unidademedida`
@@ -10149,10 +10249,16 @@ ALTER TABLE `unidademedida`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de tabela `user_ws`
+--
+ALTER TABLE `user_ws`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Restrições para despejos de tabelas

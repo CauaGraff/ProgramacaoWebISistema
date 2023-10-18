@@ -83,9 +83,12 @@ $router->get("/empresas", "Wds:empresas", "wds.empresas");
 $router->get("/produtos", "Wds:produtos", "wds.produtos");
 $router->get("/unidadesMedida", "Wds:unidadesMedida", "wds.unidadesmedida");
 $router->get("/cidades", "Wds:cidades", "wds.cidades");
+$router->get("/consomeClientes", "Wds:consomeClientes", "wds.consomeclientes");
 
+$router->group('json/lucas');
+$router->get("/empresa", "wsVivan:empresa", "wsvivan.empresa");
 
-$router->get("/empresaVivan", "wsVivan:empresa", "wsvivan.empresa");
+$router->group('json/wesley');
 $router->get("/produtosWesley", "wsWesley:produtos", "wsvivan.produtos");
 
 $router->dispatch();
