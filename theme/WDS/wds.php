@@ -85,11 +85,28 @@
 
             <p>Para acessar as entidades, sempre usar o id e o pwd de cadastro.</p>
 
+            <p>http://192.168.0.101/ws/json/{entidade}?id=1&pwd=Max</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">Logins de acesso</th>
+                    </tr>
+                    <tr>
+                        <th>id</th>
+                        <th>pwd</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <? foreach ($userWs as $user) : ?>
+                        <tr>
+                            <td><?= $user->id ?></td>
+                            <td><?= $user->psw ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
-
-            <p>http://192.168.0.103/ProgramacaoWebISistema/json/{entidade}?id=1&pwd=Max</p>
-
-            <h2>Entidade CLIENTES</h2>
+            <h2>Entidade CLIENTES - OK</h2>
             End point: <a href="<?= $router->route("wds.clientes") ?>"> /clientes</a>
             <table border="">
                 <thead>
@@ -158,7 +175,7 @@
                 </tbody>
             </table>
 
-            <h2>Entidade EMPRESAS</h2>
+            <h2>Entidade EMPRESAS - OK</h2>
             End point: <a href="<?= $router->route("wds.empresas") ?>"> /empresas</a>
             <table border="">
                 <thead>
@@ -214,7 +231,7 @@
                     </tr>
                 </tbody>
             </table>
-            <h2>Entidade PRODUTOS</h2>
+            <h2>Entidade PRODUTOS - OK</h2>
             End point: <a href="<?= $router->route("wds.produtos") ?>"> /produtos</a>
             <table border="">
                 <thead>
@@ -271,7 +288,7 @@
                 </tbody>
             </table>
 
-            <h2>Entidade UNIDADES DE MEDIDA</h2>
+            <h2>Entidade UNIDADES DE MEDIDA - OK</h2>
             End point: <a href="<?= $router->route("wds.unidadesmedida") ?>"> /unidadesMedida</a>
             <table border="">
                 <thead>

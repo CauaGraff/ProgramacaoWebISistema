@@ -112,7 +112,7 @@ class Wds extends Controller
                         $descricao = $produto->descricao;
                         $empresaId = $produto->id_empresa;
                         $unidadeId = $produto->id_uni;
-                        $linhas[] = ["id" => $id, "nome$nome" => $nome, "qtd" => $qtd, "preco" => $preco, "descricao" => $descricao, "empresaId" => $empresaId, "unidadeId" => $unidadeId];
+                        $linhas[] = ["id" => $id, "nome" => $nome, "qtd" => $qtd, "preco" => $preco, "descricao" => $descricao, "empresaId" => $empresaId, "unidadeId" => $unidadeId];
                     }
                     $json_string = json_encode($linhas);
                     echo $json_string;

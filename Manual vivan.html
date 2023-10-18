@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!-- saved from url=(0021)http://192.168.0.103/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de acesso ao WS</title>
+
+</head>
+
+<body>
+
+    <table border="">
+        <tbody>
+            <tr>
+                <td>Dia</td>
+                <td>Acao</td>
+                <td>Usuário</td>
+            </tr>
+            <tr>
+                <td>13/09/23 20:25</td>
+                <td>Criação da versão 1.0</td>
+                <td>Lucas Vivan</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="http://192.168.0.103/.../menu.php" target="_blank">Voltar Menu</a>
+    <h2>Entidade CADASTROS</h2>
+    End point: <a href="http://192.168.0.103/servidor_json_bd.php" target="_blank">Cadastro de Usuarios</a>
+    <table border="">
+        <tbody>
+            <tr>
+                <td>Campo</td>
+                <td>tipo</td>
+                <td>Tamanho</td>
+                <td>Obs</td>
+            </tr>
+            <tr>
+                <td>cd_usuario</td>
+                <td>Int</td>
+                <td>-</td>
+                <td>Chave primaria</td>
+            </tr>
+            <tr>
+                <td>ds_celular</td>
+                <td>varchar</td>
+                <td>40</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ds_cidade</td>
+                <td>varchar</td>
+                <td>50</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ds_cpf</td>
+                <td>int</td>
+                <td></td>
+                <td>Chave estarngeira</td>
+            </tr>
+            <tr>
+                <td>ds_email</td>
+                <td>varchar</td>
+                <td>30</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ds_senha</td>
+                <td>int</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ds_usuario</td>
+                <td>varchar</td>
+                <td>40</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>dt_nascimento</td>
+                <td>datetime</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+
+    <h2>Entidade Empresas</h2>
+    End point: <a href="http://192.168.0.103/servidor_json_bd_empresa.php" target="_blank">Cadastro de Empresas</a>
+    14<table border="">
+        <tbody>
+            <tr>
+                <td>Campo</td>
+                <td>tipo</td>
+                <td>Tamanho</td>
+                <td>Obs</td>
+            </tr>
+            <tr>
+                <td>cd_empresa</td>
+                <td>Int</td>
+                <td>-</td>
+                <td>Chave primaria</td>
+            </tr>
+            <tr>
+                <td>ds_contato</td>
+                <td>int</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ds_cnpj</td>
+                <td>char</td>
+                <td></td><td></td>
+            </tr>
+            <tr>
+                <td>ds_razao_social</td>
+                <td>varchar</td>
+                <td>30</td>
+                <td>Chave estarngeira</td>
+            </tr>
+            <tr>
+                <td>ds_rua</td>
+                <td>varchar</td>
+                <td>30</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ds_cidade</td>
+                <td>varchar</td>
+                <td>30</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ds_uf</td>
+                <td>varchar</td>
+                <td>2</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ds_pais</td>
+                <td>varchar</td>
+                <td>20</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ds_email</td>
+                <td>varchar</td>
+                <td>40</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+
+    <h2>Entidade Itens orçamento</h2>
+    End point: <a href="http://192.168.0.103/servidor_json_bd_iten_orcamento.php" target="_blank">Cadastro de Itens Orçamento</a>
+    <table border="">
+        <tbody>
+            <tr>
+                <td>Campo</td>
+                <td>tipo</td>
+                <td>Tamanho</td>
+                <td>Obs</td>
+            </tr>
+            <tr>
+                <td>cd_oi</td>
+                <td>Int</td>
+                <td>-</td>
+                <td>Chave primaria</td>
+            </tr>
+            <tr>
+                <td>cd_orcamento_oi</td>
+                <td>int</td>
+                <td></td>
+                <td>chave estrangeira</td>
+            </tr>
+            <tr>
+                <td>cd_produto_oi</td>
+                <td>int</td>
+                <td></td>
+                <td>chave estrangeira</td>
+            </tr>
+            <tr>
+                <td>vl_quantidade</td>
+                <td>float</td>
+                <td>8,2</td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>vl_unitario</td>
+                <td>float</td>
+                <td>8,2</td>
+                <td></td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>
+    <h2>Entidade orçamento</h2>
+    End point: <a href="http://192.168.0.103/servidor_json_bd_orcamento.php" target="_blank">Cadastro de Orçamento</a>
+    <table border="">
+        <tbody>
+            <tr>
+                <td>Campo</td>
+                <td>tipo</td>
+                <td>Tamanho</td>
+                <td>Obs</td>
+            </tr>
+            <tr>
+                <td>cd_orcamento</td>
+                <td>Int</td>
+                <td>-</td>
+                <td>Chave primaria</td>
+            </tr>
+            <tr>
+                <td>dt_orcamento</td>
+                <td>date</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>cd_cliente_orcamento</td>
+                <td>int</td>
+                <td></td>
+                <td>Chave Estrangeira</td>
+            </tr>
+            <tr>
+                <td>cd_usuario_orcamento</td>
+                <td>int</td>
+                <td></td>
+                <td>chave Estrangeira </td>
+            </tr>
+            <tr>
+                <td>vl_valor</td>
+                <td>float</td>
+                <td>8,2</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ds_obs</td>
+                <td>varchar</td>
+                <td>200</td>
+                <td></td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>
+
+    <h2>Entidade atividade</h2>
+    End point: <a href="http://192.168.0.103/servidor_json_bd_atividade.php" target="_blank">Cadastro de Atividades</a>
+    <table border="">
+        <tbody>
+            <tr>
+                <td>Campo</td>
+                <td>tipo</td>
+                <td>Tamanho</td>
+                <td>Obs</td>
+            </tr>
+            <tr>
+                <td>cd_atividade</td>
+                <td>Int</td>
+                <td>-</td>
+                <td>Chave primaria</td>
+            </tr>
+            <tr>
+                <td>data_atividade</td>
+                <td>datetime</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>tb_descricao</td>
+                <td>varchar</td>
+                <td>40</td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>tb_aluno</td>
+                <td>varchar</td>
+                <td>40</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>tb_diciplina</td>
+                <td>varchar</td>
+                <td>40</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>tb_campus</td>
+                <td>varchar</td>
+                <td>30</td>
+                <td></td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br></body></html>

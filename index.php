@@ -84,6 +84,10 @@ $router->get("/produtos", "Wds:produtos", "wds.produtos");
 $router->get("/unidadesMedida", "Wds:unidadesMedida", "wds.unidadesmedida");
 $router->get("/cidades", "Wds:cidades", "wds.cidades");
 
+
+$router->get("/empresaVivan", "wsVivan:empresa", "wsvivan.empresa");
+$router->get("/produtosWesley", "wsWesley:produtos", "wsvivan.produtos");
+
 $router->dispatch();
 if ($router->error()) {
     echo "Houve um erro " . $router->error();
