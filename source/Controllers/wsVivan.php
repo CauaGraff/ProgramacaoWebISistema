@@ -17,6 +17,8 @@ use Source\Controllers\Controller;
 
 class wsVivan extends Controller
 {
+    private $idWsUsuario = 3;
+
     public function __construct(Router $router)
     {
         parent::__construct($router);
@@ -56,7 +58,16 @@ class wsVivan extends Controller
             $inse = 0;
             $upda = 0;
             foreach ($obj as $dados) {
-                $empresa = new Empresa();
+                $connect = Connect::getInstance();
+                $error = Connect::getError();
+                if ($error) {
+                    echo $error->getMessage();
+                    exit;
+                }
+                $idEmpresa = $connect->query("SELECT id FROM empresas WHERE CNPJ = '$dados->CNPJ'")->fetch();
+                if ($idEmpresa) {
+                    $empresa = (new Empresas())->findById($idEmpresa->id);
+                    if ($empresa) {
                 $empresa->CNPJ = "99.141.406/0001-51";
                 $empresa->razaoSocial = $dados->ds_razao_social;
                 $empresa->fone = "(34)12341-2341";
@@ -64,14 +75,25 @@ class wsVivan extends Controller
                 $empresa->uf = "ES";
                 $empresa->email = "teste2222@gmail.com";
                 $empresa->save();
-                $inse++;
+                $upda++;
+                    }else{
+                        $empresa = new Empresas();
+                        $empresa->CNPJ = "99.141.406/0001-51";
+                $empresa->razaoSocial = $dados->ds_razao_social;
+                $empresa->fone = "(34)12341-2341";
+                $empresa->id_cidade = 1874;
+                $empresa->uf = "ES";
+                $empresa->email = "teste2222@gmail.com";
+                $empresa->save();
+                $upda++; 
+                    }
             }
             $timeZone = new DateTimeZone("America/Sao_Paulo");
             $log = new LogsWS();
             $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
             $log->es = "E";
             $log->entidade = "UnidadeMedida";
-            $log->origem = 3;
+            $log->origem = $this->idWsUsuario;
             $log->registros = $inse;
             $log->atualizados = 0;
             $log->inseridos = $inse;

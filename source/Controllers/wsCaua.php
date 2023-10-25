@@ -17,6 +17,7 @@ use Source\Controllers\Controller;
 
 class wsCaua extends Controller
 {
+    private $idWsUsuario = 2;
     public function __construct(Router $router)
     {
         parent::__construct($router);
@@ -26,9 +27,9 @@ class wsCaua extends Controller
     {
     }
 
-    public function empresa()
+    public function clientes()
     {
-        $json = file_get_contents(IP_VIVAN . "/Sistema/sistemaRP/json/servidor_json_bd_empresa.php");    // Check in your php.ini so allow_url_fopen is set to on.
+        $json = file_get_contents(CONF_SITE_URL . "/json/clientes?id=2&pwd=Cauan");    // Check in your php.ini so allow_url_fopen is set to on.
         $obj = json_decode($json);
 
         if (json_last_error() != 0) {
@@ -59,25 +60,51 @@ class wsCaua extends Controller
             $i = 0;
             $inse = 0;
             $upda = 0;
+
             foreach ($obj as $dados) {
-                $empresa = new Empresa();
-                $empresa->CNPJ = "99.141.406/0001-51";
-                $empresa->razaoSocial = $dados->ds_razao_social;
-                $empresa->fone = "(34)12341-2341";
-                $empresa->id_cidade = 1874;
-                $empresa->uf = "ES";
-                $empresa->email = "teste2222@gmail.com";
-                $empresa->save();
-                $inse++;
+                $connect = Connect::getInstance();
+                $error = Connect::getError();
+                if ($error) {
+                    echo $error->getMessage();
+                    exit;
+                }
+                $idCliente = $connect->query("SELECT id FROM clientes WHERE cpf = '$dados->cpf'")->fetch();
+                if ($idCliente) {
+                    $cliente = (new Clientes())->findById($idCliente->id);
+                    if ($cliente) {
+                        $cliente->nome = $dados->nome;
+                        $cliente->CPF = $dados->cpf;
+                        $cliente->dataNasc = $dados->dataNasc;
+                        $cliente->ncasa = $dados->nCasa;
+                        $cliente->cidade_id = $dados->cidadeId;
+                        $cliente->uf = $dados->uf;
+                        $cliente->email = $dados->email;
+                        $cliente->fone = $dados->fone;
+                        $cliente->save();
+                        $upda++;
+                    } else {
+                        $cliente = new Clientes();
+                        $cliente->nome = $dados->nome;
+                        $cliente->CPF = $dados->cpf;
+                        $cliente->dataNasc = $dados->dataNasc;
+                        $cliente->ncasa = $dados->ncasa;
+                        $cliente->cidade_id = $dados->cidade;
+                        $cliente->uf = $dados->uf;
+                        $cliente->email = $dados->email;
+                        $cliente->fone = $dados->fone;
+                        $cliente->save();
+                        $inse++;
+                    }
+                }
             }
             $timeZone = new DateTimeZone("America/Sao_Paulo");
             $log = new LogsWS();
             $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
             $log->es = "E";
-            $log->entidade = "UnidadeMedida";
-            $log->origem = 3;
-            $log->registros = $inse;
-            $log->atualizados = 0;
+            $log->entidade = "Clientes";
+            $log->origem = $this->idWsUsuario;
+            $log->registros = ($inse + $upda);
+            $log->atualizados = $upda;
             $log->inseridos = $inse;
             $log->save();
         } else {
