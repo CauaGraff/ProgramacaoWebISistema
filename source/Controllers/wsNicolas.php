@@ -15,16 +15,16 @@ use Source\Models\UnidadeMedida;
 use CoffeeCode\DataLayer\Connect;
 use Source\Controllers\Controller;
 
-class wsVivan extends Controller
+class wsNicolas extends Controller
 {
     public function __construct(Router $router)
     {
         parent::__construct($router);
     }
 
-    public function empresa()
+    public function produto()
     {
-        $json = file_get_contents(IP_VIVAN . "/Sistema/sistemaRP/json/servidor_json_bd_empresa.php");    // Check in your php.ini so allow_url_fopen is set to on.
+        $json = file_get_contents(IP_NICOLAS . "/produto");    // Check in your php.ini so allow_url_fopen is set to on.
         $obj = json_decode($json);
 
         if (json_last_error() != 0) {
@@ -56,7 +56,7 @@ class wsVivan extends Controller
             $inse = 0;
             $upda = 0;
             foreach ($obj as $dados) {
-                $empresa = new Empresa();
+                $empresa = new Produto();
                 $empresa->CNPJ = "99.141.406/0001-51";
                 $empresa->razaoSocial = $dados->ds_razao_social;
                 $empresa->fone = "(34)12341-2341";
@@ -70,8 +70,8 @@ class wsVivan extends Controller
             $log = new LogsWS();
             $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
             $log->es = "E";
-            $log->entidade = "UnidadeMedida";
-            $log->origem = 3;
+            $log->entidade = "Produtos";
+            $log->origem = 8;
             $log->registros = $inse;
             $log->atualizados = 0;
             $log->inseridos = $inse;

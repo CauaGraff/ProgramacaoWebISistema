@@ -15,11 +15,15 @@ use Source\Models\UnidadeMedida;
 use CoffeeCode\DataLayer\Connect;
 use Source\Controllers\Controller;
 
-class wsVivan extends Controller
+class wsCaua extends Controller
 {
     public function __construct(Router $router)
     {
         parent::__construct($router);
+    }
+
+    public function index()
+    {
     }
 
     public function empresa()

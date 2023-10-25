@@ -10,6 +10,7 @@ use Source\Models\Produto;
 use Source\Models\Clientes;
 use Source\Models\UsuarioWS;
 use CoffeeCode\Router\Router;
+use DateTimeZone;
 use Source\Models\UnidadeMedida;
 use Source\Controllers\Controller;
 
@@ -48,11 +49,12 @@ class Wds extends Controller
                         $nCasa = $cliente->ncasa;
                         $linhas[] = ["id" => $id, "nome" => $nome, "dataNasc" => $dataNasc, "cpf" => $cpf, "email" => $email, "fone" => $fone, "uf" => $uf, "cidadeId" => $cidade_id, "nCasa" => $nCasa];
                     }
+                    $timeZone = new DateTimeZone("America/Sao_Paulo");
                     $log = new LogsWS();
-                    $log->dataAcesso = (new DateTime())->format("Y-m-d H:m:s");
+                    $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
                     $log->es = "S";
                     $log->entidade = "Clientes";
-                    $log->origem = $id;
+                    $log->origem = $_REQUEST["id"];
                     $log->registros = count($linhas);
                     $log->atualizados = 0;
                     $log->inseridos = 0;
@@ -91,11 +93,12 @@ class Wds extends Controller
                         $cidade_id = $empresa->id_cidade;
                         $linhas[] = ["id" => $id, "CNPJ" => $CNPJ, "razaoSocial" => $razaoSocial, "email" => $email, "fone" => $fone, "uf" => $uf, "cidadeId" => $cidade_id];
                     }
+                    $timeZone = new DateTimeZone("America/Sao_Paulo");
                     $log = new LogsWS();
-                    $log->dataAcesso = (new DateTime())->format("Y-m-d H:m:s");
+                    $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
                     $log->es = "S";
                     $log->entidade = "Empresas";
-                    $log->origem = $id;
+                    $log->origem = $_REQUEST["id"];
                     $log->registros = count($linhas);
                     $log->atualizados = 0;
                     $log->inseridos = 0;
@@ -133,11 +136,12 @@ class Wds extends Controller
                         $unidadeId = $produto->id_uni;
                         $linhas[] = ["id" => $id, "nome" => $nome, "qtd" => $qtd, "preco" => $preco, "descricao" => $descricao, "empresaId" => $empresaId, "unidadeId" => $unidadeId];
                     }
+                    $timeZone = new DateTimeZone("America/Sao_Paulo");
                     $log = new LogsWS();
-                    $log->dataAcesso = (new DateTime())->format("Y-m-d H:m:s");
+                    $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
                     $log->es = "S";
                     $log->entidade = "Produtos";
-                    $log->origem = $id;
+                    $log->origem = $_REQUEST["id"];
                     $log->registros = count($linhas);
                     $log->atualizados = 0;
                     $log->inseridos = 0;
@@ -172,8 +176,9 @@ class Wds extends Controller
                         $descricao = $unidade->descricao;
                         $linhas[] = ["id" => $id, "nome$nome" => $nome, "simbolo" => $simbolo, "descricao" => $descricao];
                     }
+                    $timeZone = new DateTimeZone("America/Sao_Paulo");
                     $log = new LogsWS();
-                    $log->dataAcesso = (new DateTime())->format("Y-m-d H:m:s");
+                    $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
                     $log->es = "S";
                     $log->entidade = "UnidadeMedida";
                     $log->origem = $id;
