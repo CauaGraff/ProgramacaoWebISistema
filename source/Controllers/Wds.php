@@ -234,4 +234,18 @@ class Wds extends Controller
         echo "passe os parametros ?id=x&pwd=x";
         exit();
     }
+
+    public function insere()
+    {
+        if (!empty($_REQUEST["id"]) || !empty($_REQUEST["pwd"])) {
+            $id = $_REQUEST["id"];
+            $pwd = $_REQUEST["pwd"];
+            $dados = compact("id", "pwd");
+            if ((intval($id) > 1) || (strlen($pwd) > 2)) {
+                if (Auth::attemptUserWs($dados)) {
+                    $enditade = $_REQUEST["entidade"];
+                }
+            }
+        }
+    }
 }
