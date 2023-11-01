@@ -90,13 +90,9 @@ $router->group('caua');
 $router->get("/", "wsCaua:index", "wscaua.index");
 $router->get("/clientes", "wsCaua:clientes", "wscaua.clientes");
 
-
-
 $router->group('lucas');
 $router->get("/empresa", "wsVivan:empresa", "wsvivan.empresa");
 $router->get("/clientes", "wsVivan:clientes", "wsvivan.clientes");
-
-
 $router->group('wesley');
 $router->get("/produtos", "wsWesley:produtos", "wsvivan.produtos");
 
