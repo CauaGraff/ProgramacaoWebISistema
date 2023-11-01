@@ -56,16 +56,21 @@
                 <tr>
                     <th colspan="3">Histórico de Alterações </th>
                 </tr>
-            </thead>
-            <tbody>
                 <tr>
                     <th>Dia</th>
                     <th>Acao</th>
                     <th>Usuário</th>
                 </tr>
+            </thead>
+            <tbody>
                 <tr>
                     <td>13/09/23 20:25</td>
                     <td>Criação da versão 1</td>
+                    <td>Cauã</td>
+                </tr>
+                <tr>
+                    <td>01/11/23 20:25</td>
+                    <td>Inserir dados</td>
                     <td>Cauã</td>
                 </tr>
             </tbody>
@@ -84,8 +89,8 @@
             </h1>
 
             <p>Para acessar as entidades, sempre usar o id e o pwd de cadastro.</p>
-
-            <p>http://192.168.0.101/ws/json/{entidade}?id=1&pwd=Max</p>
+            <p><b>URL:</b></p>
+            <p><?= CONF_SITE_URL ?>/json/{entidade}?id=1&pwd=Max</p>
             <table>
                 <thead>
                     <tr>
@@ -323,6 +328,65 @@
                         <td>varchar</td>
                         <td>40</td>
                         <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h1>
+                <li>
+                    Inserir dados
+                </li>
+            </h1>
+            <p>Este endpoint permite aos usuários inserir dados no sistema.</p>
+            <p><b>URL:</b></p>
+            <p><?= CONF_SITE_URL ?>/json/inserir?id=1&pwd=Max&entidade=nomeDaEntiadade</p>
+            <p>Nas entidades disponiveis a baixo estão listados os parametros obrigatoros para cada entidade para fazer a inserção de dados.</p>
+            <h2>Entidade PRODUTOS - OK</h2>
+            End point: <a href="<?= $router->route("wds.insere") ?>">/inserir?entidade=produtos</a>
+            <table border="">
+                <thead>
+                    <tr>
+                        <th>Parametros</th>
+                        <th>tipo</th>
+                        <th>Tamanho</th>
+                        <th>Obs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>nome</td>
+                        <td>varchar</td>
+                        <td>40</td>
+                        <td>Obrigatorio</td>
+                    </tr>
+                    <tr>
+                        <td>qtd</td>
+                        <td>int</td>
+                        <td>-</td>
+                        <td>Obrigatorio</td>
+                    </tr>
+                    <tr>
+                        <td>preco</td>
+                        <td>float</td>
+                        <td>18.2</td>
+                        <td>Obrigatorio</td>
+                    </tr>
+                    <tr>
+                        <td>descricao</td>
+                        <td>text</td>
+                        <td>-</td>
+                        <td>Obrigatorio</td>
+                    </tr>
+                    <tr>
+                        <td>empresaId</td>
+                        <td>int</td>
+                        <td>-</td>
+                        <td>Chave estrangeira</td>
+                    </tr>
+                    <tr>
+                        <td>unidadeId</td>
+                        <td>int</td>
+                        <td>-</td>
+                        <td>Chave estarngeira</td>
                     </tr>
                 </tbody>
             </table>

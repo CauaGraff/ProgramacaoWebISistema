@@ -237,15 +237,190 @@ class Wds extends Controller
 
     public function insere()
     {
-        if (!empty($_REQUEST["id"]) || !empty($_REQUEST["pwd"])) {
+        if (!empty($_REQUEST["id"]) || !empty($_REQUEST["pwd"]) || !empty($_REQUEST["entidade"])) {
             $id = $_REQUEST["id"];
             $pwd = $_REQUEST["pwd"];
             $dados = compact("id", "pwd");
             if ((intval($id) > 1) || (strlen($pwd) > 2)) {
                 if (Auth::attemptUserWs($dados)) {
-                    $enditade = $_REQUEST["entidade"];
+                    $entidade = $_REQUEST["entidade"];
+                    if ($entidade == "clientes" || $entidade == "empresas" || $entidade == "produtos" || $entidade == "unidadesMedida") {
+                        if ($entidade == "clientes") {
+                            $this->insereClientes();
+                            return;
+                        } else if ($entidade == "empresas") {
+                            $this->insereEmpresas();
+                            return;
+                        } else if ($entidade == "produtos") {
+                            echo $this->insereProdutos();
+                            return;
+                        } else if ($entidade == "unidadesMedida") {
+                            $this->insereUnidadesMedida();
+                            return;
+                        }
+                    }
+                    $json_string = json_encode([
+                        "type" => "erro",
+                        "mensagem" => "Entidade {$entidade} não encontrada"
+                    ]);
+                    echo $json_string;
+                    return;
                 }
+                $json_string = json_encode([
+                    "type" => "erro",
+                    "mensagem" => "acesso negado verefique o id e pwd"
+                ]);
+                echo $json_string;
+                return;
             }
+            $json_string = json_encode([
+                "type" => "erro",
+                "mensagem" => "acesso negado verefique o id e pwd"
+            ]);
+            echo $json_string;
+            return;
         }
+        $json_string = json_encode([
+            "type" => "erro",
+            "mensagem" => "passe os parametros ?id=1&pwd=Max&entidade=nomeDaEntiadade"
+        ]);
+        echo $json_string;
+        return;
+    }
+
+    public function insereClientes()
+    {
+        $erro = [];
+        if (!array_key_exists("nome", $_REQUEST)) {
+            $erro[] = "nome";
+        }
+        if (!array_key_exists("dataNasc", $_REQUEST)) {
+            $erro[] = "dataNasc";
+        }
+        if (!array_key_exists("cpf", $_REQUEST)) {
+            $erro[] = "CPF";
+        }
+        if (!array_key_exists("email", $_REQUEST)) {
+            $erro[] = "email";
+        }
+        if (!array_key_exists("fone", $_REQUEST)) {
+            $erro[] = "fone";
+        }
+        if (!array_key_exists("cidadeId", $_REQUEST)) {
+            $erro[] = "cidadeId";
+        }
+        if (!empty($erro)) {
+            $json_string = json_encode([
+                "type" => "erro",
+                "mensagem" => "Parametros não encontrados",
+                "parametros" => $erro
+            ]);
+            echo $json_string;
+            return;
+        }
+
+        $cliente = new Clientes();
+        $cliente->nome = $_REQUEST["nome"];
+        $cliente->qtd = $_REQUEST["qtd"];
+        $cliente->preco = $_REQUEST["preco"];
+        $cliente->descricao = $_REQUEST["descricao"];
+        $cliente->id_empresa = $_REQUEST["empresaId"];
+        $cliente->id_uni = $_REQUEST["unidadeId"];
+        if ($cliente->save()) {
+            $timeZone = new DateTimeZone("America/Sao_Paulo");
+            $log = new LogsWS();
+            $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
+            $log->es = "E";
+            $log->entidade = "Clientes";
+            $log->origem = $_REQUEST["id"];
+            $log->registros = 1;
+            $log->atualizados = 0;
+            $log->inseridos = 0;
+            $log->save();
+            $json_string = json_encode([
+                "type" => "sucesso",
+                "mensagem" => "cliente cadastrado com sucesso",
+                "dados" => $cliente->data()
+            ]);
+            echo $json_string;
+            return;
+        }
+        $json_string = json_encode([
+            "type" => "erro",
+            "mensagem" => "cliente não cadastrado",
+            "dados" => $cliente->data()
+        ]);
+        echo $json_string;
+        return;
+    }
+    public function insereEmpresas()
+    {
+    }
+    public function insereProdutos()
+    {
+        $erro = [];
+        if (!array_key_exists("nome", $_REQUEST)) {
+            $erro[] = "nome";
+        }
+        if (!array_key_exists("qtd", $_REQUEST)) {
+            $erro[] = "qtd";
+        }
+        if (!array_key_exists("preco", $_REQUEST)) {
+            $erro[] = "preco";
+        }
+        if (!array_key_exists("descricao", $_REQUEST)) {
+            $erro[] = "descricao";
+        }
+        if (!array_key_exists("empresaId", $_REQUEST)) {
+            $erro[] = "empresaId";
+        }
+        if (!array_key_exists("unidadeId", $_REQUEST)) {
+            $erro[] = "unidadeId";
+        }
+        if (!empty($erro)) {
+            $json_string = json_encode([
+                "type" => "erro",
+                "mensagem" => "Parametros não encontrados",
+                "parametros" => $erro
+            ]);
+            echo $json_string;
+            return;
+        }
+        $produto = new Produto();
+        $produto->nome = $_REQUEST["nome"];
+        $produto->qtd = $_REQUEST["qtd"];
+        $produto->preco = $_REQUEST["preco"];
+        $produto->descricao = $_REQUEST["descricao"];
+        $produto->id_empresa = $_REQUEST["empresaId"];
+        $produto->id_uni = $_REQUEST["unidadeId"];
+        if ($produto->save()) {
+            $timeZone = new DateTimeZone("America/Sao_Paulo");
+            $log = new LogsWS();
+            $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
+            $log->es = "E";
+            $log->entidade = "Produto";
+            $log->origem = $_REQUEST["id"];
+            $log->registros = 1;
+            $log->atualizados = 0;
+            $log->inseridos = 0;
+            $log->save();
+            $json_string = json_encode([
+                "type" => "sucesso",
+                "mensagem" => "Produto cadastrado com sucesso",
+                "dados" => $produto->data()
+            ]);
+            echo $json_string;
+            return;
+        }
+        $json_string = json_encode([
+            "type" => "erro",
+            "mensagem" => "Produto não cadastrado",
+            "dados" => $produto->data()
+        ]);
+        echo $json_string;
+        return;
+    }
+    public function insereUnidadesMedida()
+    {
     }
 }
