@@ -97,6 +97,10 @@ $router->get("/clientes", "wsVivan:clientes", "wsvivan.clientes");
 $router->group('wesley');
 $router->get("/produtos", "wsWesley:produtos", "wsvivan.produtos");
 
+$router->group("ricardo");
+$router->get("/clientes", "wsRicardo:clientes", "wsricardo.clientes");
+
+
 $router->dispatch();
 if ($router->error()) {
     echo "Houve um erro " . $router->error();

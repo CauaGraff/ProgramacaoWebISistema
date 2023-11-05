@@ -298,16 +298,13 @@ class Wds extends Controller
             $erro[] = "dataNasc";
         }
         if (!array_key_exists("cpf", $_REQUEST)) {
-            $erro[] = "CPF";
+            $erro[] = "cpf";
         }
         if (!array_key_exists("email", $_REQUEST)) {
             $erro[] = "email";
         }
         if (!array_key_exists("fone", $_REQUEST)) {
             $erro[] = "fone";
-        }
-        if (!array_key_exists("cidadeId", $_REQUEST)) {
-            $erro[] = "cidadeId";
         }
         if (!empty($erro)) {
             $json_string = json_encode([
@@ -321,11 +318,13 @@ class Wds extends Controller
 
         $cliente = new Clientes();
         $cliente->nome = $_REQUEST["nome"];
-        $cliente->qtd = $_REQUEST["qtd"];
-        $cliente->preco = $_REQUEST["preco"];
-        $cliente->descricao = $_REQUEST["descricao"];
-        $cliente->id_empresa = $_REQUEST["empresaId"];
-        $cliente->id_uni = $_REQUEST["unidadeId"];
+        $cliente->CPF = $_REQUEST["cpf"];
+        $cliente->dataNasc = $_REQUEST["dataNasc"];
+        $cliente->ncasa = $_REQUEST["ncasa"];
+        $cliente->cidade_id = 1874;
+        $cliente->uf = "SC";
+        $cliente->email = $_REQUEST["email"];
+        $cliente->fone = $_REQUEST["fone"];
         if ($cliente->save()) {
             $timeZone = new DateTimeZone("America/Sao_Paulo");
             $log = new LogsWS();

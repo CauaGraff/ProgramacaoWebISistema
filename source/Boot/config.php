@@ -1,7 +1,7 @@
 <?php
 
 // define('CONF_SITE_URL', 'http://localhost/ProgramacaoWebISistema');
-define('CONF_SITE_URL', 'http://192.168.0.104/ws');
+define('CONF_SITE_URL', 'http://192.168.0.102/ws');
 //define('CONF_SITE_URL', 'http://localhost/UNC/programação%20web/ProgramacaoWebISistema');
 // define('CONF_SITE_URL', 'http://10.1.1.60/PHP/.Caua/teste/sist/ProgramacaoWebISistema');
 
@@ -36,5 +36,6 @@ define('DATA_LAYER_CONFIG', [
 // ]);
 
 define("IP_WESLEY", "http://192.168.0.102");
-define("IP_VIVAN", "http://192.168.0.100");
-define("IP_NICOLAS", "http://192.168.0.101");
+define("IP_VIVAN", "http://192.168.0.105");
+define("IP_NICOLAS", "http://192.168.0.103");
+define("IP_RICARDO", "http://192.168.0.101");

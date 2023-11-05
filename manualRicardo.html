@@ -1,0 +1,106 @@
+
+<!-- saved from url=(0037)http://192.168.0.101/teste/site2.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>WSS</title>
+
+
+
+</head><body><p>
+<font face="Verdana">
+<b>Utilize o modelo abaixo, como chave de acesso para os arquivos XML:</b><br><b>
+    ?cdu=1&amp;pwd=Max
+<b>
+    
+    </b></b><table border="">
+
+    
+<tbody><tr><td>Nome</td><td>Id</td>
+        </tr><tr><td>Max</td><td>1</td>
+        </tr><tr><td>Cauan</td><td>2</td>
+        </tr><tr><td>Lucas</td><td>3</td>
+        </tr><tr><td>Wesley</td><td>4</td>
+        </tr><tr><td>Ricardo</td><td>5</td>
+        </tr><tr><td>Felipe</td><td>6</td>
+        </tr><tr><td>Eduardo</td><td>7</td>
+        </tr><tr><td>Nicolas</td><td>8</td>
+        </tr><tr><td>Igor</td><td>9</td>
+        </tr></tbody></table><b><b>
+        <br>
+    </b>
+    </b></font></p><center><font face="Verdana"><b>
+
+    <h2>Entidade CADASTROS</h2> 
+        
+    Exemplo de inserção no banco de dados de produtos<br>
+    //localhost/teste/cmd_us.php?acao=salvar_us&amp;ds_usuario=ricardo&amp;ds_celular=124565465&amp;ds_cpf=78978978944&amp;ds_cidade=SC&amp;ds_email=ricardor@gmail.com&amp;dt_nascimento=22092001
+
+<table border="">
+    <tbody><tr><td>Campo</td><td>tipo</td><td>Tamanho</td><td>Obs</td></tr>
+<tr><td>cd_usuario</td><td>Int</td><td>-</td><td>Chave primaria</td></tr>
+<tr><td>ds_usuario</td><td>string</td><td>50</td><td></td></tr>
+<tr><td>ds_celular</td><td>string</td><td>100</td><td></td></tr>
+<tr><td>ds_cpf</td><td>string</td><td>15</td><td></td></tr>
+<tr><td>ds_cidade</td><td>string</td><td>15</td><td></td></tr>
+<tr><td>ds_email</td><td>string</td><td>15</td><td></td></tr>
+<tr><td>dt_nascimento</td><td>string</td><td>15</td><td></td></tr>
+<tr><td>ds_senha</td><td>string</td><td>15</td><td></td></tr>
+</tbody></table>
+<br>
+
+End point: usuarios_ws.php 
+<a href="http://192.168.0.101/teste/usuarios_ws.php">Acesse a pagina de usuarios</a>
+
+
+<h2>Entidade Produtos</h2>
+
+Exemplo de inserção no banco de dados de produtos<br>
+//localhost/teste/cmd_prod.php?acao=salvar_produto&amp;ds_produto=batata&amp;ds_quant=12&amp;ds_custo=3
+
+<table border="">
+<tbody><tr><td>Campo</td><td>tipo</td><td>Tamanho</td><td>Obs</td></tr>
+<tr><td>cd_produto</td><td>Int</td><td>-</td><td>Chave primaria</td></tr>
+<tr><td>ds_produto</td><td>string</td><td>50</td><td></td></tr>
+<tr><td>s_quant</td><td>string</td><td>100</td><td></td></tr>
+<tr><td>ds_custo</td><td>string</td><td>15</td><td>Chave estarngeira</td></tr>
+</tbody></table>
+<br>
+
+
+End point: produtos_ws.php 
+<a href="http://192.168.0.101/teste/produtos_ws.php">Acesse a pagina de produtos</a>
+<h2>Entidade Empresas</h2>
+
+Exemplo de inserção no banco de dados de Empresas<br>
+//localhost/teste/cmd_emp.php?acao=salvar_emp&amp;cnpj=12516&amp;nome_emp=ricdada&amp;ds_cidade=dd&amp;ds_uf=dd&amp;proprietario=dd
+
+<table border="">
+<tbody><tr><td>Campo</td><td>tipo</td><td>Tamanho</td><td>Obs</td></tr>
+<tr><td>id_empresa</td><td>Int</td><td>11</td><td>Chave primaria</td></tr>
+<tr><td>nome_emp</td><td>string</td><td>50</td><td></td></tr>
+<tr><td>cnpj</td><td>Int</td><td>11</td><td></td></tr>
+<tr><td>ds_cidade</td><td>string</td><td>50</td><td></td>
+</tr><tr><td>ds_uf</td><td>string</td><td>50</td><td></td>
+</tr><tr><td>proprietario</td><td>string</td><td>50</td><td></td>
+</tr></tbody></table>
+End point: empresas_ws.php 
+
+<a href="http://192.168.0.101/teste/empresas_ws.php">Acesse a pagina de empresas</a>
+
+<h2>Entidade Orçamentos</h2>
+
+<table border="">
+<tbody><tr><td>Campo</td><td>tipo</td><td>Tamanho</td><td>Obs</td></tr>
+<tr><td>cd_orcamento</td><td>Int</td><td>11</td><td>Chave primaria</td></tr>
+<tr><td>dt_orcamento</td><td>Date</td><td>50</td><td></td></tr>
+<tr><td>vl_valor</td><td>Int</td><td>11</td><td></td></tr>
+<tr><td>cd_usuario_orcamento</td><td>Int</td><td>50</td><td></td>
+</tr><tr><td>cd_cliente_orcamento</td><td>Int</td><td>50</td><td></td>
+</tr></tbody></table>
+End point: orcamento_ws.php 
+
+<a href="http://192.168.0.101/teste/orcamento_ws.php">Acesse a pagina de orcamentos</a>
+</b></font></center><font face="Verdana"><b>
+</b></font><b>
+<p></p>
+</b></body></html>

@@ -175,7 +175,7 @@ class wsVivan extends Controller
             $log = new LogsWS();
             $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
             $log->es = "E";
-            $log->entidade = "Empresas";
+            $log->entidade = "Clientes";
             $log->origem = $this->idWsUsuario;
             $log->registros = ($inse + $upda);
             $log->atualizados = $inse;
