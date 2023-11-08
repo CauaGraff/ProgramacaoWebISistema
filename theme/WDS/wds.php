@@ -356,25 +356,25 @@
                         <td>nome</td>
                         <td>varchar</td>
                         <td>40</td>
-                        <td>Obrigatorio</td>
+                        <td>obrigatório</td>
                     </tr>
                     <tr>
                         <td>qtd</td>
                         <td>int</td>
                         <td>-</td>
-                        <td>Obrigatorio</td>
+                        <td>obrigatório</td>
                     </tr>
                     <tr>
                         <td>preco</td>
                         <td>float</td>
                         <td>18.2</td>
-                        <td>Obrigatorio</td>
+                        <td>obrigatório</td>
                     </tr>
                     <tr>
                         <td>descricao</td>
                         <td>text</td>
                         <td>-</td>
-                        <td>Obrigatorio</td>
+                        <td>obrigatório</td>
                     </tr>
                     <tr>
                         <td>empresaId</td>
@@ -387,6 +387,95 @@
                         <td>int</td>
                         <td>-</td>
                         <td>Chave estarngeira</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>Entidade CLIENTES - OK</h2>
+            End point: <a href="<?= $router->route("wds.insere") ?>">/inserir?entidade=clientes</a>
+            <table border="">
+                <thead>
+                    <tr>
+                        <th>Parametros</th>
+                        <th>tipo</th>
+                        <th>Tamanho</th>
+                        <th>Obs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>nome</td>
+                        <td>varchar</td>
+                        <td>40</td>
+                        <td>obrigatório</td>
+                    </tr>
+                    <tr>
+                        <td>dataNasc</td>
+                        <td>date</td>
+                        <td>-</td>
+                        <td>obrigatório</td>
+                    </tr>
+                    <tr>
+                        <td>cpf</td>
+                        <td>char</td>
+                        <td>15</td>
+                        <td>obrigatório</td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>varchar</td>
+                        <td>40</td>
+                        <td>obrigatório</td>
+                    </tr>
+                    <tr>
+                        <td>fone</td>
+                        <td>varchar</td>
+                        <td>40</td>
+                        <td>obrigatório</td>
+                    </tr>
+                    <tr>
+                        <td>nCasa</td>
+                        <td>int</td>
+                        <td>-</td>
+                        <td>obrigatório</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>Entidade EMPRESAS - OK</h2>
+            End point: <a href="<?= $router->route("wds.insere") ?>">/inserir?entidade=empresas</a>
+            <table border="">
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>tipo</th>
+                        <th>Tamanho</th>
+                        <th>Obs</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>cnpj</td>
+                        <td>varchar</td>
+                        <td>18</td>
+                        <td>obrigatório</td>
+                    </tr>
+                    <tr>
+                        <td>razaoSocial</td>
+                        <td>varchar</td>
+                        <td>40</td>
+                        <td>obrigatório</td>
+                    </tr>
+                    <tr>
+                        <td>email</td>
+                        <td>varchar</td>
+                        <td>40</td>
+                        <td>obrigatório</td>
+                    </tr>
+                    <tr>
+                        <td>fone</td>
+                        <td>varchar</td>
+                        <td>40</td>
+                        <td>obrigatório</td>
                     </tr>
                 </tbody>
             </table>

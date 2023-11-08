@@ -254,9 +254,6 @@ class Wds extends Controller
                         } else if ($entidade == "produtos") {
                             echo $this->insereProdutos();
                             return;
-                        } else if ($entidade == "unidadesMedida") {
-                            $this->insereUnidadesMedida();
-                            return;
                         }
                     }
                     $json_string = json_encode([
@@ -306,6 +303,9 @@ class Wds extends Controller
         if (!array_key_exists("fone", $_REQUEST)) {
             $erro[] = "fone";
         }
+        if (!array_key_exists("nCasa", $_REQUEST)) {
+            $erro[] = "nCasa";
+        }
         if (!empty($erro)) {
             $json_string = json_encode([
                 "type" => "erro",
@@ -320,11 +320,12 @@ class Wds extends Controller
         $cliente->nome = $_REQUEST["nome"];
         $cliente->CPF = $_REQUEST["cpf"];
         $cliente->dataNasc = $_REQUEST["dataNasc"];
-        $cliente->ncasa = $_REQUEST["ncasa"];
+        $cliente->ncasa = $_REQUEST["nCasa"];
         $cliente->cidade_id = 1874;
         $cliente->uf = "SC";
         $cliente->email = $_REQUEST["email"];
         $cliente->fone = $_REQUEST["fone"];
+
         if ($cliente->save()) {
             $timeZone = new DateTimeZone("America/Sao_Paulo");
             $log = new LogsWS();
@@ -354,6 +355,64 @@ class Wds extends Controller
     }
     public function insereEmpresas()
     {
+        $erro = [];
+        if (!array_key_exists("cnpj", $_REQUEST)) {
+            $erro[] = "cnpj";
+        }
+        if (!array_key_exists("razaoSocial", $_REQUEST)) {
+            $erro[] = "razaoSocial";
+        }
+        if (!array_key_exists("email", $_REQUEST)) {
+            $erro[] = "email";
+        }
+        if (!array_key_exists("fone", $_REQUEST)) {
+            $erro[] = "fone";
+        }
+
+        if (!empty($erro)) {
+            $json_string = json_encode([
+                "type" => "erro",
+                "mensagem" => "Parametros não encontrados",
+                "parametros" => $erro
+            ]);
+            echo $json_string;
+            return;
+        }
+        $empresa = new Empresa();
+        $empresa->CNPJ = $_REQUEST["cnpj"];
+        $empresa->razaoSocial = $_REQUEST["razaoSocial"];
+        $empresa->fone = $_REQUEST["fone"];
+        $empresa->id_cidade = 1874;
+        $empresa->uf = "SC";
+        $empresa->email = $_REQUEST["email"];
+
+
+        if ($empresa->save()) {
+            $timeZone = new DateTimeZone("America/Sao_Paulo");
+            $log = new LogsWS();
+            $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
+            $log->es = "E";
+            $log->entidade = "Eempresas";
+            $log->origem = $_REQUEST["id"];
+            $log->registros = 1;
+            $log->atualizados = 0;
+            $log->inseridos = 0;
+            $log->save();
+            $json_string = json_encode([
+                "type" => "sucesso",
+                "mensagem" => "empresa cadastrado com sucesso",
+                "dados" => $empresa->data()
+            ]);
+            echo $json_string;
+            return;
+        }
+        $json_string = json_encode([
+            "type" => "erro",
+            "mensagem" => "empresa não cadastrado",
+            "dados" => $empresa->data()
+        ]);
+        echo $json_string;
+        return;
     }
     public function insereProdutos()
     {
@@ -418,8 +477,5 @@ class Wds extends Controller
         ]);
         echo $json_string;
         return;
-    }
-    public function insereUnidadesMedida()
-    {
     }
 }
