@@ -15,7 +15,7 @@ use Source\Models\UnidadeMedida;
 use CoffeeCode\DataLayer\Connect;
 use Source\Controllers\Controller;
 
-class wsCaua extends Controller
+class wsRicardo extends Controller
 {
     private $idWsUsuario = 5;
     public function __construct(Router $router)
@@ -77,7 +77,7 @@ class wsCaua extends Controller
                         $cliente->cidade_id = 1874;
                         $cliente->uf = "SC";
                         $cliente->email = $dados->ds_email;
-                        $cliente->fone = "sem telefone";
+                        $cliente->fone = "49988030660";
                         $cliente->save();
                         $upda++;
                     } else {
@@ -88,9 +88,10 @@ class wsCaua extends Controller
                         $cliente->cidade_id = 1874;
                         $cliente->uf = "SC";
                         $cliente->email = $dados->ds_email;
-                        $cliente->fone = "sem telefone";
+                        $cliente->fone = "49988030660";
                         $cliente->save();
-                        $upda++;
+
+                        $inse++;
                     }
                 }
             }

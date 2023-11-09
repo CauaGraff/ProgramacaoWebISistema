@@ -17,6 +17,7 @@ use Source\Controllers\Controller;
 
 class wsNicolas extends Controller
 {
+    private $idWsUsuario = 8;
     public function __construct(Router $router)
     {
         parent::__construct($router);
@@ -56,25 +57,48 @@ class wsNicolas extends Controller
             $inse = 0;
             $upda = 0;
             foreach ($obj as $dados) {
-                $empresa = new Produto();
-                $empresa->CNPJ = "99.141.406/0001-51";
-                $empresa->razaoSocial = $dados->ds_razao_social;
-                $empresa->fone = "(34)12341-2341";
-                $empresa->id_cidade = 1874;
-                $empresa->uf = "ES";
-                $empresa->email = "teste2222@gmail.com";
-                $empresa->save();
-                $inse++;
+                $connect = Connect::getInstance();
+                $error = Connect::getError();
+                if ($error) {
+                    echo $error->getMessage();
+                    exit;
+                }
+
+                $idProdutos = $connect->query("SELECT id FROM produto WHERE nome = '$dados->ds_prod'")->fetch();
+                if ($idProdutos) {
+                    $produto = (new Produto())->findById($idProdutos->id);
+                    if ($produto) {
+                        $produto->nome = $dados->ds_prod;
+                        $produto->qtd = $dados->estoque;
+                        $produto->preco = $dados->precovenda;
+                        $produto->descricao = "sem descrição";
+                        $produto->id_empresa = 2;
+                        $produto->id_uni = 1;
+                        $produto->save();
+                        var_dump($produto);
+                        $upda++;
+                    } else {
+                        $produto = new Produto();
+                        $produto->nome = $dados->ds_prod;
+                        $produto->qtd = $dados->estoque;
+                        $produto->preco = $dados->precovenda;
+                        $produto->descricao = "sem descrição";
+                        $produto->id_empresa = 2;
+                        $produto->id_uni = 1;
+                        $produto->save();
+                        $inse++;
+                    }
+                }
             }
             $timeZone = new DateTimeZone("America/Sao_Paulo");
             $log = new LogsWS();
             $log->dataAcesso = (new DateTime("now", $timeZone))->format("Y-m-d H:m:s");
             $log->es = "E";
-            $log->entidade = "Produtos";
-            $log->origem = 8;
-            $log->registros = $inse;
+            $log->entidade = "Produto";
+            $log->origem = $this->idWsUsuario;
+            $log->registros = ($inse + $upda);
             $log->atualizados = 0;
-            $log->inseridos = $inse;
+            $log->inseridos = $upda;
             $log->save();
         } else {
             echo "Json Vazio ou com Problema";

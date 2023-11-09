@@ -1,0 +1,30 @@
+
+body {
+  background-color: #f3f2f6;
+}
+
+.container {
+  background-color: #fff;
+  border: 5px solid #284868;
+  border-radius: 5px;
+}
+
+.sql-code {
+  border-radius: 5px;
+  background-color: #284868;
+  color: #fff
+}
+
+.success {
+  border-radius: 5px;
+  background-color: #284868;
+  color: #fff
+}
+
+.error {
+  color: #ff0000;
+}
+
+nav a {
+  color: #fff !important;;
+}

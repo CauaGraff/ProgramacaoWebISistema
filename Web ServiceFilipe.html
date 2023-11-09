@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://192.168.0.103/webservice-max/cadastre.get-clients -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Service</title>
+  <link rel="stylesheet" href="./Web ServiceFilipe_files/bootstrap.min.css">
+  <link rel="stylesheet" href="./Web ServiceFilipe_files/style.css">
+</head>
+
+<body>
+  <header style="margin-bottom: 5rem;">
+    <nav style="background-color: #284868 !important;" class="navbar navbar-expand-lg bg-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="http://192.168.0.103/webservice-max/cadastre.get-clients#">Documentação</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="http://192.168.0.103/webservice-max/cadastre.get-clients#web-service">
+                Início
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="http://192.168.0.103/webservice-max/cadastre.get-clients#clients" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Clientes
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="http://192.168.0.103/webservice-max/cadastre.get-clients#clients-table">Tipo de dados</a></li>
+                <li><a class="dropdown-item" href="http://192.168.0.103/webservice-max/cadastre.get-clients#clients-ddl">DDL clientes</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="http://192.168.0.103/webservice-max/cadastre.get-clients#products" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Produtos
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="http://192.168.0.103/webservice-max/cadastre.get-clients#products-table">Tipo de dados</a></li>
+                <li><a class="dropdown-item" href="http://192.168.0.103/webservice-max/cadastre.get-clients#products-ddl">DDL produtos</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="http://192.168.0.103/webservice-max/cadastre.get-clients#suppliers" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Fornecedores
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="http://192.168.0.103/webservice-max/cadastre.get-clients#suppliers-table">Tipo de dados</a></li>
+                <li><a class="dropdown-item" href="http://192.168.0.103/webservice-max/cadastre.get-clients#suppliers-ddl">DDL produtos</a></li>
+              </ul>
+            </li>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="http://192.168.0.103/webservice-max/cadastre.get-clients#test-request">Testando as requisições</a>
+              </li>
+            </ul>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="http://192.168.0.103/webservice-max/ws-nikolas.html">WS Nikolas</a>
+              </li>
+            </ul>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container mb-5">
+    <h2 id="web-service" class="text-center">Web Service</h2>
+    <section class="mt-5">
+      <p>URL base para conexão com o web service: <b>http://localhost/webservice-max/ws/</b>
+      </p>
+
+      <p>
+        <b>*Alterar localhost para o IP definido na aula do Max</b>
+      </p>
+
+      <p>A cada consulta, o web-service verifica se há um token de autorização presente no header da
+        requisição. Caso não haja este token, irá retornar a seguinte mensagem:
+        <br>
+        <br>
+        <b>'Acesso não autorizado'</b>
+        <br>
+        <br>
+        Para facilitar os testes, gerei um token fixo, então sempre ao enviar uma requisição,
+        crie um header <b>Authorization</b> com o seguinte token:
+        <b>e8ea876f49a6de0c5132a2889d4d35e6bdd81e3a3f3048691862fa490375d0bb</b>,
+
+      </p>
+    </section>
+
+    <div id="clients">
+      <h4 class="mt-4">Endpoint: <i><b>cadastre.get-clients</b></i></h4>
+      <p>Entidade de clientes, retorna os seguintes campos:</p>
+    </div>
+
+    <hr>
+
+    <div id="clients-table" class="mb-5">
+      <table class="table">
+        <thead class="table-dark">
+          <tr class="fw-bold">
+            <th>Campo</th>
+            <th>Tipo de dado</th>
+          </tr>
+        </thead>
+        <tbody id="table-body-clients">
+        <tr><td>Id</td><td>mediumint</td></tr><tr><td>name</td><td>varchar(255)</td></tr><tr><td>phone</td><td>varchar(100)</td></tr><tr><td>email</td><td>varchar(255)</td></tr></tbody>
+      </table>
+    </div>
+
+    <div id="clients-ddl">
+      <p>DDL clientes:</p>
+      <pre class="sql-code">        <code>
+          CREATE TABLE `tb_client` (
+            `id` mediumint unsigned NOT NULL auto_increment,
+            `name` varchar(255) default NULL,
+            `phone` varchar(100) default NULL,
+            `email` varchar(255) default NULL,
+            PRIMARY KEY (`id`)
+          ) AUTO_INCREMENT=1;
+        </code>
+      </pre>
+    </div>
+
+    <hr>
+
+    <div id="products">
+      <h4 class="mt-4">Endpoint: <i><b>cadastre.get-products</b></i></h4>
+      <p>Entidade de produtos, retorna os seguintes campos:</p>
+    </div>
+
+    <hr>
+
+    <div id="products-table" class="mb-5">
+      <table class="table">
+        <thead class="table-dark">
+          <tr class="fw-bold">
+            <th>Campo</th>
+            <th>Tipo de dado</th>
+          </tr>
+        </thead>
+        <tbody id="table-body-products">
+        <tr><td>Id</td><td>INT</td></tr><tr><td>nome</td><td>varchar(255)</td></tr><tr><td>descricao</td><td>text</td></tr><tr><td>preco</td><td>DECIMAL(10, 2)</td></tr><tr><td>estoque</td><td>INT</td></tr></tbody>
+      </table>
+    </div>
+
+    <div id="products-ddl">
+      <p>DDL Produtos:</p>
+      <pre class="sql-code">    <code>
+      CREATE TABLE `tb_products` (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(255) NOT NULL,
+        descricao TEXT,
+        preco DECIMAL(10, 2) NOT NULL,
+        estoque INT NOT NULL
+    );
+    </code>
+  </pre>
+
+      <div id="suppliers">
+        <h4 class="mt-4">Endpoint: <i><b>cadastre.get-suppliers</b></i></h4>
+        <p>Entidade de fornecedores, retorna os seguintes campos:</p>
+      </div>
+
+      <hr>
+
+      <div id="suppliers-table" class="mb-5">
+        <table class="table">
+          <thead class="table-dark">
+            <tr class="fw-bold">
+              <th>Campo</th>
+              <th>Tipo de dado</th>
+            </tr>
+          </thead>
+          <tbody id="table-body-suppliers">
+          <tr><td>supplier_id</td><td>INT</td></tr><tr><td>supplier_name</td><td>VARCHAR(255)</td></tr><tr><td>contact_name</td><td>VARCHAR(255)</td></tr><tr><td>contact_email</td><td> VARCHAR(255)</td></tr><tr><td>phone_number</td><td>VARCHAR(20)</td></tr><tr><td>address</td><td>VARCHAR(255)</td></tr><tr><td>city</td><td>VARCHAR(100)</td></tr><tr><td>country</td><td>VARCHAR(100)</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="suppliers-ddl">
+      <p>DDL fornecedores:</p>
+      <pre class="sql-code mb-3">    <code>
+      CREATE TABLE `tb_suppliers` (
+        `supplier_id` INT AUTO_INCREMENT PRIMARY KEY,
+        `supplier_name` VARCHAR(255) NOT NULL,
+        `contact_name` VARCHAR(255),
+        `contact_email` VARCHAR(255),
+        `phone_number` VARCHAR(20),
+        `address` VARCHAR(255),
+        `city` VARCHAR(100),
+        `country` VARCHAR(100)
+    );
+    </code>
+  </pre>
+
+      <div>
+        <h4>Teste as requisições</h4>
+        <p>Para testar as requisições apenas informe qual endpoint você deseja consultar</p>
+        <div id="test-request" class="mt-4">
+          <label for="urlInput">URL da Requisição:</label>
+          <input type="text" id="urlInput" value="cadastre.get-products" class="form-control" placeholder="Insira a URL da requisição">
+          <button id="submitButton" class="btn btn-primary mt-2 mb-4" style="
+            background-color: #284868; 
+            border-color: #284868;">
+            Enviar Requisição
+          </button>
+          <button id="resetButton" class="btn btn-primary mt-2 mb-4" style="
+            background-color: #284868; 
+            border-color: #284868;">
+            Limpar
+          </button>
+          <div id="responseContainer" class="mt-4">
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4>Cadastro de produtos (cadastre.post-products)</h4>
+        <div id="test-request" class="mt-4">
+          <label for="urlInputWithParameters">URL da Requisição:</label>
+          <input type="text" id="urlInputWithParameters" value="cadastre.post-products" class="form-control" placeholder="Insira a URL da requisição">
+
+          <div class="row mt-3">
+            <div class="col-md-3">
+              <input type="text" id="param1" placeholder="Nome" class="form-control">
+            </div>
+
+            <div class="col-md-3">
+              <input type="text" id="param2" placeholder="Descrição" class="form-control">
+            </div>
+
+            <div class="col-md-3">
+              <input type="number" id="param3" placeholder="Preço" class="form-control">
+            </div>
+
+            <div class="col-md-3">
+              <input type="number" id="param4" placeholder="Quantidade" class="form-control">
+            </div>
+
+          </div>
+
+
+          <button id="submitButtonWithParameters" class="btn btn-primary mt-2 mb-4" style="
+            background-color: #284868; 
+            border-color: #284868;">
+            Enviar Requisição
+          </button>
+          <button id="resetButton" class="btn btn-primary mt-2 mb-4" style="
+            background-color: #284868; 
+            border-color: #284868;">
+            Limpar
+          </button>
+          <div id="responseContainerWithParameters" class="mt-4">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./Web ServiceFilipe_files/jquery-3.6.0.min.js.transferir"></script>
+    <script src="./Web ServiceFilipe_files/bootstrap.bundle.min.js.transferir"></script>
+
+    <script>
+
+      // Remover JQUERY e melhorar JS
+      const products = [{
+        campo: "Id",
+        tipoDado: "INT"
+      },
+      {
+        campo: "nome",
+        tipoDado: "varchar(255)"
+      },
+      {
+        campo: "descricao",
+        tipoDado: "text"
+      },
+      {
+        campo: "preco",
+        tipoDado: "DECIMAL(10, 2)"
+      },
+      {
+        campo: "estoque",
+        tipoDado: "INT"
+      },
+      ];
+      const clients = [{
+        campo: 'Id',
+        tipoDado: 'mediumint'
+      },
+      {
+        campo: 'name',
+        tipoDado: 'varchar(255)'
+      },
+      {
+        campo: 'phone',
+        tipoDado: 'varchar(100)'
+      },
+      {
+        campo: 'email',
+        tipoDado: 'varchar(255)'
+      }
+      ]
+      const suppliers = [{
+        campo: 'supplier_id',
+        tipoDado: 'INT'
+      },
+      {
+        campo: 'supplier_name',
+        tipoDado: 'VARCHAR(255)'
+      },
+      {
+        campo: 'contact_name',
+        tipoDado: 'VARCHAR(255)'
+      },
+      {
+        campo: 'contact_email',
+        tipoDado: ' VARCHAR(255)'
+      },
+      {
+        campo: 'phone_number',
+        tipoDado: 'VARCHAR(20)'
+      },
+      {
+        campo: 'address',
+        tipoDado: 'VARCHAR(255)'
+      },
+      {
+        campo: 'city',
+        tipoDado: 'VARCHAR(100)'
+      },
+      {
+        campo: 'country',
+        tipoDado: 'VARCHAR(100)'
+      }
+      ]
+
+      function criarLinhasTabela(tableData, tableId) {
+        const tableBody = document.getElementById(`${tableId}`);
+        tableData.forEach((data) => {
+          const row = document.createElement("tr");
+          const campoCell = document.createElement("td");
+          const tipoDadoCell = document.createElement("td");
+          campoCell.textContent = data.campo;
+          tipoDadoCell.textContent = data.tipoDado;
+          row.appendChild(campoCell);
+          row.appendChild(tipoDadoCell);
+          tableBody.appendChild(row);
+        });
+      }
+      criarLinhasTabela(clients, 'table-body-clients');
+      criarLinhasTabela(products, 'table-body-products');
+      criarLinhasTabela(suppliers, 'table-body-suppliers');
+
+      $('#resetButton').click(() => {
+        $('#urlInput').val('cadastre.post-products');
+        $('#responseContainer').empty();
+      })
+
+      $('#submitButtonWithParameters').click(() => {
+        var entryPoint = $('#urlInputWithParameters').val();
+        var nome = $('#param1').val();
+        var descricao = $('#param2').val();
+        var preco = $('#param3').val();
+        var quantidade = $('#param4').val();
+
+        var headers = {
+          'Authorization': 'e8ea876f49a6de0c5132a2889d4d35e6bdd81e3a3f3048691862fa490375d0bb',
+          'Content-Type': 'application/json'
+        };
+        const api = 'http://localhost/webservice-max/ws/'
+
+        const myJSon = {
+          "nome": nome,
+          "descricao": descricao,
+          "estoque": quantidade,
+          "preco": preco
+        };
+
+        $.ajax({
+          url: `${api}${entryPoint}`,
+          headers: headers,
+          method: "POST",
+          contentType: 'application/json',
+          dataType: 'json',
+          data: JSON.stringify(myJSon),
+          success: (response) => {
+            $('#responseContainerWithParameters').html('<pre class="error">' + JSON.stringify(response, null, 2) +
+              '</pre>');
+          },
+          error: (error) => {
+            $('#responseContainerWithParameters').html(`
+            <div class=success>
+              <p>${error.responseText}</p>
+            </div>
+              `);
+          }
+        });
+      });
+
+
+      $('#submitButton').click(() => {
+        var entryPoint = $('#urlInput').val();
+
+        var headers = {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        };
+
+        const api = 'http://localhost/webservice-max/ws/'
+
+        $.ajax({
+          url: `${api}${entryPoint}`,
+          method: 'GET',
+          headers: headers,
+          success: (response) => {
+            console.log(response);
+            $('#responseContainerWithParameters').html('<pre class="error">' + JSON.stringify(response, null, 2) +
+              '</pre>');
+          },
+          error: (error) => {
+            $('#responseContainer').html(`
+            <div class=success>
+              <p>${error.responseText}</p>
+            </div>
+              `);
+          }
+        });
+      });
+
+    </script>
+
+
+</div></body></html>

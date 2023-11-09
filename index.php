@@ -1,5 +1,8 @@
 <?php
 
+header("Access-Control-Allow-Origin:*");
+header("Access-Control-Allow-Methods:*");
+
 session_start();
 
 use CoffeeCode\Router\Router;
@@ -95,10 +98,17 @@ $router->get("/empresa", "wsVivan:empresa", "wsvivan.empresa");
 $router->get("/clientes", "wsVivan:clientes", "wsvivan.clientes");
 
 $router->group('wesley');
-$router->get("/produtos", "wsWesley:produtos", "wsvivan.produtos");
+$router->get("/produtos", "wsWesley:produtos", "wswesley.produtos");
 
 $router->group("ricardo");
 $router->get("/clientes", "wsRicardo:clientes", "wsricardo.clientes");
+
+$router->group('nicolas');
+$router->get("/produtos", "wsNicolas:produtos", "wsnicolas.produtos");
+
+$router->group('filipe');
+$router->get("/clientes", "wsFilipe:clientes", "wsfilipe.clientes");
+$router->get("/produtos", "wsFilipe:produtos", "wsfilipe.produtos");
 
 
 $router->dispatch();
